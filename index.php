@@ -12,6 +12,8 @@
     <meta name="author" content="">
     <title>Crown Carwash</title>
     <!-- Bootstrap core CSS -->
+    <link rel="shortcut icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
     <link href="frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="frontend/css/one-page-wonder.css" rel="stylesheet">
     <link href="frontend/css/select2.min.css" rel="stylesheet">
@@ -62,7 +64,6 @@
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Crown CarWash <?php echo date('Y');?></p>
     </div>
-    <!-- /.container -->
   </footer>
   <!-- Bootstrap core JavaScript -->
 </body>
