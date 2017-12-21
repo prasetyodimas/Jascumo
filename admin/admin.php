@@ -1,4 +1,4 @@
-<?php include "koneksi.php";
+<?php include "../config/koneksi.php";
 session_start();
 if(empty( $_SESSION['id_user'])){
   //session_destroy();
@@ -18,7 +18,9 @@ if(empty( $_SESSION['id_user'])){
     <title>Crown Carwash Administrator</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/jquery-ui.min.css" rel="stylesheet">
+	  <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <?php include "modules/menus/menu.php"; ?>
@@ -33,5 +35,6 @@ if(empty( $_SESSION['id_user'])){
 </html>
 <?php } ?>
 
-<style type="text/css"> body {min-height: 200px; padding-top: 70px; } @media print {.container {margin-top: -30px; } #tombol, .noprint {display: none; } } 
+<style type="text/css"> body {min-height: 200px; padding-top: 70px; } 
+@media print {.container {margin-top: -30px; } #tombol, .noprint {display: none; } } 
 </style>
