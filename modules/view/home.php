@@ -3,7 +3,7 @@
       <div class="container">
         <h2 class="display-3 text-white">Crown CarWash</h2>
         <h2 class="display-6 text-white">We Serve With Profesional Way</h2>
-        <h4 class="display-6 text-white">Open 9 Pagi - Closed 6 PM</h4>
+        <h4 class="display-6 text-white">Open 9 AM - Closed 6 PM</h4>
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12" style="margin-top: 4.2em;">
