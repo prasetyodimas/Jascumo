@@ -27,7 +27,9 @@
 		  </ul>
 		<?php } ?> 
 		</li>
-		<li><a href="./admin.php?hlm=transaksi"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi</a></li>
+		<li class="dropdown">
+			<a href="./admin.php?hlm=transaksi" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
+		</li>
         <li><a href="?hlm=laporan"><i class="fa fa-file-text-o" aria-hidden="true"></i> Laporan</a></li>
 
 	  </ul>

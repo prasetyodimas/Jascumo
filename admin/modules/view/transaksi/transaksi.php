@@ -30,12 +30,13 @@ if(empty($_SESSION['id_user'])){
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
-					 <th width="10%">No. Nota</th>
-					 <th width="20%">Nama Pelanggan</th>
-					 <th width="20%">Jenis</th>
-					 <th width="10%">Total Bayar</th>
-					 <th width="10%">Tanggal</th>
-					 <th width="20%">Tindakan</th>
+					 <th width="">No. Nota</th>
+					 <th width="">Nama Pelanggan</th>
+					 <th width="">Jenis</th>
+					 <th width="">Total Bayar</th>
+					 <th width="">Tanggal</th>
+					 <th width="">Status</th>
+					 <th width="">Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -54,20 +55,18 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$row['nama'].'</td>
 					 <td>'.$row['jenis'].'</td>
-					 <td>RP. '.number_format($row['total']).'</td>
+					 <td>Rp. '.number_format($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
+					 <td></td>
 					 <td>
-
-					<script type="text/javascript" language="JavaScript">
-					  	function konfirmasi(){
-						  	tanya = confirm("Anda yakin akan menghapus data ini?");
-						  	if (tanya == true) return true;
-						  	else return false;
-						}
-					</script>
-
+						<script type="text/javascript" language="JavaScript">
+						  	function konfirmasi(){
+							  	tanya = confirm("Anda yakin akan menghapus data ini?");
+							  	if (tanya == true) return true;
+							  	else return false;
+							}
+						</script>
 					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
-					 	<a href="?hlm=transaksi&aksi=edit&id_transaksi='.$row['id_transaksi'].'" class="btn btn-warning btn-s">Edit</a>
 					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 					</td>';
 				}

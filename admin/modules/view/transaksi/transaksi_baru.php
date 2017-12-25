@@ -27,112 +27,122 @@ if(empty( $_SESSION['id_user'])){
 ?>
 <h2>Tambah Transaksi Baru</h2>
 <div class="clearfix form-group"></div>
+<form method="post" action="" class="form-horizontal" role="form">
 	<div class="col-lg-12">
 		<div class="row">
-			<div class="col-lg-6">
-				<form method="post" action="" class="form-horizontal" role="form">
-					<div class="form-group">
-						<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
-						<div class="col-sm-8">
-						<?php
+			<div class="col-lg-7">
+				<div class="form-group">
+					<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
+					<div class="col-sm-4">
+					<?php
 
-							$sql = mysqli_query($db_con, "SELECT no_nota FROM transaksi");
-								echo '<input type="text" class="form-control" id="no_nota" value="';
+						$sql = mysqli_query($db_con, "SELECT no_nota FROM transaksi");
+							echo '<input type="text" class="form-control" id="no_nota" value="';
 
-							$no_nota = "C001";
-							if(mysqli_num_rows($sql) == 0){
+						$no_nota = "C001";
+						if(mysqli_num_rows($sql) == 0){
+							echo $no_nota;
+						}
+
+						$result = mysqli_num_rows($sql);
+						$counter = 0;
+						while(list($no_nota) = mysqli_fetch_array($sql)){
+							if (++$counter == $result) {
+								$no_nota++;
 								echo $no_nota;
 							}
+						}
+							echo '"name="no_nota" placeholder="No. Nota" readonly>';
+					?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Nama Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="jenis" class="col-sm-4 control-label">Jenis Kendaraan</label>
+					<div class="col-sm-5">
+						<select name="jenis" class="form-control" id="jenis" required>
+							<option value="" disable> Pilih Jenis Kendaraan </option>
+						<?php
 
-							$result = mysqli_num_rows($sql);
-							$counter = 0;
-							while(list($no_nota) = mysqli_fetch_array($sql)){
-								if (++$counter == $result) {
-									$no_nota++;
-									echo $no_nota;
-								}
+							$q = mysqli_query($db_con, "SELECT nama_mobil FROM tipe_mobil");
+							while(list($jenis) = mysqli_fetch_array($q)){
+								echo '<option value="'.$jenis.'">'.$jenis.'</option>';
 							}
-								echo '"name="no_nota" placeholder="No. Nota" readonly>';
 
 						?>
 
-						</div>
+						</select>
 					</div>
-					<div class="form-group">
-						<label for="nama" class="col-sm-4 control-label">Nama Pelanggan</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan" required>
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="jenis_layanan" class="col-lg-4 control-label">Jenis Layanan</label>
+					<div class="col-lg-5">
+						<select name="" class="form-control" required="">
+							<option value="">Pilih Jenis Layanan</option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>
 					</div>
-					<div class="form-group">
-						<label for="jenis" class="col-sm-4 control-label">Jenis Kendaraan</label>
-						<div class="col-sm-5">
-							<select name="jenis" class="form-control" id="jenis" required>
-								<option value="" disable> Pilih Jenis Kendaraan </option>
-							<?php
-
-								$q = mysqli_query($koneksi, "SELECT jenis FROM biaya");
-								while(list($jenis) = mysqli_fetch_array($q)){
-									echo '<option value="'.$jenis.'">'.$jenis.'</option>';
-								}
-
-							?>
-
-							</select>
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="biaya" class="col-sm-4 control-label">Biaya</label>
+					<div class="col-sm-5">
+						<input type="number" class="form-control" id="biaya" name="biaya" value="" required>
 					</div>
-					<div class="form-group">
-						<label for="biaya" class="col-sm-4 control-label">Biaya</label>
-						<div class="col-sm-8">
-							<input type="number" class="form-control" id="biaya" name="biaya" value="" required>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-							<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
-						</div>
-					</div>
+				</div>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-5">
 				<div class="col-lg-12">
-                  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
-	              <div class="panel outerlines-area">
-	                <div class="border__booking">
-	                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
+	               <div class="panel outerlines-area">
+		                <div class="border__booking">
+	              		  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
+		                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
+		                </div>
+		                <div class="queue__list__booking">
+		                  <h1 class="text-center">1</h1>
+		                </div>
 	                </div>
-	                <div class="queue__list__booking">
-	                  <p class="text-center">1</p>
-	                </div>
-	              </div>
-	              <div class="terms-condition">
-	                <p>Ketentuan : Untuk Melakukan prosedur booking / reservasi pencucian pelanggan di harapkan melakukan pemesanan pada jam operasional 
-	                / jam kerja. Jam operasional 8.00 Am - 17.00 Pm </p>
-	              </div>
-	            </div>
-				<div class="form-group">
-					<label for="bayar" class="col-sm-4 control-label">Bayar</label>
-					<div class="col-sm-5">
-						<input type="number" class="form-control" id="bayar" name="bayar" placeholder="Isi dengan angka" required>
-					</div>
+		            <div class="rown form-horizontal">
+						<div class="form-group">
+							<label for="bayar" class="col-sm-4 control-label">Bayar</label>
+							<div class="col-sm-7">
+								<input type="number" class="form-control" id="bayar" name="bayar" placeholder="Isi dengan angka" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="kembali" class="col-sm-4 control-label">Kembalian</label>
+							<div class="col-sm-7">
+								<input type="number" class="form-control" id="kembali" name="kembali" placeholder="Kembalian" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="total" class="col-sm-4 control-label">Total Bayar</label>
+							<div class="col-sm-7">
+								<input type="number" class="form-control" id="total" name="total" placeholder="Total Bayar" required>
+							</div>
+						</div>
+		            </div>
 				</div>
+		        <div class="terms-condition">
+		            <p>Ketentuan : Untuk Melakukan prosedur booking / reservasi pencucian pelanggan di harapkan melakukan pemesanan pada jam operasional 
+		            / jam kerja. Jam operasional 8.00 Am - 17.00 Pm </p>
+		        </div>
+			</div>
+			<div class="col-lg-12">
 				<div class="form-group">
-					<label for="kembali" class="col-sm-4 control-label">Kembalian</label>
-					<div class="col-sm-5">
-						<input type="number" class="form-control" id="kembali" name="kembali" placeholder="Kembalian" required>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="total" class="col-sm-4 control-label">Total Bayar</label>
-					<div class="col-sm-5">
-						<input type="number" class="form-control" id="total" name="total" placeholder="Total Bayar" required>
+					<div class="col-sm-offset-2 pull-right">
+						<button type="submit" name="submit" class="btn btn-success">Simpan</button>
+						<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </form>
 <?php } } ?>
 

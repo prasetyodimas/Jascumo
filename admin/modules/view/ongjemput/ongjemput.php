@@ -23,7 +23,7 @@ if (empty($_SESSION['id_user'])) {
 	<div class="col-md-12">
 		<div class="heading-katemobil">
 			<h3>Ongkos Jemput</h3>
-			<a href="./admin.php?hlm=ongjemput&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Kategori Mobil</a>
+			<a href="./admin.php?hlm=ongjemput&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Ongkos Jemput</a>
 		</div>
 		<div class="clearfix form-group"></div>
 	<table class="table table-bordered table-hover">
