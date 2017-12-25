@@ -5,9 +5,6 @@ if(isset($_REQUEST['hlm'])){
 			case 'transaksi':
 				include "modules/view/transaksi/transaksi.php";
 				break;
-			case 'laporan':
-				include "laporan.php";
-				break;
 			case 'user':
 				include "modules/view/user/user.php";
 				break;
@@ -22,6 +19,9 @@ if(isset($_REQUEST['hlm'])){
 				break;
 			case 'cetak':
 				include "cetak_nota.php";
+				break;
+			case 'laporan':
+				include "laporan.php";
 				break;
 		}
 	} else {

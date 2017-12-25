@@ -48,7 +48,7 @@ if(empty( $_SESSION['id_user'])){
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['jenis'].'</td>
-					 <td>'.$row['biaya'].'</td>
+					 <td>Rp.'.formatuang($row['biaya']).'</td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
 						  	function konfirmasi(){
