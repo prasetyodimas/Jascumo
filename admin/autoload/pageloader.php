@@ -1,24 +1,24 @@
-<?php
+<?php include '../config/koneksi.php';
 if(isset($_REQUEST['hlm'])){
 	$hlm = $_REQUEST['hlm'];
 		switch($hlm){
 			case 'transaksi':
-				include "transaksi.php";
+				include "modules/view/transaksi/transaksi.php";
 				break;
 			case 'laporan':
 				include "laporan.php";
 				break;
 			case 'user':
-				include "user.php";
+				include "modules/view/user/user.php";
 				break;
 			case 'biaya':
-				include "biaya.php";
+				include "modules/view/biaya/biaya.php";
 				break;
-			case 'kate_mobil':
-				include "kate_mobil.php";
+			case 'katemobil':
+				include "modules/view/katemobil/katemobil.php";
 				break;
-			case 'ongkir':
-				include "ongkir.php";
+			case 'ongjemput':
+				include "modules/view/ongjemput/ongjemput.php";
 				break;
 			case 'cetak':
 				include "cetak_nota.php";
@@ -33,9 +33,9 @@ if(isset($_REQUEST['hlm'])){
 		<strong>
 		<?php
 			if($_SESSION['level'] == 1){
-				echo 'Admin.';
+				echo 'Admin (Petugas Kasir)';
 			} else {
-				echo 'Petugas Kasir.';
+				echo 'Pimpinan / Manager.';
 			}
 		?>
 		</strong>

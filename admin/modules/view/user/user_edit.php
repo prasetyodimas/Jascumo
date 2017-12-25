@@ -1,22 +1,22 @@
 <?php
-if( empty( $_SESSION['id_user'] ) ){
+if(empty($_SESSION['id_user'])){
 
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 } else {
 
-	if( isset( $_REQUEST['submit'] )){
+	if(isset($_REQUEST['submit'])){
 
         $id_user = $_REQUEST['id_user'];
-		$level = $_REQUEST['level'];
+		$level   = $_REQUEST['level'];
 
         if($id_user == 1){
             header("location: ./admin.php?hlm=user");
             die();
         }
 
-		$sql = mysqli_query($koneksi, "UPDATE user SET level='$level' WHERE id_user='$id_user'");
+		$sql = mysqli_query($db_con, "UPDATE user SET level='$level' WHERE id_user='$id_user'");
 
 		if($sql == true){
 			header('Location: ./admin.php?hlm=user');
@@ -28,7 +28,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
 		$id_user = $_REQUEST['id_user'];
 
-		$sql = mysqli_query($koneksi, "SELECT * FROM user WHERE id_user='$id_user'");
+		$sql = mysqli_query($db_con, "SELECT * FROM user WHERE id_user='$id_user'");
 		while($row = mysqli_fetch_array($sql)){
 
 ?>
@@ -60,12 +60,12 @@ if( empty( $_SESSION['id_user'] ) ){
 					if($level == 1){
 						echo 'Admin';
 					} else {
-						echo 'User Biasa';
+						echo 'Pimpinan / Manager';
 					}
 				?>
 				</option>
-				<option value="2">User Biasa</option>
 				<option value="1">Admin</option>
+				<option value="2">Pimpinan / Manager</option>
 			</select>
 		</div>
 	</div>

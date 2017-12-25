@@ -1,0 +1,50 @@
+/*CSS MAIN JASCUMO CROWN CAR WASH*/
+body {
+	min-height: 200px; 
+	padding-top: 70px; 
+} 
+
+/*Custom Bootsrap*/
+.navbar-inverse{
+	background-color:#eac702;
+    border-color: transparent;
+}
+.navbar-inverse .navbar-brand{
+	color: #fff !important;
+}
+.navbar-inverse .navbar-nav > li > a{
+	color: #fff !important;
+}
+.navbar-inverse .navbar-nav > li > a:hover{
+	color: #646363 !important;
+}
+.navbar-nav > li > .dropdown-menu{
+	margin-top: 8px;
+}
+.dropdown-menu >li > a:hover{
+	background-color:#eac702;
+}
+
+.table>thead>tr>td.info, .table>tbody>tr>td.info, .table>tfoot>tr>td.info, .table>thead>tr>th.info, .table>tbody>tr>th.info, .table>tfoot>tr>th.info, .table>thead>tr.info>td, .table>tbody>tr.info>td, .table>tfoot>tr.info>td, .table>thead>tr.info>th, .table>tbody>tr.info>th, .table>tfoot>tr.info>th{
+	background-color: #e2e2e2 !important;
+}
+
+
+/* LOKET CASHIER */
+.heading-barloket{
+	text-align:center;
+}
+@media print {
+	.container {
+		margin-top: -30px;
+	} 
+	#tombol, .noprint {
+		display: none; 
+	} 
+} 
+
+@media (min-width:768px){
+	.container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse{
+		padding:4px;
+	}
+}

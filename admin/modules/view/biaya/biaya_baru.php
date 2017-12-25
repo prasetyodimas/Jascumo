@@ -1,17 +1,16 @@
 <?php
-if( empty( $_SESSION['id_user'] ) ){
-
+if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 } else {
 
-	if( isset( $_REQUEST['submit'] )){
+	if(isset($_REQUEST['submit'])){
 
 		$jenis = $_REQUEST['jenis'];
 		$biaya = $_REQUEST['biaya'];
 
-		$sql = mysqli_query($koneksi, "INSERT INTO biaya(jenis, biaya) VALUES('$jenis', '$biaya')");
+		$sql = mysqli_query($db_con, "INSERT INTO biaya(jenis, biaya) VALUES('$jenis', '$biaya')");
 
 		if($sql == true){
 			header('Location: ./admin.php?hlm=biaya');

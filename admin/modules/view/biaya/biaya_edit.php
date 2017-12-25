@@ -1,18 +1,18 @@
 <?php
-if( empty( $_SESSION['id_user'] ) ){
+if(empty( $_SESSION['id_user'])){
 
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 } else {
 
-	if( isset( $_REQUEST['submit'] )){
+	if(isset($_REQUEST['submit'])){
 
-		$id_biaya = $_REQUEST['id_biaya'];
-		$jenis = $_REQUEST['jenis'];
-		$biaya = $_REQUEST['biaya'];
+		$id_biaya  = $_REQUEST['id_biaya'];
+		$jenis 	   = $_REQUEST['jenis'];
+		$biaya 	   = $_REQUEST['biaya'];
 
-		$sql = mysqli_query($koneksi, "UPDATE biaya SET jenis='$jenis', biaya='$biaya' WHERE id_biaya='$id_biaya'");
+		$sql = mysqli_query($db_con, "UPDATE biaya SET jenis='$jenis', biaya='$biaya' WHERE id_biaya='$id_biaya'");
 
 		if($sql == true){
 			header('Location: ./admin.php?hlm=biaya');
@@ -24,7 +24,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
 		$id_biaya = $_REQUEST['id_biaya'];
 
-		$sql = mysqli_query($koneksi, "SELECT * FROM biaya WHERE id_biaya='$id_biaya'");
+		$sql = mysqli_query($db_con, "SELECT * FROM biaya WHERE id_biaya='$id_biaya'");
 		while($row = mysqli_fetch_array($sql)){
 
 ?>
@@ -47,7 +47,7 @@ if( empty( $_SESSION['id_user'] ) ){
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-			<a href="./admin.php?hlm=total" class="btn btn-danger">Batal</a>
+			<a href="./admin.php?hlm=biaya" class="btn btn-danger">Batal</a>
 		</div>
 	</div>
 </form>

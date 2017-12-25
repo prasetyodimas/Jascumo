@@ -5,7 +5,7 @@ if(empty($_SESSION['id_user'])){
 	die();
 }else{
 
-	if( isset( $_REQUEST['submit'] )){
+	if(isset($_REQUEST['submit'])){
 		$username = $_REQUEST['username'];
 		$password = MD5($_REQUEST['password']);
 		$nama     = $_REQUEST['nama'];
@@ -13,7 +13,7 @@ if(empty($_SESSION['id_user'])){
 		$hp 	  = $_REQUEST['hp'];
 		$level    = $_REQUEST['level'];
 
-		$sql = mysqli_query($koneksi, "INSERT INTO user(username, password, nama, alamat, hp, level) VALUES('$username', '$password', '$nama', '$alamat', '$hp', '$level')");
+		$sql = mysqli_query($db_con, "INSERT INTO user(username, password, nama, alamat, hp, level) VALUES('$username', '$password', '$nama', '$alamat', '$hp', '$level')");
 		if($sql == true)
 		{
 			header('Location: ./admin.php?hlm=user');
@@ -62,8 +62,8 @@ if(empty($_SESSION['id_user'])){
 		<div class="col-sm-3">
 			<select name="level" class="form-control" required>
 				<option value="">Pilih Jenis User</option>
-				<option value="2">User Biasa</option>
 				<option value="1">Admin</option>
+				<option value="2">Pimpinan / Manager</option>
 			</select>
 		</div>
 	</div>

@@ -1,12 +1,10 @@
 <?php
-
-if( empty( $_SESSION['id_user'] ) ){
-
+if(empty( $_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 } else {
-	if( isset( $_REQUEST['aksi'] )){
+	if(isset($_REQUEST['aksi'])){
 		$aksi = $_REQUEST['aksi'];
 		switch($aksi){
 			case 'baru':
@@ -20,16 +18,15 @@ if( empty( $_SESSION['id_user'] ) ){
 				break;
 		}
 	} else {
-
 		echo '
-
 			<div class="container">
 			<div class="col-md-12">
-				<h3 style="margin-bottom: -20px;">Daftar User</h3>
-					<a href="./admin.php?hlm=user&aksi=baru" class="btn btn-success btn-s pull-right">Tambah User</a>
-				<br/><hr/>
-
-				<table class="table table-bordered">
+				<div class="heading-user">
+					<h3>Daftar User</h3>
+					<a href="./admin.php?hlm=user&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah User</a>
+				</div>
+				<div class="clearfix form-group"></div>
+				<table class="table table-hover table-bordered">
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
@@ -42,43 +39,40 @@ if( empty( $_SESSION['id_user'] ) ){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($koneksi, "SELECT * FROM user");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM user");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 
 				 while($row = mysqli_fetch_array($sql)){
 	 				$no++;
 	 			echo '
-
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['username'].'</td>
 					 <td>'.$row['nama'].'</td>
 					 <td>';
-
-					 if($row['level'] == 1){
-						 echo 'Admin';
-					 } else {
-						 echo 'User Biasa';
-					 }
-
+						 if($row['level'] == 1){
+							 echo 'Admin';
+						 } else {
+							 echo 'Manager / Pimpinan';
+						 }
 					 echo'</td>
 					 <td>
 
-					<script type="text/javascript" language="JavaScript">
-					  	function konfirmasi(){
-						  	tanya = confirm("Anda yakin akan menghapus user ini?");
-						  	if (tanya == true) return true;
-						  	else return false;
-						}
-					</script>
+						<script type="text/javascript" language="JavaScript">
+						  	function konfirmasi(){
+							  	tanya = confirm("Anda yakin akan menghapus user ini?");
+							  	if (tanya == true) return true;
+							  	else return false;
+							}
+						</script>
 
-					 <a href="?hlm=user&aksi=edit&id_user='.$row['id_user'].'" class="btn btn-warning btn-s">Edit</a>
-					 <a href="?hlm=user&aksi=hapus&submit=yes&id_user='.$row['id_user'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					 <a href="?hlm=user&aksi=edit&id_user='.$row['id_user'].'" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+					 <a href="?hlm=user&aksi=hapus&submit=yes&id_user='.$row['id_user'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 
 					 </td>';
 				}
-			} else {
+			}else{
 				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?hlm=user&aksi=baru">Tambah user baru</a></u> </p></center></td></tr>';
 			}
 			echo '
