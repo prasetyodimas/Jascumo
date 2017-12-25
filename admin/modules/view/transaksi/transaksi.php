@@ -1,12 +1,10 @@
 <?php
-
-if( empty( $_SESSION['id_user'] ) ){
-
+if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
-} else {
-	if( isset( $_REQUEST['aksi'] )){
+}else{
+	if(isset($_REQUEST['aksi'])){
 		$aksi = $_REQUEST['aksi'];
 		switch($aksi){
 			case 'baru':
@@ -22,16 +20,13 @@ if( empty( $_SESSION['id_user'] ) ){
 				include 'cetak_nota.php';
 				break;
 		}
-	} else {
-
+	}else{
 		echo '
-
 			<div class="container">
-				<h3 style="margin-bottom: -20px;">Daftar Transaksi</h3>
-					<a href="./admin.php?hlm=transaksi&aksi=baru" class="btn btn-success btn-s pull-right">Tambah Data</a>
-				<br/><hr/>
-
-				<table class="table table-bordered">
+				<h3>Daftar Transaksi</h3>
+					<a href="./admin.php?hlm=transaksi&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Transaksi Baru</a>
+				<div class="clearfix form-group"></div>
+				<table class="table table-bordered table-hover">
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
@@ -46,7 +41,7 @@ if( empty( $_SESSION['id_user'] ) ){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($koneksi, "SELECT * FROM transaksi");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 
@@ -71,16 +66,13 @@ if( empty( $_SESSION['id_user'] ) ){
 						}
 					</script>
 
-					<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
-
-					 <a href="?hlm=transaksi&aksi=edit&id_transaksi='.$row['id_transaksi'].'" class="btn btn-warning btn-s">Edit</a>
-
-					 <a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
-
-					 </td>';
+					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
+					 	<a href="?hlm=transaksi&aksi=edit&id_transaksi='.$row['id_transaksi'].'" class="btn btn-warning btn-s">Edit</a>
+					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					</td>';
 				}
-			} else {
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?hlm=transaksi&aksi=baru">Tambah data baru</a></u> </p></center></td></tr>';
+			}else{
+				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?hlm=transaksi&aksi=baru">Tambah transaksi baru</a></u> </p></center></td></tr>';
 			}
 			echo '
 			 	</tbody>

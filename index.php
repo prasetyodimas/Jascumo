@@ -12,16 +12,16 @@
     <meta name="author" content="">
     <title>Crown Carwash</title>
     <!-- Bootstrap core CSS -->
-    <link rel="shortcut icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
-    <link href="frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="frontend/css/one-page-wonder.css" rel="stylesheet">
-    <link href="frontend/css/select2.min.css" rel="stylesheet">
+    <link href="<?php echo $site;?>frontend/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="<?php echo $site;?>frontend/favicon/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="<?php echo $site;?>frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo $site;?>frontend/css/one-page-wonder.css" rel="stylesheet">
+    <link href="<?php echo $site;?>frontend/css/select2.min.css" rel="stylesheet">
     <!-- JS -->
-    <script src="frontend/vendor/jquery/jquery.min.js"></script>
-    <script src="frontend/js/select2.min.js"></script>
-    <script src="frontend/vendor/popper/popper.min.js"></script>
-    <script src="frontend/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo $site;?>frontend/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo $site;?>frontend/js/select2.min.js"></script>
+    <script src="<?php echo $site;?>frontend/vendor/popper/popper.min.js"></script>
+    <script src="<?php echo $site;?>frontend/vendor/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
   <!-- Navigation -->

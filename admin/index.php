@@ -1,5 +1,5 @@
 <?php session_start();
-      include "koneksi.php";
+      include "../config/koneksi.php";
     //jika ada session, maka akan diarahkan ke halaman dashboard admin
     if(isset($_SESSION['id_user'])){
         //mengarahkan ke halaman dashboard admin
@@ -18,8 +18,8 @@
     <title>Aplikasi Jasa Cuci Mobil</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="shortcut icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
 	<style type="text/css">
 		body {
 		  padding-top: 40px;
@@ -74,8 +74,7 @@
 		$password = $_REQUEST['password'];
 
         //skript query ke insert data ke dalam database
-		$sql = mysqli_query($koneksi, "SELECT id_user, username, nama, level FROM user WHERE username='$username' AND password=MD5('$password')");
-
+		$sql = mysqli_query($db_con, "SELECT id_user, username, nama, level FROM user WHERE username='$username' AND password=MD5('$password')");
         //jika skript query benar maka akan membuat session
 		if($sql){
 			list($id_user, $username, $nama, $level) = mysqli_fetch_array($sql);
@@ -118,10 +117,12 @@
 	</div> <!-- /container -->
 
 	<!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="<?php echo $site;?>admin/js/jquery.min.js"></script>
+    <script src="<?php echo $site;?>admin/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$(".alert-message").alert().delay(3000).slideUp('slow');
+		$(function(){
+			$(".alert-message").alert().delay(3000).slideUp('slow');
+		});
 	</script>
   </body>
 </html>

@@ -1,11 +1,10 @@
 <?php
-
-if( empty( $_SESSION['id_user'] ) ){
+if(empty( $_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 } else {
-	if( isset( $_REQUEST['aksi'] )){
+	if(isset($_REQUEST['aksi'])){
 		$aksi = $_REQUEST['aksi'];
 		switch($aksi){
 			case 'baru':
@@ -23,13 +22,14 @@ if( empty( $_SESSION['id_user'] ) ){
 		echo '
 			<div class="container">
 			<div class="col-md-12">
-				<h3 style="margin-bottom: -20px;">Data Master Biaya Jasa</h3>
-					<a href="./admin.php?hlm=biaya&aksi=baru" class="btn btn-success btn-s pull-right">Tambah Data</a>
-				<br/><hr/>
-
-				<table class="table table-bordered">
+			<div class="">
+				<h3>Layanan / Jasa</h3>
+				<a href="./admin.php?hlm=biaya&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Layanan / Jasa</a>
+			</div>
+			<div class="clearfix form-group"></div>
+				<table class="table table-bordered table-hover">
 				 <thead>
-				   <tr class="info">
+				   <tr class="info">  
 					 <th width="10%">No</th>
 					 <th width="35%">Jenis Kendaraan</th>
 					 <th width="35%">Biaya</th>
@@ -39,7 +39,7 @@ if( empty( $_SESSION['id_user'] ) ){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($koneksi, "SELECT * FROM biaya");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM biaya");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 				 while($row = mysqli_fetch_array($sql)){
@@ -57,8 +57,8 @@ if( empty( $_SESSION['id_user'] ) ){
 							  	else return false;
 							}
 						</script>
-						 <a href="?hlm=biaya&aksi=edit&id_biaya='.$row['id_biaya'].'" class="btn btn-warning btn-s">Edit</a>
-						 <a href="?hlm=biaya&aksi=hapus&submit=yes&id_biaya='.$row['id_biaya'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+						 <a href="?hlm=biaya&aksi=edit&id_biaya='.$row['id_biaya'].'" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+						 <a href="?hlm=biaya&aksi=hapus&submit=yes&id_biaya='.$row['id_biaya'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 					 </td>';
 				}
 			} else {

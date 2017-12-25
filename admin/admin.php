@@ -1,4 +1,6 @@
 <?php include "../config/koneksi.php";
+      include "../helpers/currency.php";
+      include "../helpers/date.php";
 session_start();
 if(empty( $_SESSION['id_user'])){
   //session_destroy();
@@ -17,10 +19,12 @@ if(empty( $_SESSION['id_user'])){
     <meta name="author" content="">
     <title>Crown Carwash Administrator</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-	  <link href="css/jquery-ui.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link href="<?php echo $site?>admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo $site?>admin/css/custom.css" rel="stylesheet">
+    <link href="<?php echo $site?>admin/css/font-awesome.min.css" rel="stylesheet">
+	  <link href="<?php echo $site?>admin/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="<?php echo $site?>frontend/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon" rel="icon">
   </head>
   <body>
     <?php include "modules/menus/menu.php"; ?>
@@ -28,13 +32,9 @@ if(empty( $_SESSION['id_user'])){
     	<?php include "autoload/pageloader.php";?>
     </div> <!-- /container -->
     <!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
+    <script src="<?php echo $site;?>admin/js/jquery.min.js"></script>
+    <script src="<?php echo $site;?>admin/js/bootstrap.min.js"></script>
+	  <script src="<?php echo $site;?>admin/js/jquery-ui.min.js"></script>
   </body>
 </html>
 <?php } ?>
-
-<style type="text/css"> body {min-height: 200px; padding-top: 70px; } 
-@media print {.container {margin-top: -30px; } #tombol, .noprint {display: none; } } 
-</style>

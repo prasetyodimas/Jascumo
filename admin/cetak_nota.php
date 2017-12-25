@@ -1,6 +1,5 @@
-<?php
-    if( empty( $_SESSION['id_user'] ) ){
-
+<?php 
+    if(empty( $_SESSION['id_user'])){
     	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
     	header('Location: ./');
     	die();
@@ -9,7 +8,8 @@
 
 <html>
 <head>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="<?php echo $site;?>css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="<?php echo $site;?>css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body onload="window.print()">
     <div class="container">
@@ -18,7 +18,7 @@
 
     $id_transaksi = $_REQUEST['id_transaksi'];
 
-    $sql = mysqli_query($koneksi, "SELECT no_nota, nama, jenis, bayar, kembali, total, tanggal, id_user FROM transaksi WHERE id_transaksi='$id_transaksi'");
+    $sql = mysqli_query($db_con, "SELECT no_nota, nama, jenis, bayar, kembali, total, tanggal, id_user FROM transaksi WHERE id_transaksi='$id_transaksi'");
 
     list($no_nota, $nama, $jenis, $bayar, $kembali, $total, $tanggal, $id_user) = mysqli_fetch_array($sql);
 
@@ -55,7 +55,7 @@
         <p style="margin-bottom: 60px;">Petugas Kasir</p>
         <p>';
 
-        $sql = mysqli_query($koneksi, "SELECT nama FROM user WHERE id_user='$id_user'");
+        $sql = mysqli_query($db_con, "SELECT nama FROM user WHERE id_user='$id_user'");
         list($nama) = mysqli_fetch_array($sql);
 
         echo "<b><u>$nama</u></b>";
