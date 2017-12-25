@@ -31,7 +31,7 @@ if(empty( $_SESSION['id_user'])){
 				 <thead>
 				   <tr class="info">  
 					 <th width="10%">No</th>
-					 <th width="35%">Jenis Kendaraan</th>
+					 <th width="35%">Jenis Layanan</th>
 					 <th width="35%">Biaya</th>
 					 <th width="20%">Tindakan</th>
 				   </tr>

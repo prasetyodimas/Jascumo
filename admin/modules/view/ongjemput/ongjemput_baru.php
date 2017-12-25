@@ -20,23 +20,19 @@ if (empty($_SESSION['id_user'])) {
 ?>	
 <div class="container">
 	<div class="col-lg-12">
-		<h2>Tambah Kategori Mobil</h2>
+		<h2>Tambah Ongkos Jemput </h2>
 		<hr>
 		<form method="post" action="" class="form-horizontal" role="form">
 			<div class="form-group">
-				<label for="nama_mobil" class="col-sm-2 control-label">Jenis Kendaraan</label>
+				<label for="nama_wilayah" class="col-sm-2 control-label">Nama Wilayah</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="mobile_name" name="nama_mobil" placeholder="Jenis Kendaraan" required>
+					<input type="text" class="form-control" id="" name="nama_wilayah" placeholder="Nama Wilayah" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="Jenis Kendaraan" class="col-sm-2 control-label">Tipe Kendaraan</label>
+				<label for="Jenis Kendaraan" class="col-sm-2 control-label">Biaya Jemput</label>
 				<div class="col-sm-3">
-					<select name="ukuran_mobil" class="form-control" required>
-						<option value="">Pilih</option>
-						<option value="Sedang">Sedang</option>
-						<option value="Besar">Besar</option>
-					</select>
+					<input type="number" name="biaya_jemput" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -49,3 +45,13 @@ if (empty($_SESSION['id_user'])) {
 	</div>
 </div>
 <?php } } ?>
+<script type="text/javascript">
+  	function konfirmasi(){
+	  	tanya = confirm("Anda yakin akan menghapus user ini?");
+	  	if (tanya == true){
+	  		return true;
+	  	}else{
+	  		return false;
+	  	} 
+	}
+</script>
