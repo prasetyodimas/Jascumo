@@ -4,20 +4,20 @@ if (empty($_SESSION['id_user'])) {
 	header('location:./');
 	die();
 }else{
-	$aksi = $_REQUEST['aksi'];
-	switch ($aksi) {
-		case 'baru':
-			include "ongjemput_baru.php";
-			break;
-		case 'edit':
-			include "ongjemput_edit.php";
-			break;
-		case 'hapus':
-			include "ongjemput_hapus.php";
-			break;
-	}
-?>
-<?php }else{ ?>
+	if (isset($_REQUEST['submit'])) {
+		$nama_wilayah = $_REQUEST['nama_wilayah'];
+		$biaya_jemput = $_REQUEST['biaya_jemput'];
+
+		$sql = mysqli_query($db_con, "INSERT INTO ongkos_jemput(nama_wilayah, biaya_jemput) VALUES('$nama_wilayah', '$biaya_jemput')");
+
+		if($sql == true){
+			header('Location: ./admin.php?hlm=ongjemput');
+			die();
+		} else {
+			echo 'ERROR! Periksa penulisan querynya.';
+		}
+	}else{
+?>	
 <div class="container">
 	<div class="col-lg-12">
 		<h2>Tambah Kategori Mobil</h2>
@@ -48,4 +48,4 @@ if (empty($_SESSION['id_user'])) {
 		</form>
 	</div>
 </div>
-<?php } ?>
+<?php } } ?>
