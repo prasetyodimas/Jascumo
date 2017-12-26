@@ -45,13 +45,3 @@ if (empty($_SESSION['id_user'])) {
 	</div>
 </div>
 <?php } } ?>
-<script type="text/javascript">
-  	function konfirmasi(){
-	  	tanya = confirm("Anda yakin akan menghapus user ini?");
-	  	if (tanya == true){
-	  		return true;
-	  	}else{
-	  		return false;
-	  	} 
-	}
-</script>

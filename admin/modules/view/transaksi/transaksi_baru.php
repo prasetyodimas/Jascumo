@@ -20,7 +20,7 @@ if(empty( $_SESSION['id_user'])){
 		if($sql == true){
 			header('Location: ./admin.php?hlm=transaksi');
 			die();
-		} else {
+		}else{
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
