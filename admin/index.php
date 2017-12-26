@@ -17,51 +17,11 @@
     <meta name="author" content="">
     <title>Aplikasi Jasa Cuci Mobil</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo $site;?>admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo $site;?>admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo $site;?>admin/css/custom.css" rel="stylesheet">
     <link rel="shortcut icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
-	<style type="text/css">
-		body {
-		  padding-top: 40px;
-		  padding-bottom: 40px;
-		  background-color: #eee;
-		}
-
-		.form-signin {
-		  max-width: 330px;
-		  padding: 15px;
-		  margin: 0 auto;
-		}
-		.form-signin .form-signin-heading,
-		.form-signin .checkbox {
-		  margin-bottom: 10px;
-		}
-		.form-signin .checkbox {
-		  font-weight: normal;
-		}
-		.form-signin .form-control {
-		  position: relative;
-		  height: auto;
-		  -webkit-box-sizing: border-box;
-			 -moz-box-sizing: border-box;
-				  box-sizing: border-box;
-		  padding: 10px;
-		  font-size: 16px;
-		}
-		.form-signin .form-control:focus {
-		  z-index: 2;
-		}
-		.form-signin input[type="text"] {
-		  margin-bottom: -1px;
-		  border-bottom-right-radius: 0;
-		  border-bottom-left-radius: 0;
-		}
-		.form-signin input[type="password"] {
-		  margin-bottom: 10px;
-		  border-top-left-radius: 0;
-		  border-top-right-radius: 0;
-		}
-	</style>
   </head>
   <body>
     <div class="container">
@@ -96,26 +56,35 @@
 
 	} else {
 	?>
-      <form class="form-signin" method="post" action="" role="form">
-		<?php
-		if(isset($_SESSION['err'])){
-			$err = $_SESSION['err'];
-				echo '<div class="alert alert-danger alert-message">'.$err.'</div>';
-            unset($_SESSION['err']);
-		}
-		?>
-        <h2 class="form-signin-heading">Administrator Area</h2>
-        <div class="form-group">
-        	<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-        </div>
-        <div class="form-group">
-        	<input type="password" name="password" class="form-control" placeholder="Password" required>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Login</button>
-      </form>
-	<?php } ?> 
+	<div class="col-lg-12 col-sm-12 main-login">
+		<div class="col-lg-5 col-lg-push-3 inner-login">
+	      <form class="form-signin" method="post" action="" role="form">
+			<?php
+			if(isset($_SESSION['err'])){
+				$err = $_SESSION['err'];
+						echo '<div class="alert alert-danger alert-message">'.$err.'</div>';
+		            unset($_SESSION['err']);
+				}
+				?>
+		        <h2 class="form-signin-heading text-center">Administrator Area</h2>
+		        <div class="form-group">
+		        	<div class="input-group">
+		        		<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+		        		<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+		        	</div>
+		        </div>
+		        <div class="form-group">
+		        	<div class="input-group">
+		        		<span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+		        		<input type="password" name="password" class="form-control" placeholder="Password" required>
+			        </div>
+		        </div>
+		        <button class="btn btn-lg btn-danger btn-block" type="submit" name="login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+		      </form>
+			<?php } ?> 
+			</div>
+		</div>
 	</div> <!-- /container -->
-
 	<!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
     <script src="<?php echo $site;?>admin/js/jquery.min.js"></script>
     <script src="<?php echo $site;?>admin/js/bootstrap.min.js"></script>
