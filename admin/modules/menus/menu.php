@@ -21,17 +21,20 @@
         <li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase" aria-hidden="true"></i> Data Master <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
-			<li><a href="./admin.php?hlm=katemobil">Kategori Mobil</a></li>
-			<li><a href="./admin.php?hlm=biaya">Layanan / Service</a></li>
-			<li><a href="./admin.php?hlm=ongjemput">Biaya Jemput</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=katemobil">Kategori Mobil</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=biaya">Layanan / Service</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=ongjemput">Biaya Jemput</a></li>
 		  </ul>
 		<?php } ?> 
 		</li>
 		<li class="dropdown">
-			<a href="./admin.php?hlm=transaksi" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
+			<a href=""class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi_online">Transaksi Online</a></li>
+				<li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi">Transaksi Offline</a></li>
+			</ul>
 		</li>
         <li><a href="?hlm=laporan"><i class="fa fa-file-text-o" aria-hidden="true"></i> Laporan</a></li>
-
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
@@ -39,7 +42,7 @@
 		 	<i class="fa fa-user" aria-hidden="true"></i> <?php echo $_SESSION['nama']; ?> <b class="caret"></b>
 		  </a>
 		  <ul class="dropdown-menu">
-			<li><a href="./admin.php?hlm=user">	<i class="fa fa-cog" aria-hidden="true"></i> User</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=user"><i class="fa fa-cog" aria-hidden="true"></i> User</a></li>
 			<li><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 		  </ul>
 		</li>

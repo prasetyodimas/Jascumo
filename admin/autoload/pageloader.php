@@ -5,6 +5,9 @@ if(isset($_REQUEST['hlm'])){
 			case 'transaksi':
 				include "modules/view/transaksi/transaksi.php";
 				break;
+			case 'transaksi_online':
+				include "modules/view/transaksi/transaksi_online.php";
+				break;
 			case 'user':
 				include "modules/view/user/user.php";
 				break;
