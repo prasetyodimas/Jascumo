@@ -3,11 +3,10 @@
       include "../helpers/date.php";
 session_start();
 if(empty( $_SESSION['id_user'])){
-  //session_destroy();
   $_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
   header('Location: ./');
   die();
-} else {
+}else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +26,7 @@ if(empty( $_SESSION['id_user'])){
     <link href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon" rel="icon">
   </head>
   <body>
-    <?php include "modules/menus/menu.php"; ?>
+      <?php include "modules/menus/menu.php"; ?>
     <div class="container">
     	<?php include "autoload/pageloader.php";?>
     </div> <!-- /container -->

@@ -31,7 +31,6 @@ if(isset($_REQUEST['hlm'])){
 ?>
   <div class="jumbotron">
     <h2>Selamat Datang di Aplikasi Kasir Jasa Cuci</h2>
-
     <p>Halo <strong><?php echo $_SESSION['nama'];?></strong>, Anda login sebagai
 		<strong>
 		<?php
