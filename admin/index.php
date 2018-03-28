@@ -27,7 +27,7 @@
     <div class="container">
 	<?php
     //apabila tombol login di klik akan menjalankan skript dibawah ini
-	if( isset( $_REQUEST['login'] ) ){
+	if(isset($_REQUEST['login'])){
 
         //mendeklarasikan data yang akan dimasukkan ke dalam database
 		$username = $_REQUEST['username'];
@@ -38,33 +38,29 @@
         //jika skript query benar maka akan membuat session
 		if($sql){
 			list($id_user, $username, $nama, $level) = mysqli_fetch_array($sql);
-
             //membuat session
             $_SESSION['id_user']  = $id_user;
 			$_SESSION['username'] = $username;
 			$_SESSION['nama']     = $nama;
 			$_SESSION['level']    = $level;
-
 			header("Location: ./admin.php");
 			die();
-		} else {
-
+		}else{
 			$_SESSION['err'] = '<strong>ERROR!</strong> Username dan Password tidak ditemukan.';
 			header('Location: ./');
 			die();
 		}
-
-	} else {
+	}else{
 	?>
 	<div class="col-lg-12 col-sm-12 main-login">
 		<div class="col-lg-5 col-lg-push-3 inner-login">
 	      <form class="form-signin" method="post" action="" role="form">
-			<?php
-			if(isset($_SESSION['err'])){
-				$err = $_SESSION['err'];
-						echo '<div class="alert alert-danger alert-message">'.$err.'</div>';
-		            unset($_SESSION['err']);
-				}
+				<?php
+					if(isset($_SESSION['err'])){
+							$err = $_SESSION['err'];
+							echo '<div class="alert alert-danger alert-message">'.$err.'</div>';
+			            	unset($_SESSION['err']);
+					}
 				?>
 		        <h2 class="form-signin-heading text-center">Administrator Area</h2>
 		        <div class="form-group">

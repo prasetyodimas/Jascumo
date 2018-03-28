@@ -20,6 +20,9 @@ if(isset($_REQUEST['hlm'])){
 			case 'ongjemput':
 				include "modules/view/ongjemput/ongjemput.php";
 				break;
+			case 'member':
+				include "modules/view/member/member.php";
+				break;
 			case 'cetak':
 				include "cetak_nota.php";
 				break;

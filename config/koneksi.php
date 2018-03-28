@@ -4,7 +4,8 @@
 	$username = "root";
 	$password = "";
 	$db_name  = "db_jascumo"; //database name
-	$site 	  = 'http://localhost/jascumo/';
+	// $site 	  = 'http://localhost/jascumo/';
+	$site 	  = 'http://jascumo/';
 	//connect to mysql server
 	$db_con = new mysqli($host, $username, $password, $db_name);
 	//check if any connection error was encountered

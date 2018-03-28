@@ -7,12 +7,12 @@ if(empty($_SESSION['id_user'])){
 }else{
 
 if(isset($_REQUEST['submit'])){
-		$id_ongkos     = $_REQUEST['id_ongkosjemput'];
-		$nama_wilayah  = $_REQUEST['nama_wilayah'];
-		$biaya_jemput  = $_REQUEST['biaya_jemput'];
+		$id_ongkos    		= $_REQUEST['id_ongkosjemput'];
+		$nama_wilayah  	    = $_REQUEST['nama_wilayah'];
+		$biaya_jemput   	= $_REQUEST['biaya_jemput'];
 
-		$sql = mysqli_query($db_con, "UPDATE ongkos_jemput SET nama_wilayah='$nama_wilayah', biaya_jemput='$biaya_jemput' WHERE id_ongkosjemput='$id_ongkos'");
-
+		$update_sql = "UPDATE ongkos_jemput SET nama_wilayah='$nama_wilayah', biaya_jemput='$biaya_jemput' WHERE id_ongkosjemput='$_GET[id_ongkos]'";
+		$sql = mysqli_query($db_con, $update_sql);
 		if($sql == true){
 			header('Location: ./admin.php?hlm=ongjemput');
 			die();
@@ -31,6 +31,7 @@ if(isset($_REQUEST['submit'])){
 		<h2>Edit Ongkos Jemput </h2>
 		<hr>
 		<form method="post" action="" class="form-horizontal" role="form">
+			<input type="hidden" name="id_ongkos" value="<?php echo $id_ongkos ?>">
 			<div class="form-group">
 				<label for="nama_wilayah" class="col-sm-2 control-label">Nama Wilayah</label>
 				<div class="col-sm-4">

@@ -24,6 +24,7 @@
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=katemobil">Kategori Mobil</a></li>
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=biaya">Layanan / Service</a></li>
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=ongjemput">Biaya Jemput</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=member">Member </a></li>
 		  </ul>
 		<?php } ?> 
 		</li>

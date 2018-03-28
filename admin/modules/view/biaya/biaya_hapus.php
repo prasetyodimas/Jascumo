@@ -7,9 +7,9 @@ if(empty( $_SESSION['id_user'])){
 
 if(isset($_REQUEST['submit'])){
 
-    $id_biaya = $_REQUEST['id_biaya'];
+    $id_layanan = $_REQUEST['id_layanan'];
 
-    $sql = mysqli_query($db_con, "DELETE FROM biaya WHERE id_biaya='$id_biaya'");
+    $sql = mysqli_query($db_con, "DELETE FROM layanan WHERE id_layanan='$id_layanan'");
         if($sql == true){
             header("Location: ./admin.php?hlm=biaya");
             die();

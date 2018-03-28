@@ -38,7 +38,7 @@ if (empty($_SESSION['id_user'])) {
 	 <tbody>
 	 	<?php
 			$no= 1;
-	 		$getOngkosJemput = mysqli_query($db_con,"SELECT * FROM ongkos_jemput");
+	 		$getOngkosJemput = mysqli_query($db_con,"SELECT * FROM vw_ongkos_jemput");
 			while ($res=mysqli_fetch_array($getOngkosJemput)) {
 	 	 ?>
 	 	<tr>

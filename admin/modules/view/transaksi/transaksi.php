@@ -42,7 +42,7 @@ if(empty($_SESSION['id_user'])){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 

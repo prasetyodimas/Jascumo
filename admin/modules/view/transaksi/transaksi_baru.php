@@ -6,7 +6,6 @@ if(empty( $_SESSION['id_user'])){
 }else{
 
 	if(isset($_REQUEST['submit'])){
-
 		$no_nota  = $_REQUEST['no_nota'];
 		$jenis    = $_REQUEST['jenis'];
 		$nama     = $_REQUEST['nama'];
@@ -16,7 +15,6 @@ if(empty( $_SESSION['id_user'])){
 		$id_user  = $_SESSION['id_user'];
 
 		$sql = mysqli_query($db_con, "INSERT INTO transaksi(no_nota, jenis, nama, bayar, kembali, total, tanggal, id_user) VALUES('$no_nota', '$jenis', '$nama', '$bayar', '$kembali', '$total', NOW(), '$id_user')");
-
 		if($sql == true){
 			header('Location: ./admin.php?hlm=transaksi');
 			die();
@@ -69,9 +67,9 @@ if(empty( $_SESSION['id_user'])){
 							<option value="" disable> Pilih Jenis Kendaraan </option>
 						<?php
 
-							$q = mysqli_query($db_con, "SELECT nama_mobil FROM tipe_mobil");
+							$q = mysqli_query($db_con, "SELECT * FROM tipe_mobil ORDER BY id_tipemobil DESC");
 							while(list($jenis) = mysqli_fetch_array($q)){
-								echo '<option value="'.$jenis.'">'.$jenis.'</option>';
+								echo '<option value="'.$jenis['id_tipemobil'].'">'.$jenis['nama_mobil'].'</option>';
 							}
 
 						?>
@@ -84,8 +82,12 @@ if(empty( $_SESSION['id_user'])){
 					<div class="col-lg-5">
 						<select name="" class="form-control" required="">
 							<option value="">Pilih Jenis Layanan</option>
-							<option value=""></option>
-							<option value=""></option>
+							<?php 
+								$data = mysqli_query($db_con, "SELECT * FROM layanan ORDER BY id_layanan DESC");
+								while ($res =mysqli_fetch_array($data)){
+									echo "<option value=".$res['id_layanan'].">".$res['jenis_layanan']."</option>";
+								}
+							 ?>
 						</select>
 					</div>
 				</div>
@@ -147,14 +149,10 @@ if(empty( $_SESSION['id_user'])){
 <?php } } ?>
 
 <script type="text/javascript">
-  $(document).ready(function(){ /* PREPARE THE SCRIPT */
-
+  $(document).ready(function(){ 
     $("#jenis").change(function(){ /* TRIGGER THIS WHEN USER HAS SELECTED DATA FROM THE SELECT FIELD */
-
       var jenis = $(this).val(); /* STORE THE SELECTED LOAD NUMBER TO THIS VARIABLE */
-
-      $.ajax({ /* START AJAX */
-
+      $.ajax({
         type: "POST", /* METHOD TO USE TO PASS THE DATA */
         url: "action.php", /* THE FILE WHERE WE WILL PASS THE DATA */
         data: {"jenis": jenis}, /* THE DATA WE WILL PASS TO action.php */
@@ -164,10 +162,9 @@ if(empty( $_SESSION['id_user'])){
           $("#biaya").val(result.biaya);
         }
 
-      }); /* END OF AJAX */
+      }); 
+    }); 
 
-    }); /* END OF CHANGE #loads */
-
+    
   });
-
 </script>
