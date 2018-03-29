@@ -17,7 +17,7 @@
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
 		<li><a href="./admin.php"><i class="fa fa-home" aria-hidden="true"></i> Beranda</a></li>
-        <?php if( $_SESSION['level'] == 1 ){ ?> 
+        <?php if($_SESSION['level_acces'] == 1 ){ ?> 
         <li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase" aria-hidden="true"></i> Data Master <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
@@ -40,7 +40,7 @@
 	  <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		 	<i class="fa fa-user" aria-hidden="true"></i> <?php echo $_SESSION['nama']; ?> <b class="caret"></b>
+		 	<i class="fa fa-user" aria-hidden="true"></i> <?php echo $_SESSION['name_userlog']; ?> <b class="caret"></b>
 		  </a>
 		  <ul class="dropdown-menu">
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=user"><i class="fa fa-cog" aria-hidden="true"></i> User</a></li>

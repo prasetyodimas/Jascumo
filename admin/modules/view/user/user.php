@@ -30,10 +30,12 @@ if(empty( $_SESSION['id_user'])){
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
-					 <th width="22%">Username</th>
-					 <th width="33%">Nama</th>
-					 <th width="20%">Level</th>
-					 <th width="20%">Tindakan</th>
+					 <th>Username</th>
+					 <th>Nama User</th>
+					 <th>Level</th>
+					 <th>Created at</th>
+					 <th>Update at</th>
+					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -42,21 +44,22 @@ if(empty( $_SESSION['id_user'])){
 		 	$sql = mysqli_query($db_con, "SELECT * FROM user");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
-
 				 while($row = mysqli_fetch_array($sql)){
 	 				$no++;
 	 			echo '
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['username'].'</td>
-					 <td>'.$row['nama'].'</td>
+					 <td>'.$row['name_userlog'].'</td>
 					 <td>';
-						 if($row['level'] == 1){
+						 if($row['level_acces'] == 1){
 							 echo 'Admin';
 						 } else {
 							 echo 'Manager / Pimpinan';
 						 }
 					 echo'</td>
+					 <td>'.$row['update_at'].'</td>
+					 <td>'.$row['created_at'].'</td>
 					 <td>
 
 						<script type="text/javascript" language="JavaScript">

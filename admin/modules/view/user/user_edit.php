@@ -7,17 +7,15 @@ if(empty($_SESSION['id_user'])){
 } else {
 
 	if(isset($_REQUEST['submit'])){
-
-        $id_user = $_REQUEST['id_user'];
-		$level   = $_REQUEST['level'];
+        $id_user 	   = $_REQUEST['id_user'];
+		$level_acces   = $_REQUEST['level_acces'];
 
         if($id_user == 1){
             header("location: ./admin.php?hlm=user");
             die();
         }
 
-		$sql = mysqli_query($db_con, "UPDATE user SET level='$level' WHERE id_user='$id_user'");
-
+		$sql = mysqli_query($db_con, "UPDATE user SET level_acces='$level_acces' WHERE id_user='$id_user'");
 		if($sql == true){
 			header('Location: ./admin.php?hlm=user');
 			die();
@@ -47,16 +45,16 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama" class="col-sm-2 control-label">Nama User</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="nama" value="<?php echo $row['nama']; ?>" name="nama" placeholder="Nama User" readonly>
+			<input type="text" class="form-control" id="nama" value="<?php echo $row['name_userlog']; ?>" name="nama" placeholder="Nama User" readonly>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="jenis" class="col-sm-2 control-label">Jenis User</label>
 		<div class="col-sm-3">
-			<select name="level" class="form-control" required>
+			<select name="level_acces" class="form-control" required>
 				<option value="<?php echo $row['level']?>">
 				<?php
-					$level = $row['level'];
+					$level = $row['level_acces'];
 					if($level == 1){
 						echo 'Admin';
 					} else {
