@@ -17,8 +17,8 @@
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
 		<li><a href="./admin.php"><i class="fa fa-home" aria-hidden="true"></i> Beranda</a></li>
-        <?php if($_SESSION['level_acces'] == 1 ){ ?> 
-        <li class="dropdown">
+			<?php if($_SESSION['level_acces'] =='2'){ ?> 
+      <li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase" aria-hidden="true"></i> Data Master <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=katemobil">Kategori Mobil</a></li>
@@ -26,7 +26,7 @@
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=ongjemput">Biaya Jemput</a></li>
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=member">Member </a></li>
 		  </ul>
-		<?php } ?> 
+		  <?php } ?> 
 		</li>
 		<li class="dropdown">
 			<a href=""class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>

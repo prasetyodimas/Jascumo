@@ -7,11 +7,11 @@ if(empty($_SESSION['id_user'])){
 }else{
 
 if(isset($_REQUEST['submit'])){
-		$id_ongkos    		= $_REQUEST['id_ongkosjemput'];
+		$id_ongkos    		= $_REQUEST['id_ongkos'];
 		$nama_wilayah  	    = $_REQUEST['nama_wilayah'];
 		$biaya_jemput   	= $_REQUEST['biaya_jemput'];
 
-		$update_sql = "UPDATE ongkos_jemput SET nama_wilayah='$nama_wilayah', biaya_jemput='$biaya_jemput' WHERE id_ongkosjemput='$_GET[id_ongkos]'";
+		$update_sql = "UPDATE ongkos_jemput SET nama_wilayah='$nama_wilayah', biaya_jemput='$biaya_jemput' WHERE id_ongkos='$_GET[id_ongkos]'";
 		$sql = mysqli_query($db_con, $update_sql);
 		if($sql == true){
 			header('Location: ./admin.php?hlm=ongjemput');
@@ -23,7 +23,7 @@ if(isset($_REQUEST['submit'])){
 
 		$id_ongkos = $_REQUEST['id_ongkos'];
 
-		$sql = mysqli_query($db_con, "SELECT * FROM ongkos_jemput WHERE id_ongkosjemput='$id_ongkos'");
+		$sql = mysqli_query($db_con, "SELECT * FROM ongkos_jemput WHERE id_ongkos='$id_ongkos'");
 		while($row = mysqli_fetch_array($sql)){
 ?>
 <div class="container">
