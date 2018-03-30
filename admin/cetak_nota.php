@@ -19,7 +19,6 @@
     $id_transaksi = $_REQUEST['id_transaksi'];
 
     $sql = mysqli_query($db_con, "SELECT no_nota, nama, jenis, bayar, kembali, total, tanggal, id_user FROM transaksi WHERE id_transaksi='$id_transaksi'");
-
     list($no_nota, $nama, $jenis, $bayar, $kembali, $total, $tanggal, $id_user) = mysqli_fetch_array($sql);
 
     echo '

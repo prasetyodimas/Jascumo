@@ -10,7 +10,7 @@ if(empty($_SESSION['id_user'])){
 		$jenis = $_REQUEST['jenis'];
 		$biaya = $_REQUEST['biaya'];
 
-		$sql = mysqli_query($db_con, "INSERT INTO biaya(jenis, biaya) VALUES('$jenis', '$biaya')");
+		$sql = mysqli_query($db_con, "INSERT INTO layanan(jenis_layanan, biaya) VALUES('$jenis', '$biaya')");
 
 		if($sql == true){
 			header('Location: ./admin.php?hlm=biaya');
@@ -20,13 +20,19 @@ if(empty($_SESSION['id_user'])){
 		}
 	} else {
 ?>
-<h2>Tambah Data Master biaya Baru</h2>
+<h2>Tambah Data Master Layanan</h2>
 <hr>
 <form method="post" action="" class="form-horizontal" role="form">
 	<div class="form-group">
-		<label for="jenis" class="col-sm-2 control-label">Jenis Kendaraan</label>
+		<label for="jenis" class="col-sm-2 control-label">Jenis Layanan</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="jenis" name="jenis" placeholder="Jenis Kendaraan" required>
+			<select name="jenis" class="form-control" required="">
+				<option value="">Pilih</option>
+				<option value="Cuci Mobil">Cuci Mobil</option>
+				<option value="Cuci Mobil + Wax">Cuci Mobil + Wax</option>
+				<option value="Poles Body">Poles Body</option>
+				<option value="Poles Jamur Kaca">Poles Jamur Kaca</option>
+			</select>
 		</div>
 	</div>
 	<div class="form-group">
