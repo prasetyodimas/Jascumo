@@ -1,4 +1,4 @@
-<?php
+<?php include '../helpers/generate_code.php';
 if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
@@ -7,25 +7,52 @@ if(empty($_SESSION['id_user'])){
 
 	if(isset($_REQUEST['submit'])){
 
-		$id_member 		= $_REQUEST['id_member'];
-		$nama_lengkap   = $_REQUEST['nama_lengkap'];
+		$id_member 		= $_REQUEST['kode_member'];
+		$nama_member   = $_REQUEST['nama_member'];
 		$email_member   = $_REQUEST['email_member'];
 		$notelp_member  = $_REQUEST['notelp_member'];
 		$alamat_member  = $_REQUEST['alamat_member'];
+		$status_member  = 'Aktif';
+		$created_at  	= date('Y-m-d H:i:s');
+		$update_at  	= date('Y-m-d H:i:s');
 
+		// $sql = "INSERT INTO member
+		// 										 (id_member, 
+		// 										 nama_member, 
+		// 										 email_member, 
+		// 										 notelp_member, 
+		// 										 alamat_member,
+		// 										 status_member,
+		// 										 created_at,
+		// 										 update_at)
+		// 							  	VALUES 	('$id_member', 
+		// 							  		 	'$nama_member',
+		// 							  		 	'$email_member',
+		// 							  		 	'$notelp_member',
+		// 							  		 	'$alamat_member',
+		// 							  		 	'$status_member',
+		// 							  		 	'$created_at',
+		// 										   '$update_at')";
+		// 										   echo $sql; exit();
 		$sql = mysqli_query($db_con, "INSERT INTO member
 												 (id_member, 
-												 nama_lengkap, 
+												 nama_member, 
 												 email_member, 
 												 notelp_member, 
-												 alamat_member)
+												 alamat_member,
+												 status_member,
+												 created_at,
+												 update_at)
 									  	VALUES 	('$id_member', 
-									  		 	'$nama_lengkap',
+									  		 	'$nama_member',
 									  		 	'$email_member',
 									  		 	'$notelp_member',
-									  		 	'$alamat_member')");
+									  		 	'$alamat_member',
+									  		 	'$status_member',
+									  		 	'$created_at',
+									  		 	'$update_at')");
 		if($sql == true){
-			header('Location: ./admin.php?hlm=biaya');
+			header('Location: ./admin.php?hlm=member');
 			die();
 		} else {
 			echo 'ERROR! Periksa penulisan querynya.';
@@ -36,9 +63,15 @@ if(empty($_SESSION['id_user'])){
 <hr>
 <form method="post" action="" class="form-horizontal" role="form">
 	<div class="form-group">
+		<label for="nama_lengkap" class="col-sm-2 control-label">Kode Member</label>
+		<div class="col-sm-3">
+			<input type="text" name="kode_member" value="CRWN<?php echo generatorStr(2); ?>" class="form-control" readonly>
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="nama_lengkap" class="col-sm-2 control-label">Nama Lengkap</label>
 		<div class="col-sm-3">
-			<input type="text" name="nama_lengkap" class="form-control">
+			<input type="text" name="nama_member" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
