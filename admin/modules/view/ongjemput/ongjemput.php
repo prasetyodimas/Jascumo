@@ -38,7 +38,7 @@ if (empty($_SESSION['id_user'])) {
 	 <tbody>
 	 	<?php
 			$no= 1;
-	 		$getOngkosJemput = mysqli_query($db_con,"SELECT * FROM vw_ongkos_jemput");
+	 		$getOngkosJemput = mysqli_query($db_con,"SELECT * FROM ongkos_jemput");
 			while ($res=mysqli_fetch_array($getOngkosJemput)) {
 	 	 ?>
 	 	<tr>
@@ -46,8 +46,8 @@ if (empty($_SESSION['id_user'])) {
 	 		<td><?php echo $res['nama_wilayah'];?></td>
 	 		<td>Rp.<?php echo formatuang($res['biaya_jemput']);?></td>
 	 		<td>
-				<a href="?hlm=ongjemput&aksi=edit&id_ongkos=<?php echo $res['id_ongkosjemput'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
-				<a href="?hlm=ongjemput&aksi=hapus&submit=yes&id_ongkos=<?php echo $res['id_ongkosjemput'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
+				<a href="?hlm=ongjemput&aksi=edit&id_ongkos=<?php echo $res['id_ongkos'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+				<a href="?hlm=ongjemput&aksi=hapus&submit=yes&id_ongkos=<?php echo $res['id_ongkos'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 	 		</td>
 	 	</tr>
 	 	<?php $no++; } ?>

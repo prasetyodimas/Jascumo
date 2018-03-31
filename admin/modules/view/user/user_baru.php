@@ -6,14 +6,32 @@ if(empty($_SESSION['id_user'])){
 }else{
 
 	if(isset($_REQUEST['submit'])){
-		$username = $_REQUEST['username'];
-		$password = MD5($_REQUEST['password']);
-		$nama     = $_REQUEST['nama'];
-		$alamat   = $_REQUEST['alamat'];
-		$hp 	  = $_REQUEST['hp'];
-		$level    = $_REQUEST['level'];
+		$username 	  = $_REQUEST['username'];
+		$name_userlog = $_REQUEST['name_userlog'];
+		$password 	  = MD5($_REQUEST['password']);
+		$alamat   	  = $_REQUEST['alamat'];
+		$hp 	  	  = $_REQUEST['nomer_hp'];
+		$level_acces  = $_REQUEST['level_acces'];
+		$created_at   = date('y-m-d H:i:s');
+		$update_at    = date('y-m-d H:i:s');
 
-		$sql = mysqli_query($db_con, "INSERT INTO user(username, password, nama, alamat, hp, level) VALUES('$username', '$password', '$nama', '$alamat', '$hp', '$level')");
+		$sql = mysqli_query($db_con, "INSERT INTO user (username, 
+														name_userlog, 
+														password, 
+														level_acces,
+														handphone, 
+														alamat,
+														created_at,
+														update_at 
+														) VALUES
+														('$username',
+														 '$name_userlog',
+														 '$password',
+														 '$level_acces', 
+														 '$hp',
+														 '$alamat', 
+														 '$created_at',
+														 '$update_at')");
 		if($sql == true)
 		{
 			header('Location: ./admin.php?hlm=user');
@@ -42,7 +60,7 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama" class="col-sm-2 control-label">Nama User</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama User" required>
+			<input type="text" class="form-control" id="nama" name="name_userlog" placeholder="Nama User" required>
 		</div>
 	</div>
 	<div class="form-group">
@@ -54,13 +72,13 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="hp" class="col-sm-2 control-label">Nomor HP</label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="hp" name="hp" placeholder="Nomor HP" required>
+			<input type="text" class="form-control" id="hp" name="nomer_hp" placeholder="Nomor HP" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="jenis" class="col-sm-2 control-label">Jenis User</label>
 		<div class="col-sm-3">
-			<select name="level" class="form-control" required>
+			<select name="level_acces" class="form-control" required>
 				<option value="">Pilih Jenis User</option>
 				<option value="1">Admin</option>
 				<option value="2">Pimpinan / Manager</option>

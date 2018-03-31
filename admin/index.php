@@ -34,19 +34,20 @@
 		$password = $_REQUEST['password'];
 
         //skript query ke insert data ke dalam database
-		$sql = mysqli_query($db_con, "SELECT id_user, username, nama, level FROM user WHERE username='$username' AND password=MD5('$password')");
-        //jika skript query benar maka akan membuat session
+		$sql = mysqli_query($db_con, "SELECT id_user, username, name_userlog, level_acces
+		FROM user WHERE username='$username' AND password=MD5('$password')");
+		//jika skript query benar maka akan membuat session
 		if($sql){
-			list($id_user, $username, $nama, $level) = mysqli_fetch_array($sql);
+			list($id_user, $username, $name_userlog, $level_acces) = mysqli_fetch_array($sql);
             //membuat session
-            $_SESSION['id_user']  = $id_user;
-			$_SESSION['username'] = $username;
-			$_SESSION['nama']     = $nama;
-			$_SESSION['level']    = $level;
+            $_SESSION['id_user']  	  = $id_user;
+			$_SESSION['username'] 	  = $username;
+			$_SESSION['name_userlog'] = $name_userlog;
+			$_SESSION['level_acces']  = $level_acces;
 			header("Location: ./admin.php");
 			die();
 		}else{
-			$_SESSION['err'] = '<strong>ERROR!</strong> Username dan Password tidak ditemukan.';
+			$message_failed = $_SESSION['err'] = '<strong>ERROR!</strong> Username dan Password tidak ditemukan.';
 			header('Location: ./');
 			die();
 		}
@@ -55,6 +56,10 @@
 	<div class="col-lg-12 col-sm-12 main-login">
 		<div class="col-lg-5 col-lg-push-3 inner-login">
 	      <form class="form-signin" method="post" action="" role="form">
+				<div class="col-sm-8 col-md-8 col-md-push-2">
+					<img src="<?php echo $site;?>frontend/logo/crown-cars.png" class="img-responsive">
+				</div>
+		        <h2 class="form-signin-heading text-center">Administrator Area</h2>
 				<?php
 					if(isset($_SESSION['err'])){
 							$err = $_SESSION['err'];
@@ -62,7 +67,6 @@
 			            	unset($_SESSION['err']);
 					}
 				?>
-		        <h2 class="form-signin-heading text-center">Administrator Area</h2>
 		        <div class="form-group">
 		        	<div class="input-group">
 		        		<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
