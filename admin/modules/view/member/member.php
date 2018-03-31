@@ -27,15 +27,17 @@ if(empty( $_SESSION['id_user'])){
 				<a href="./admin.php?hlm=member&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Member </a>
 			</div>
 			<div class="clearfix form-group"></div>
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover table-responsive">
 				 <thead>
 				   <tr class="info">  
 					 <th width="10%">No</th>
-					 <th width="35%">Nama Lengkap</th>
-					 <th width="35%">Email</th>
-					 <th width="35%">No telp</th>
-					 <th width="35%">Alamat</th>
-					 <th width="20%">Tindakan</th>
+					 <th>Kode Member</th>
+					 <th>Nama Lengkap</th>
+					 <th>Email</th>
+					 <th>No telp</th>
+					 <th>Status Member</th>
+					 <th width="30%">Alamat</th>
+					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -49,10 +51,12 @@ if(empty( $_SESSION['id_user'])){
 	 			echo '
 				   <tr>
 					 <td>'.$no.'</td>
-					 <td>'.$row['nama_lengkap'].'</td>
+					 <td>'.$row['id_member'].'</td>
+					 <td>'.$row['nama_member'].'</td>
 					 <td>'.$row['email_member'].'</td>
 					 <td>'.$row['notelp_member'].'</td>
 					 <td>'.$row['alamat_member'].'</td>
+					 <td>'.$row['status_member'].'</td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
 						  	function konfirmasi(){

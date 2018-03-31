@@ -1,15 +1,18 @@
-<?php
+<?php include '../helpers/generate_code.php';
 if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
 }else{
 	if(isset($_REQUEST['submit'])){
+		$id_tipe_mobil  = $_REQUEST['kode_tipemobil'];
+		$nama_mobil 	= strtoupper($_REQUEST['nama_mobil']);
+		$ukuran_mobil 	= $_REQUEST['ukuran_mobil'];
+		$join_kodeStr   = $id_tipe_mobil.'-'.$nama_mobil;
 
-		$nama_mobil = $_REQUEST['nama_mobil'];
-		$ukuran_mobil = $_REQUEST['ukuran_mobil'];
 
-		$sql = mysqli_query($db_con, "INSERT INTO tipe_mobil(nama_mobil, ukuran_mobil) VALUES('$nama_mobil', '$ukuran_mobil')");
+		$sql = mysqli_query($db_con, "INSERT INTO tipe_mobil(id_tipe_mobil ,nama_mobil, ukuran_mobil)
+									  VALUES('$join_kodeStr','$nama_mobil', '$ukuran_mobil')");
 
 		if($sql == true){
 			header('Location: ./admin.php?hlm=katemobil');
@@ -22,6 +25,13 @@ if(empty($_SESSION['id_user'])){
 <h2>Tambah Kategori Mobil</h2>
 <hr>
 <form method="post" action="" class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="nama_mobil" class="col-sm-2 control-label">Kode Kendaraan</label>
+		<div class="col-sm-4">
+			<!-- <input type="text" class="form-control" id="mobile_name" name="nama_mobil" placeholder="Jenis Kendaraan" required> -->
+			<input type="text" class="form-control" id="mobile_name" value="<?php echo generatorStr(3); ?>" name="kode_tipemobil" placeholder="Jenis Kendaraan" required>
+		</div>
+	</div>
 	<div class="form-group">
 		<label for="nama_mobil" class="col-sm-2 control-label">Jenis Kendaraan</label>
 		<div class="col-sm-4">
