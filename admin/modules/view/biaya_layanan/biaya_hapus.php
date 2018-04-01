@@ -11,7 +11,7 @@ if(isset($_REQUEST['submit'])){
 
     $sql = mysqli_query($db_con, "DELETE FROM layanan WHERE id_layanan='$id_layanan'");
         if($sql == true){
-            header("Location: ./admin.php?hlm=biaya");
+            header("Location: ./admin.php?hlm=biaya_layanan");
             die();
         }
     }

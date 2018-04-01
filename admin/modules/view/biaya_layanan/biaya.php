@@ -24,16 +24,17 @@ if(empty( $_SESSION['id_user'])){
 			<div class="col-md-12">
 			<div class="">
 				<h3>Layanan / Jasa</h3>
-				<a href="./admin.php?hlm=biaya&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Layanan / Jasa</a>
+				<a href="./admin.php?hlm=biaya_layanan&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Layanan / Jasa</a>
 			</div>
 			<div class="clearfix form-group"></div>
 				<table class="table table-bordered table-hover">
 				 <thead>
 				   <tr class="info">  
 					 <th width="10%">No</th>
-					 <th width="35%">Jenis Layanan</th>
-					 <th width="35%">Biaya Jasa</th>
-					 <th width="20%">Tindakan</th>
+					 <th>Kode Layanan</th>
+					 <th>Jenis Layanan</th>
+					 <th>Biaya Jasa</th>
+					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -47,8 +48,9 @@ if(empty( $_SESSION['id_user'])){
 	 			echo '
 				   <tr>
 					 <td>'.$no.'</td>
+					 <td>'.$row['id_layanan'].'</td>
 					 <td>'.$row['jenis_layanan'].'</td>
-					 <td>Rp.'.formatuang($row['biaya']).'</td>
+					 <td>Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
 						  	function konfirmasi(){
@@ -57,8 +59,8 @@ if(empty( $_SESSION['id_user'])){
 							  	else return false;
 							}
 						</script>
-						 <a href="?hlm=biaya&aksi=edit&id_layanan='.$row['id_layanan'].'" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
-						 <a href="?hlm=biaya&aksi=hapus&submit=yes&id_layanan='.$row['id_layanan'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
+						 <a href="?hlm=biaya_layanan&aksi=edit&id_layanan='.$row['id_layanan'].'" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+						 <a href="?hlm=biaya_layanan&aksi=hapus&submit=yes&id_layanan='.$row['id_layanan'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 					 </td>';
 				}
 			} else {

@@ -35,8 +35,8 @@ if(empty( $_SESSION['id_user'])){
 					 <th>Nama Lengkap</th>
 					 <th>Email</th>
 					 <th>No telp</th>
+					 <th>Alamat</th>
 					 <th>Status Member</th>
-					 <th width="30%">Alamat</th>
 					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
