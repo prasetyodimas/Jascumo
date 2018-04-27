@@ -29,7 +29,7 @@ if(empty($_SESSION['id_user'])){
 		<label for="nama_mobil" class="col-sm-2 control-label">Kode Kendaraan</label>
 		<div class="col-sm-4">
 			<!-- <input type="text" class="form-control" id="mobile_name" name="nama_mobil" placeholder="Jenis Kendaraan" required> -->
-			<input type="text" class="form-control" id="mobile_name" value="<?php echo generatorStr(3); ?>" name="kode_tipemobil" placeholder="Jenis Kendaraan" required>
+			<input type="text" class="form-control" id="mobile_name" value="<?php echo generatorStr(3); ?>" name="kode_tipemobil" placeholder="Jenis Kendaraan" readonly>
 		</div>
 	</div>
 	<div class="form-group">
@@ -39,7 +39,7 @@ if(empty($_SESSION['id_user'])){
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="Jenis Kendaraan" class="col-sm-2 control-label">Tipe Kendaraan</label>
+		<label for="Jenis Kendaraan" class="col-sm-2 control-label">Ukuran Kendaraan</label>
 		<div class="col-sm-3">
 			<select name="ukuran_mobil" class="form-control" required>
 				<option value="">Pilih</option>

@@ -22,7 +22,7 @@
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase" aria-hidden="true"></i> Data Master <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=katemobil">Kategori Mobil</a></li>
-			<li><a href="<?php echo $site;?>admin/admin.php?hlm=biaya">Layanan / Service</a></li>
+			<li><a href="<?php echo $site;?>admin/admin.php?hlm=biaya_layanan">Layanan / Service</a></li>
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=ongjemput">Biaya Jemput</a></li>
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=member">Member </a></li>
 		  </ul>

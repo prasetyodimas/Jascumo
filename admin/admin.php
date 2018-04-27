@@ -22,8 +22,8 @@ if(empty( $_SESSION['id_user'])){
     <link href="<?php echo $site?>admin/css/custom.css" rel="stylesheet">
     <link href="<?php echo $site?>admin/css/font-awesome.min.css" rel="stylesheet">
 	  <link href="<?php echo $site?>admin/css/jquery-ui.min.css" rel="stylesheet">
-    <link href="<?php echo $site?>frontend/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="<?php echo $site?>frontend/favicon/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="<?php echo $site?>frontend/favicon/favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="<?php echo $site?>frontend/favicon/favicon.png" type="image/x-icon" rel="icon">
   </head>
   <body>
       <?php include "modules/menus/menu.php"; ?>

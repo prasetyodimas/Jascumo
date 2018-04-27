@@ -28,7 +28,7 @@
 			<a href="./admin.php?hlm=katemobil&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Kategori Mobil</a>
 		</div>
 		<div class="clearfix form-group"></div>
-	<table class="table table-bordered table-hover" style="width:100%;">
+	<table class="table table-bordered table-hover" style="width:100%;" id="tables-katemobil">
 	 <thead>
 	   <tr class="info">
 		 <th width="5%">No</th>
@@ -41,7 +41,7 @@
 	 <tbody>
 	 	<?php
 	 		$no= 1;
-	 		$getTypeMobil = mysqli_query($db_con,"SELECT * FROM tipe_mobil");
+	 		$getTypeMobil = mysqli_query($db_con,"SELECT * FROM tipe_mobil ORDER BY nama_mobil ASC");
 	 		while ($res=mysqli_fetch_array($getTypeMobil)) {
 	 	 ?>
 	 	<tr>

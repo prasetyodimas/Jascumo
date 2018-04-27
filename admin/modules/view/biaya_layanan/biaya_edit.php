@@ -9,12 +9,12 @@ if(empty( $_SESSION['id_user'])){
 
 		$id_layanan    = $_REQUEST['id_layanan'];
 		$jenis_layanan = $_REQUEST['jenis_layanan'];
-		$biaya 	   	   = $_REQUEST['biaya'];
+		$harga_layanan = $_REQUEST['harga_layanan'];
 
-		$sql = mysqli_query($db_con, "UPDATE layanan SET jenis_layanan='$jenis_layanan', biaya='$biaya' WHERE id_layanan='$id_layanan'");
+		$sql = mysqli_query($db_con, "UPDATE layanan SET jenis_layanan='$jenis_layanan', harga_layanan='$harga_layanan' WHERE id_layanan='$id_layanan'");
 
 		if($sql == true){
-			header('Location: ./admin.php?hlm=biaya');
+			header('Location: ./admin.php?hlm=biaya_layanan');
 			die();
 		} else {
 			echo 'ERROR! Periksa penulisan querynya.';
@@ -31,6 +31,12 @@ if(empty( $_SESSION['id_user'])){
 <hr>
 <form method="post" action="" class="form-horizontal" role="form">
 	<div class="form-group">
+		<label for="kode_layanan" class="col-sm-2 control-label">Kode Layanan</label>
+		<div class="col-sm-4">
+			<input type="text" name="kode_layanan" class="form-control" value="<?php echo $row['id_layanan']; ?>" readonly>
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="jenis" class="col-sm-2 control-label">Jenis Layanan</label>
 		<div class="col-sm-4">
 			<input type="hidden" name="id_total" value="<?php echo $row['id_layanan']; ?>">
@@ -40,13 +46,13 @@ if(empty( $_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="biaya" class="col-sm-2 control-label">Biaya Jasa</label>
 		<div class="col-sm-3">
-			<input type="number" class="form-control" id="biaya" value="<?php echo $row['biaya']; ?>" name="biaya" placeholder="total Jasa" required>
+			<input type="number" class="form-control" id="harga_layanan" value="<?php echo $row['harga_layanan']; ?>" name="harga_layanan" placeholder="Biaya Jasa" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-			<a href="./admin.php?hlm=biaya" class="btn btn-danger">Batal</a>
+			<a href="./admin.php?hlm=biaya_layanan" class="btn btn-danger">Batal</a>
 		</div>
 	</div>
 </form>
