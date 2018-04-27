@@ -11,8 +11,8 @@ if(isset($_REQUEST['hlm'])){
 			case 'user':
 				include "modules/view/user/user.php";
 				break;
-			case 'biaya':
-				include "modules/view/biaya/biaya.php";
+			case 'biaya_layanan':
+				include "modules/view/biaya_layanan/biaya.php";
 				break;
 			case 'katemobil':
 				include "modules/view/katemobil/katemobil.php";

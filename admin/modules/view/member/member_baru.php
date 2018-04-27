@@ -83,7 +83,7 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">Notelp </label>
 		<div class="col-sm-3">
-			<input type="text" name="notelp_member" class="form-control">
+			<input type="number" name="notelp_member" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
