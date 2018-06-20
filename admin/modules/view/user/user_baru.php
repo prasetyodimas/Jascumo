@@ -7,27 +7,27 @@ if(empty($_SESSION['id_user'])){
 
 	if(isset($_REQUEST['submit'])){
 		$username 	  = $_REQUEST['username'];
-		$name_userlog = $_REQUEST['name_userlog'];
+		$nama_user 	  = $_REQUEST['nama_user'];
 		$password 	  = MD5($_REQUEST['password']);
-		$alamat   	  = $_REQUEST['alamat'];
+		$alamat   	  = $_REQUEST['alamat_user'];
 		$hp 	  	  = $_REQUEST['nomer_hp'];
-		$level_acces  = $_REQUEST['level_acces'];
+		$level_akses  = $_REQUEST['level_akses'];
 		$created_at   = date('y-m-d H:i:s');
 		$update_at    = date('y-m-d H:i:s');
 
 		$sql = mysqli_query($db_con, "INSERT INTO user (username, 
-														name_userlog, 
+														nama_user, 
 														password, 
-														level_acces,
-														handphone, 
-														alamat,
+														level_akses,
+														nohp_user, 
+														alamat_user,
 														created_at,
 														update_at 
 														) VALUES
 														('$username',
-														 '$name_userlog',
+														 '$nama_user',
 														 '$password',
-														 '$level_acces', 
+														 '$level_akses', 
 														 '$hp',
 														 '$alamat', 
 														 '$created_at',
@@ -60,28 +60,28 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama" class="col-sm-2 control-label">Nama User</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" id="nama" name="name_userlog" placeholder="Nama User" required>
+			<input type="text" class="form-control" id="nama" name="nama_user" placeholder="Nama User" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="alamat" class="col-sm-2 control-label">Alamat</label>
 		<div class="col-sm-6">
-			<textarea class="form-control" name="alamat" rows="4" required></textarea>
+			<textarea class="form-control" name="alamat_user" rows="4" required></textarea>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="hp" class="col-sm-2 control-label">Nomor HP</label>
 		<div class="col-sm-3">
-			<input type="text" class="form-control" id="hp" name="nomer_hp" placeholder="Nomor HP" required>
+			<input type="number" class="form-control" id="hp" name="nomer_hp" placeholder="Nomor HP" required>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="jenis" class="col-sm-2 control-label">Jenis User</label>
 		<div class="col-sm-3">
-			<select name="level_acces" class="form-control" required>
+			<select name="level_akses" class="form-control" required>
 				<option value="">Pilih Jenis User</option>
-				<option value="1">Admin</option>
-				<option value="2">Pimpinan / Manager</option>
+				<option value="0">Admin</option>
+				<option value="1">Pimpinan / Manager</option>
 			</select>
 		</div>
 	</div>

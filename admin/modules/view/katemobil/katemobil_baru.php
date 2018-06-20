@@ -7,17 +7,17 @@ if(empty($_SESSION['id_user'])){
 	if(isset($_REQUEST['submit'])){
 		$id_tipe_mobil  = $_REQUEST['kode_tipemobil'];
 		$nama_mobil 	= strtoupper($_REQUEST['nama_mobil']);
+		$id_merek_mobil  = $_REQUEST['id_merek_mobil'];
 		$ukuran_mobil 	= $_REQUEST['ukuran_mobil'];
+		$keterangan 	= $_REQUEST['keterangan'];
 		$join_kodeStr   = $id_tipe_mobil.'-'.$nama_mobil;
 
-
-		$sql = mysqli_query($db_con, "INSERT INTO tipe_mobil(id_tipe_mobil ,nama_mobil, ukuran_mobil)
-									  VALUES('$join_kodeStr','$nama_mobil', '$ukuran_mobil')");
-
+		$sql = mysqli_query($db_con, "INSERT INTO tipe_mobil(id_tipe_mobil , id_merek_mobil ,nama_mobil, ukuran_mobil, keterangan)
+									  VALUES('$join_kodeStr', '$id_merek_mobil', '$nama_mobil', '$ukuran_mobil','$keterangan')");
 		if($sql == true){
 			header('Location: ./admin.php?hlm=katemobil');
 			die();
-		} else {
+		}else{
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
@@ -33,7 +33,20 @@ if(empty($_SESSION['id_user'])){
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="nama_mobil" class="col-sm-2 control-label">Jenis Kendaraan</label>
+		<label for="nama_mobil" class="col-sm-2 control-label">Merek Kendaraan</label>
+		<div class="col-sm-4">
+			<select name="id_merek_mobil" class="form-control" id="">
+				<?php
+					$getQuery = mysqli_query($db_con,"SELECT * FROM merek_mobil");
+					while ($data = mysqli_fetch_array($getQuery)) {
+						echo "<option value='".$data['id_merek_mobil']."'>".$data['nama_kendaraan']."</option>";
+				 	}
+				 ?>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="nama_mobil" class="col-sm-2 control-label">Nama Kendaraan</label>
 		<div class="col-sm-4">
 			<input type="text" class="form-control" id="mobile_name" name="nama_mobil" placeholder="Jenis Kendaraan" required>
 		</div>
@@ -47,6 +60,12 @@ if(empty($_SESSION['id_user'])){
 				<option value="Sedang">Sedang</option>
 				<option value="Besar">Besar</option>
 			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="nama_mobil" class="col-sm-2 control-label">Keterangan</label>
+		<div class="col-sm-4">
+			<textarea name="keterangan" class="form-control"></textarea>
 		</div>
 	</div>
 	<div class="form-group">

@@ -6,7 +6,7 @@ if(isset($_REQUEST['hlm'])){
 				include "modules/view/transaksi/transaksi.php";
 				break;
 			case 'transaksi_online':
-				include "modules/view/transaksi/transaksi_online.php";
+				include "modules/view/transaksi_online/transaksi_online.php";
 				break;
 			case 'user':
 				include "modules/view/user/user.php";
@@ -16,6 +16,9 @@ if(isset($_REQUEST['hlm'])){
 				break;
 			case 'katemobil':
 				include "modules/view/katemobil/katemobil.php";
+				break;
+			case 'merekmobil':
+				include "modules/view/merekmobil/merekmobil.php";
 				break;
 			case 'ongjemput':
 				include "modules/view/ongjemput/ongjemput.php";
@@ -34,12 +37,12 @@ if(isset($_REQUEST['hlm'])){
 ?>
   <div class="jumbotron">
     <h2>Selamat Datang di Aplikasi Kasir Jasa Cuci</h2>
-    <p>Halo <strong><?php echo $_SESSION['nama'];?></strong>, Anda login sebagai
+    <p>Halo <strong><?php echo $_SESSION['nama_user'];?></strong>, Anda login sebagai
 		<strong>
 		<?php
-			if($_SESSION['level'] == 1){
+			if($_SESSION['level_akses'] == 0){
 				echo 'Admin (Petugas Kasir)';
-			} else {
+			}elseif($_SESSION['level_akses'] == 1) {
 				echo 'Pimpinan / Manager.';
 			}
 		?>

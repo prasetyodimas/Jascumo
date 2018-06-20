@@ -34,16 +34,16 @@
 		$password = $_REQUEST['password'];
 
         //skript query ke insert data ke dalam database
-		$sql = mysqli_query($db_con, "SELECT id_user, username, name_userlog, level_acces
+		$sql = mysqli_query($db_con, "SELECT id_user, username, nama_user, level_akses, status_pengguna
 		FROM user WHERE username='$username' AND password=MD5('$password')");
 		//jika skript query benar maka akan membuat session
 		if($sql){
-			list($id_user, $username, $name_userlog, $level_acces) = mysqli_fetch_array($sql);
+			list($id_user, $username, $nama_user, $level_akses) = mysqli_fetch_array($sql);
             //membuat session
-            $_SESSION['id_user']  	  = $id_user;
-			$_SESSION['username'] 	  = $username;
-			$_SESSION['name_userlog'] = $name_userlog;
-			$_SESSION['level_acces']  = $level_acces;
+            $_SESSION['id_user']  	  	= $id_user;
+			$_SESSION['username'] 	  	= $username;
+			$_SESSION['nama_user'] 		= $nama_user;
+			$_SESSION['level_akses']  	= $level_akses;
 			header("Location: ./admin.php");
 			die();
 		}else{

@@ -50,9 +50,9 @@ if(empty( $_SESSION['id_user'])){
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['username'].'</td>
-					 <td>'.$row['name_userlog'].'</td>
+					 <td>'.$row['nama_user'].'</td>
 					 <td>';
-						 if($row['level_acces'] == 1){
+						 if($row['level_akses'] == 0){
 							 echo 'Admin';
 						 } else {
 							 echo 'Manager / Pimpinan';

@@ -8,54 +8,46 @@
 			$aksi = $_REQUEST['aksi'];
 			switch ($aksi) {
 				case 'baru':
-					include 'katemobil_baru.php';
+					include 'merekmobil_baru.php';
 					break;
 				case 'edit':
-					include 'katemobil_edit.php';
+					include 'merekmobil_edit.php';
 					break;
 				case 'hapus':
-					include 'katemobil_hapus.php';
+					include 'merekmobil_hapus.php';
 					break;
-			}
-
-	
+		}
 ?>
 <?php }else{ ?>
 <div class="container">
 	<div class="col-md-12">
 		<div class="heading-katemobil">
-			<h3>Kategori Mobil</h3>
-			<a href="./admin.php?hlm=katemobil&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Kategori Mobil</a>
+			<h3>Merek Mobil</h3>
+			<a href="./admin.php?hlm=merekmobil&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Merek Mobil</a>
 		</div>
 		<div class="clearfix form-group"></div>
 	<table class="table table-bordered table-hover" style="width:100%;" id="tables-katemobil">
 	 <thead>
 	   <tr class="info">
 		 <th width="5%">No</th>
-		 <th>Merek Mobil</th>
-		 <th>Nama Mobil</th>
-		 <th>Ukuran</th>
-		 <th>Keterangan</th>
+		 <th width="50%;">Kode Kendaraan</th>
+		 <th>Nama Kendaraan</th>
 		 <th>Aksi</th>
 	   </tr>
 	 </thead>
 	 <tbody>
 	 	<?php
 	 		$no= 1;
-	 		$getTypeMobil = mysqli_query($db_con,"SELECT * FROM tipe_mobil tm 
-	 											  JOIN merek_mobil mm on tm.id_merek_mobil=mm.id_merek_mobil 
-	 										      ORDER BY nama_mobil ASC");
+	 		$getTypeMobil = mysqli_query($db_con,"SELECT * FROM merek_mobil ORDER BY id_merek_mobil DESC");
 	 		while ($res=mysqli_fetch_array($getTypeMobil)) {
 	 	 ?>
 	 	<tr>
 	 		<td><?php echo $no;?></td>
+	 		<td><?php echo $res['id_merek_mobil'];?></td>
 	 		<td><?php echo $res['nama_kendaraan'];?></td>
-	 		<td><?php echo $res['nama_mobil'];?></td>
-	 		<td><?php echo $res['ukuran_mobil'];?></td>
-	 		<td><?php echo $res['keterangan'];?></td>
 	 		<td>
-				<a href="?hlm=katemobil&aksi=edit&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
-				<a href="?hlm=katemobil&aksi=hapus&submit=yes&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
+				<a href="?hlm=merekmobil&aksi=edit&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+				<a href="?hlm=merekmobil&aksi=hapus&submit=yes&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 	 		</td>
 	 	</tr>
 	 	<?php $no++; }?>

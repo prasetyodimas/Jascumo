@@ -1,9 +1,9 @@
 <?php
   include "../config/koneksi.php"; 
-  $cek_noantrian = mysqli_query($db_con,"SELECT * FROM booking ORDER BY id_booking DESC");
+  $cek_noantrian = mysqli_query($db_con,"SELECT * FROM transaksi_booking ORDER BY no_nota DESC");
   $show_queue = mysqli_num_rows($cek_noantrian);
   //get date 
-  $getbooking_data = mysqli_fetch_array(mysqli_query($db_con,"SELECT tgl_pesan FROM booking"));
+  $getbooking_data = mysqli_fetch_array(mysqli_query($db_con,"SELECT tgl_pesan FROM transaksi_booking"));
 
   //check prepare condition
   $datenow = date('Y-m-d H:i:s');
@@ -28,7 +28,7 @@
             minutes = checkTime(minutes);
             seconds = checkTime(seconds);
         document.getElementById('jam').innerHTML = hours + ":" + minutes + ":" + seconds;
-        var todayGenerateTimeout = setTimeout(startTime, 5s00);
+        // var todayGenerateTimeout = setTimeout(startTime, 5s00);
       }
 
       function checkTime(i) {
