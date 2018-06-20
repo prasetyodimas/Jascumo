@@ -1,7 +1,8 @@
-<?php error_reporting(0);
-  require 'config/koneksi.php';
-  require 'config/uri_visit.php';
-  require 'helpers/function.php';
+<?php session_start();
+      error_reporting(0);
+      require 'config/koneksi.php';
+      require 'config/uri_visit.php';
+      require 'helpers/function.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,51 +13,26 @@
     <meta name="author" content="">
     <title>Crown Carwash</title>
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo $site;?>frontend/favicon/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link href="<?php echo $site;?>frontend/favicon/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo $site;?>frontend/favicon/favicon.ico" type="image/x-icon">
     <link href="<?php echo $site;?>frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo $site;?>frontend/css/one-page-wonder.css" rel="stylesheet">
     <link href="<?php echo $site;?>frontend/css/select2.min.css" rel="stylesheet">
+    <link href="<?php echo $site;?>frontend/vendor/sweetalert/sweetalert.css" rel="stylesheet">
     <!-- JS -->
     <script src="<?php echo $site;?>frontend/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo $site;?>frontend/js/select2.min.js"></script>
     <script src="<?php echo $site;?>frontend/vendor/popper/popper.min.js"></script>
     <script src="<?php echo $site;?>frontend/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo $site;?>frontend/vendor/sweetalert/sweetalert.min.js"></script>
   </head>
   <body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="<?php echo $site;?>">Crown Carwash</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item <?php echo $url_home;?>">
-            <a class="nav-link" href="index.php?m=home">Home
-              <!-- <span class="sr-only">(current)</span> -->
-            </a>
-          </li>
-          <li class="nav-item <?php echo $url_booking;?>">
-            <a class="nav-link" href="<?php echo $site;?>index.php?m=booking">Booking</a>
-          </li>
-          <li class="nav-item <?php echo $url_about;?>">
-            <a class="nav-link" href="<?php echo $site;?>index.php?m=about">About</a>
-          </li>
-          <li class="nav-item <?php echo $url_services;?>">
-            <a class="nav-link" href="<?php echo $site;?>index.php?m=services">Services</a>
-          </li>
-          <li class="nav-item <?php echo $url_contact;?>">
-            <a class="nav-link" href="<?php echo $site;?>index.php?m=contact">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <?php include 'modules/view/partials/navbar.php';?>
   </nav>
   <!-- Modal Booking -->
   <?php include 'modules/view/modal-booking.php';?>
-
   <!-- Content All Start Here !! -->
   <?php include 'autoload/pages.php';?>
   <!-- Footer -->
@@ -68,4 +44,3 @@
   <!-- Bootstrap core JavaScript -->
 </body>
 </html>
-

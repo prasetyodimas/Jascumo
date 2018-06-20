@@ -6,9 +6,16 @@ if(empty( $_SESSION['id_user'])){
 }else{
 
 	if(isset($_REQUEST['submit'])){
-		$no_nota  = $_REQUEST['no_nota'];
-		$jenis    = $_REQUEST['jenis'];
-		$nama     = $_REQUEST['nama'];
+		//declaring variable
+		$no_nota  			= $_REQUEST['no_nota'];
+		// $jenis    = $_REQUEST['jenis'];
+		$nama_pemesan       = $_REQUEST['nama_pemesan'];
+		$alamat_pemesan     = $_REQUEST['alamat_pemesan'];
+		$notelp_pemesan     = $_REQUEST['notelp_pemesan'];
+		$email_pemesan      = $_REQUEST['email_pemesan'];
+		$tangal_pesan		= $_REQUEST['tangal_pesan'];
+		$no_antrian  		= $_REQUEST['no_antrian'];
+
 		$bayar    = $_REQUEST['bayar'];
 		$kembali  = $_REQUEST['kembali'];
 		$total    = $_REQUEST['total'];
@@ -34,10 +41,10 @@ if(empty( $_SESSION['id_user'])){
 					<div class="col-sm-4">
 					<?php
 
-						$sql = mysqli_query($db_con, "SELECT no_nota FROM transaksi");
+						$sql = mysqli_query($db_con, "SELECT no_nota FROM transaksi_booking");
 							echo '<input type="text" class="form-control" id="no_nota" value="';
 
-						$no_nota = "C001";
+						$no_nota = "CRWN001";
 						if(mysqli_num_rows($sql) == 0){
 							echo $no_nota;
 						}
@@ -57,7 +64,25 @@ if(empty( $_SESSION['id_user'])){
 				<div class="form-group">
 					<label for="nama" class="col-sm-4 control-label">Nama Pelanggan</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan" required>
+						<input type="text" class="form-control" id="nama" name="nama_pelanggan" placeholder="Nama Pelanggan" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Alamat Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="" name="alamat_pelanggan" placeholder="Alamat Pelanggan" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Email Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="" name="email_pelanggan" placeholder="Email Pelanggan" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Notelp</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="" name="notelp_pelanggan" placeholder="Notelp Pelanggan" required>
 					</div>
 				</div>
 				<div class="form-group">

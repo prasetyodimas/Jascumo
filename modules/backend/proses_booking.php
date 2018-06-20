@@ -1,5 +1,4 @@
-<?php
-include '../../config/koneksi.php'; 
+<?php include '../../config/koneksi.php'; 
 
 $act = $_GET['act'];
 if ($act=='booking') {
@@ -14,7 +13,7 @@ if ($act=='booking') {
 	$status_booking = $_POST['status_booking'];
 	$tgl_pesan		= date('Y-m-d H:i:s');
 
-	$addBooking = "INSERT INTO booking(id_booking, 
+	$addBooking = "INSERT INTO transaksi_booking(id_booking, 
 								   id_biayajemput, 
 								   id_member, 
 								   noantrian, 
@@ -42,10 +41,14 @@ if ($act=='booking') {
 	}	
 	
 }elseif ($act=='update-booking') {
-	# code...
+	
+
+
+
 }elseif ($act=='delete-booking') {
-	# code...
+
+
+
+
 }
-
-
 ?>
