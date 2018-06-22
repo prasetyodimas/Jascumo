@@ -27,10 +27,10 @@
       <?php }  ?>
       <?php if($_SESSION['id_member']!=''){ ?>
         <li class="nav-item <?php echo $url_contact;?>">
-          <a class="nav-link" href="<?php echo $site;?>index.php?m=member-reg">Pemesanan</a>
+          <a class="nav-link" href="<?php echo $site;?>index.php?m=pemesanan">Pemesanan</a>
         </li>
         <li class="nav-item <?php echo $url_contact;?>">
-          <a class="nav-link" href="<?php echo $site;?>index.php?m=member-reg">Logout</a>
+          <a class="nav-link logout-funct" href=""> Logout</a>
         </li>
       <?php }  ?>
     </ul>

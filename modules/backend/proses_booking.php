@@ -3,7 +3,7 @@
 $act = $_GET['act'];
 if ($act=='booking') {
 	//declare param
-	$kd_booking 	= $_POST['id_booking'];
+	$kd_booking 	= $_POST['no_nota'];
 	$id_biayajemput = $_POST['id_biayajemput'];
 	$id_member 		= $_POST['id_member'];
 	$no_antrian 	= $_POST['no_antrian'];
@@ -13,10 +13,10 @@ if ($act=='booking') {
 	$status_booking = $_POST['status_booking'];
 	$tgl_pesan		= date('Y-m-d H:i:s');
 
-	$addBooking = "INSERT INTO transaksi_booking(id_booking, 
-								   id_biayajemput, 
+	$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+								   id_layanan, 
 								   id_member, 
-								   noantrian, 
+								   id_tipe_mobil, 
 								   nama_user,
 								   email_user,
 								   alamat_user,

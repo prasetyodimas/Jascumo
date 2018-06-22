@@ -142,7 +142,7 @@
   					alert('Selamat Datang Di Sistem Crown Carwash !!');
 					setTimeout(function(){
 					  window.location = '<?php echo $site;?>'+'index.php?m=booking';
-					},3000);
+					},1000);
 				},
 		        error : function (response) {
   					alert('Whoops Registrasi Member Gagal !!');

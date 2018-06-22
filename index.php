@@ -44,3 +44,21 @@
   <!-- Bootstrap core JavaScript -->
 </body>
 </html>
+<script type="text/javascript">
+  $('.logout-funct').on('click',function(){
+      alert('Anda yakin keluar sistem !!');
+      let url_aplication = '<?php echo $site;?>';
+      $.ajax({
+        url: url_aplication+"modules/backend/proses_logout.php?&act=logout-process",
+        method :"POST",
+        cache: false,
+        success : function (response) {
+          alert('Berhasil Logout dari Sistem Crown Carwash !!');
+          window.location = '<?php echo $site;?>'+'index.php?m=home';
+        },
+        error : function (response) {
+            alert('Whoops logout failled !!');
+        }
+      });
+    });
+</script>
