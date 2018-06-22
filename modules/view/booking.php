@@ -1,14 +1,12 @@
-<script type="text/javascript">
-	//init select 2 function
-	$(document).ready(function(){
-		// $('.form-tested').select2({
-		// 	placeholder:'jenis kendaraan'
-		// });
-		// $('.choose-services').select2({
-		// 	placeholder:'Pilih Jenis Layanan'
-		// });
-	});
-</script>
+<style type="text/css">
+	.select2-container--default .select2-selection--single .select2-selection__rendered{
+		line-height: 33px;
+	}
+	.select2-container .select2-selection--single {
+	    display: block;
+	    height: 38px !important;
+	}
+</style>
 <div class="container">
 	<div class="col-lg-12" style="margin-top: 2rem;">
 		<div class="form-group">
@@ -74,8 +72,8 @@
 					</div>
 				</div>	
 				<div class="col-sm-12 col-lg-12">
-					<div class="row">
-						<div class="col-sm-4">
+					<div class="row form-group">
+						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Jenis Tipe Mobil</label>
 								<select name="car_type" class="form-control form-tested" required="">
@@ -89,13 +87,40 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
-								<label>Pilih Layanan</label>
-								<select name="car_type" class="form-control choose-services" id="jenis_layanan" required="">
+								<label>Nama Mobil</label>
+								<select name="car_type" class="form-control form-tested" required="">
 									<option value=""> Pilih </option>
 									<?php
-										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan");
+										$getQuery = mysqli_query($db_con,"SELECT * FROM merek_mobil ORDER BY id_merek_mobil DESC");
+										while ($data = mysqli_fetch_array($getQuery)) {
+											echo "<option value='".$data['id_merek_mobil']."'>".$data['nama_kendaraan']."</option>";
+									 	}
+									 ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-3 col-md-3">
+							<div class="form-group">
+								<label>Ukuran</label>
+								<input type="text" name="size-car" class="form-control" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3 col-md-3">
+							<div class="form-group">
+								<label>Keterangan</label>
+								<input type="text" name="note-car" class="form-control" readonly>
+							</div>
+						</div>
+
+						<div class="col-sm-3 col-md-3">
+							<div class="form-group">
+								<label>Jenis Layanan</label>
+								<select name="car_type" class="form-control form-tested" required="">
+									<option value=""> Pilih </option>
+									<?php
+										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
 											echo "<option value='".$data['id_layanan']."'>".$data['jenis_layanan']."</option>";
 									 	}
@@ -103,10 +128,14 @@
 								</select>
 							</div>
 						</div>
+						<div class="col-sm-3 col-md-3">
+							<label>Harga Layanan</label>
+							<input type="text" name="harga_layanan" class="form-control" readonly>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-12">
-							<button class="btn btn-primary" value="">Pesan Sekarang</button>
+							<button class="btn btn-primary book-now" value="">Pesan Sekarang</button>
 						</div>
 					</div>
 				</div>
@@ -114,3 +143,19 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		let choose_car = $('.form-tested');
+		let choose_service = $('.choose-services');
+		$('.book-now').on('click',function(){
+			alert('this function was clicked !');
+		});
+
+		choose_car.select2({
+			placeholder:'jenis kendaraan'
+		});
+		choose_service.select2({
+			placeholder:'Pilih Jenis Layanan'
+		});
+	});
+</script>
