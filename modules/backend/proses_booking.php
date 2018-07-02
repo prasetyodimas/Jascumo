@@ -3,27 +3,44 @@
 $act = $_GET['act'];
 if ($act=='booking') {
 	//declare param
-	$kd_booking 	= $_POST['id_booking'];
-	$id_biayajemput = $_POST['id_biayajemput'];
-	$id_member 		= $_POST['id_member'];
-	$no_antrian 	= $_POST['no_antrian'];
-	$nama_user 		= $_POST['nama_user'];
-	$email_user 	= $_POST['email_user'];
-	$alamat_user 	= $_POST['alamat_user'];
-	$status_booking = $_POST['status_booking'];
-	$tgl_pesan		= date('Y-m-d H:i:s');
+	$no_nota 			= $_POST['no_nota'];
+	$id_layanan  		= $_POST['id_layanan'];
+	$id_member 			= $_POST['id_member'];
+	$id_tipe_mobil  	= $_POST['id_tipe_mobil'];
+	$id_ongkos  		= $_POST['id_ongkos'];
 
-	$addBooking = "INSERT INTO transaksi_booking(id_booking, 
-								   id_biayajemput, 
+	$nama_pemesan 		= $_POST['nama_pemesan'];
+	$alamat_pemesan 	= $_POST['alamat_pemesan'];
+	$notelp_pemesan		= $_POST['notelp_pemesan'];
+	$email_pemesan 		= $_POST['email_pemesan'];
+	$tanggal_pesan 		= $_POST['tanggal_pesan'];
+	$no_antrian 		= $_POST['no_antrian'];
+	$checkin_noantrian 	= $_POST['checkin_noantrian'];
+	$status_pemesanan 	= $_POST['status_pemesanan'];
+	$bayar				= '',
+	$kembali			= '',
+	$total 				= '',
+
+	$tgl_pesan			= date('Y-m-d H:i:s');
+
+	$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+								   id_layanan, 
 								   id_member, 
-								   noantrian, 
-								   nama_user,
-								   email_user,
-								   alamat_user,
-								   status_booking,
-								   tgl_pesan) 
-							VALUES ('$kd_booking',
-									'$id_biayajemput',
+								   id_tipe_mobil, 
+								   id_ongkos,
+								   nama_pemesan,
+								   alamat_pemesan,
+								   notelp_pemesan,
+								   email_pemesan,
+								   tanggal_pesan,
+								   no_antrian,
+								   checkin_noantrian,
+								   status_pemesanan,
+								   bayar,
+								   kembali,
+								   total) 
+							VALUES ('$no_nota',
+									'$id_layanan',
 									'$id_member',
 									'$no_antrian',
 									'$nama_user',
@@ -51,4 +68,5 @@ if ($act=='booking') {
 
 
 }
+
 ?>

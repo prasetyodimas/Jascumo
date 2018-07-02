@@ -10,7 +10,7 @@ $act = $_GET['act'];
 		$status_mem	   		= 'aktif';
 
 		$sql = mysqli_query($db_con, "INSERT INTO member (id_member, nama_member, email_member, notelp_member, alamat_member, password_member, status_member)
-							VALUES ('$id_member','$nama_member','$email_member','$notelp_member','$alamat_member','$password_member','$status_mem')");
+									  VALUES ('$id_member','$nama_member','$email_member','$notelp_member','$alamat_member','$password_member','$status_mem')");
 		if ($sql === false) {
 			throw new Exception("Error cannot saved data !", 500);
 			alert('Error Function !!');

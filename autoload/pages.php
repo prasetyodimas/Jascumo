@@ -23,6 +23,9 @@
     elseif ($_GET['m']=='member-reg') {
         include ("modules/view/daftar-member.php");
     }
+    elseif ($_GET['m']=='pemesanan') {
+        include ("modules/view/pemesanan.php");
+    }
     else {
         echo "<p><b> Whoops Your Page Request Was Not Found !!</b></p>";
 
