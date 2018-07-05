@@ -136,10 +136,35 @@
 					<div class="box-area__layanan row">
 						<div class="col-sm-12 col-md-12">
 							<label>Layanan Antar / Jemput</label>
-							<p>Ketentuan : Untuk Melakukan layanan ini adalah</p>
+							<p>Ketentuan : Klik dsini untuk melakukan layanan ini</p>
+						</div>
+						<div class="col-md-12 col-sm-12">
+							<div class="input-group-prepend">
+								<div class="card">
+								  <div class="card-body row">
+									<div class="col-sm-2">
+										Layanan Jemput <input type="checkbox" aria-label="Checkbox for following text input">
+									</div>
+									<div class="col-sm-6">
+										Layanan Antar & Jemput  <input type="checkbox" aria-label="Checkbox for following text input">
+									</div>
+								  </div>
+								  <div class="col-sm-5 col-md-5" style="padding-bottom: 2em;">
+								  	<select name="" class="form-control">
+								  		<option value="">Pilih</option>
+								  	<?php
+										$getQuery = mysqli_query($db_con,"SELECT * FROM ongkos_jemput ORDER BY id_ongkos DESC");
+										while ($data = mysqli_fetch_array($getQuery)) {
+											echo "<option value='".$data['id_ongkos']."'>".$data['nama_wilayah']."</option>";
+									 	}
+									 ?>
+								  	</select>
+								  </div>
+								</div>
+							</div>
 						</div>
 					</div>
-
+					<div style="margin-top: 2rem;"></div>
 					<div class="row">
 						<div class="col-sm-12 col-md-12">
 							<button class="btn btn-primary book-now" value="">Pesan Sekarang</button>
@@ -160,28 +185,34 @@
 			alert('this function was clicked !');
 		});
 		
-		//function show layanan onkgir
-		$('.box-area__layanan').on('click',function(){
-			$('box-layanan__ongkir').slideToggle(1000);
-			
-		});
-
 		//get json services
 		$('#selected-services').on('change',function(){
-            var getValue = $('.hidden-value-service').val();
-            if(getValue =='default') {
-                $('#harga_layanan').html("<option value=''>Pilih layananan dulu !!</option>");
+        	let getValue	   = $('.hidden-value-service').val();
+			choose_service.on("select2:select", function (e) { 
+			  let select_val = $(e.currentTarget).val();
+			  $('.hidden-value-service').val(select_val);
+			});
+			
+            if(getValue =='' || null) {
+            	alert('Pilih layananan dulu !!');
             }else{
-                $.ajax({
-                    url:'../modules/backend/json/jsonservices.php',
-                    type:'GET',
-                    dataType:'json',
-                    data: {'jenis_layanan' : getValue},
-                    success:function (response) {
-                   		$('#harga_layanan').html(response.harga_layanan);
-	            	}
-                });
-            }
+	            $.ajax({
+	                url:'../modules/backend/json/jsonservices.php',
+	                type:'GET',
+	                dataType:'json',
+	                data: {'jenis_layanan' : getValue},
+	                success:function (results) {
+	                	$('#harga_layanan').val(results[0].harga_layanan);
+	            	},
+	            	fail: function(jqXHR, textStatus, errorThrown) {
+	    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
+					}
+	            });
+			}
+		});
+
+		choose_cartype.on("select2:selecting", function(e) { 
+			alert('selecting !');
 		});
 
 		choose_cartype.select2({
@@ -195,9 +226,5 @@
 			data: '', 
 		});
 
-		choose_service.on("select2:select", function (e) { 
-		  let select_val = $(e.currentTarget).val();
-		  $('.hidden-value-service').val(select_val);
-		});
 	});
 </script>
