@@ -43,8 +43,12 @@
 									<input type="text" name="name_alias" class="form-control" value="<?php echo $_SESSION['id_member'];?>" readonly>
 								</div>
 								<div class="form-">
-									<label>Nama Member</label>
-									<input type="text" name="name_alias" class="form-control" required="" value="<?php echo $_SESSION['nama_member'];?>">
+									<label>Nama Lengkap</label>
+									<input type="text" name="name_alias" class="form-control" value="<?php echo $_SESSION['nama_member'];?>" readonly>
+								</div>
+								<div class="form-">
+									<label>Alamat</label>
+									<textarea class="form-control" value="<?php echo $_SESSION['alamat_member'];?>" readonly></textarea>
 								</div>
 							<?php } ?>
 						</div>
@@ -76,7 +80,7 @@
 						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Jenis Tipe Mobil</label>
-								<select name="car_type" class="form-control form-tested" required="">
+								<select name="cars_type" class="form-control choose_cartype" required="">
 									<option value=""> Pilih </option>
 									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM merek_mobil ORDER BY id_merek_mobil DESC");
@@ -90,35 +94,30 @@
 						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Nama Mobil</label>
-								<select name="car_type" class="form-control form-tested" required="">
+								<select name="cars_name" class="form-control choose_car" required="" id="val_namecars">
 									<option value=""> Pilih </option>
-									<?php
-										$getQuery = mysqli_query($db_con,"SELECT * FROM merek_mobil ORDER BY id_merek_mobil DESC");
-										while ($data = mysqli_fetch_array($getQuery)) {
-											echo "<option value='".$data['id_merek_mobil']."'>".$data['nama_kendaraan']."</option>";
-									 	}
-									 ?>
 								</select>
 							</div>
 						</div>
 						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Ukuran</label>
-								<input type="text" name="size-car" class="form-control" readonly>
+								<input type="text" name="size-car" class="form-control" readonly id="val_ukuran">
 							</div>
 						</div>
 						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Keterangan</label>
-								<input type="text" name="note-car" class="form-control" readonly>
+								<input type="text" name="note-car" class="form-control" readonly id="val_teks">
 							</div>
 						</div>
 
 						<div class="col-sm-3 col-md-3">
 							<div class="form-group">
 								<label>Jenis Layanan</label>
-								<select name="car_type" class="form-control form-tested" required="">
-									<option value=""> Pilih </option>
+								<input type="hidden" class="hidden-value-service" name="hidden_servicesval">
+								<select name="car_type" class="form-control choose-services" required="" id="selected-services">
+									<option value=""> Pilih </option> 
 									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
@@ -130,9 +129,17 @@
 						</div>
 						<div class="col-sm-3 col-md-3">
 							<label>Harga Layanan</label>
-							<input type="text" name="harga_layanan" class="form-control" readonly>
+							<input type="text" name="harga_layanan" class="form-control" readonly id="harga_layanan">
 						</div>
 					</div>
+
+					<div class="box-area__layanan row">
+						<div class="col-sm-12 col-md-12">
+							<label>Layanan Antar / Jemput</label>
+							<p>Ketentuan : Untuk Melakukan layanan ini adalah</p>
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="col-sm-12 col-md-12">
 							<button class="btn btn-primary book-now" value="">Pesan Sekarang</button>
@@ -145,17 +152,52 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		let choose_car = $('.form-tested');
+		let choose_car     = $('.choose_car');
+		let choose_cartype = $('.choose_cartype');
 		let choose_service = $('.choose-services');
+
 		$('.book-now').on('click',function(){
 			alert('this function was clicked !');
 		});
+		
+		//function show layanan onkgir
+		$('.box-area__layanan').on('click',function(){
+			$('box-layanan__ongkir').slideToggle(1000);
+			
+		});
 
+		//get json services
+		$('#selected-services').on('change',function(){
+            var getValue = $('.hidden-value-service').val();
+            if(getValue =='default') {
+                $('#harga_layanan').html("<option value=''>Pilih layananan dulu !!</option>");
+            }else{
+                $.ajax({
+                    url:'../modules/backend/json/jsonservices.php',
+                    type:'GET',
+                    dataType:'json',
+                    data: {'jenis_layanan' : getValue},
+                    success:function (response) {
+                   		$('#harga_layanan').html(response.harga_layanan);
+	            	}
+                });
+            }
+		});
+
+		choose_cartype.select2({
+			placeholder:'jenis tipemobil'
+		});
 		choose_car.select2({
-			placeholder:'jenis kendaraan'
+			placeholder:'nama mobil'
 		});
 		choose_service.select2({
-			placeholder:'Pilih Jenis Layanan'
+			placeholder:'Pilih Jenis Layanan',
+			data: '', 
+		});
+
+		choose_service.on("select2:select", function (e) { 
+		  let select_val = $(e.currentTarget).val();
+		  $('.hidden-value-service').val(select_val);
 		});
 	});
 </script>

@@ -7,12 +7,9 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item <?php echo $url_home;?>">
         <a class="nav-link" href="index.php?m=home">Home <!-- <span class="sr-only">(current)</span> --> </a> 
-      </li>
+      </l i>
       <li class="nav-item <?php echo $url_booking;?>">
         <a class="nav-link" href="<?php echo $site;?>index.php?m=booking">Booking</a>
-      </li>
-      <li class="nav-item <?php echo $url_about;?>">
-        <a class="nav-link" href="<?php echo $site;?>index.php?m=about">About</a>
       </li>
       <li class="nav-item <?php echo $url_services;?>">
         <a class="nav-link" href="<?php echo $site;?>index.php?m=services">Services</a>

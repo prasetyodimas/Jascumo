@@ -49,6 +49,7 @@ if ($act=='booking') {
 									'$status_booking',
 									'$tgl_pesan')";
 	$saveBooking = mysqli_query($db_con,$addBooking);
+	
 	if ($saveBooking) {
 		echo "<script>alert('Pemesanan Berhasil Tunggu Konfirmasi Dari Kami Terimakasih !!')</script>";
 		echo "<meta http-equiv=refresh content=0;url=$site"."index.php?booking>";
