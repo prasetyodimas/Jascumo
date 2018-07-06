@@ -46,8 +46,8 @@
 	 		<td><?php echo $res['id_merek_mobil'];?></td>
 	 		<td><?php echo $res['nama_kendaraan'];?></td>
 	 		<td>
-				<a href="?hlm=merekmobil&aksi=edit&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
-				<a href="?hlm=merekmobil&aksi=hapus&submit=yes&id_tipe_mobil=<?php echo $res['id_tipe_mobil'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
+				<a href="?hlm=merekmobil&aksi=edit&id_merek_mobil=<?php echo $res['id_merek_mobil'];?>" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
+				<a href="?hlm=merekmobil&aksi=hapus&submit=yes&id_merek_mobil=<?php echo $res['id_merek_mobil'];?>" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 	 		</td>
 	 	</tr>
 	 	<?php $no++; }?>

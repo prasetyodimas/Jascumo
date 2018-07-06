@@ -8,7 +8,7 @@ if(empty($_SESSION['id_user'])){
 	if(isset($_REQUEST['submit'])){
 
 		$id_member 		= $_REQUEST['kode_member'];
-		$nama_member   = $_REQUEST['nama_member'];
+		$nama_member    = $_REQUEST['nama_member'];
 		$email_member   = $_REQUEST['email_member'];
 		$notelp_member  = $_REQUEST['notelp_member'];
 		$alamat_member  = $_REQUEST['alamat_member'];

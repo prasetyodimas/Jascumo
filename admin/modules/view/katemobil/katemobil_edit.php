@@ -26,7 +26,7 @@ if(empty( $_SESSION['id_user'])){
 		while($row = mysqli_fetch_array($sql)){
 
 ?>
-<h2>Edit Master Mobil</h2>
+<h2>Edit Kategori Mobil</h2>
 <hr>
 <form method="post" action="" class="form-horizontal" role="form">
 	<div class="form-group">

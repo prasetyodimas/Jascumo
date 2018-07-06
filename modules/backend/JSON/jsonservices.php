@@ -3,7 +3,7 @@ $id = isset($_GET['jenis_layanan']) ? strval($_GET['jenis_layanan']) : 0;
 
 $getServices = "SELECT * FROM layanan WHERE id_layanan='$id'";
 $result = mysqli_query($db_con,$getServices);
-$response = array();
+// $response = array();
 while ($hasil = mysqli_fetch_array($result)) {
 	$response[] = $hasil;
 }
