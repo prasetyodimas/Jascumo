@@ -11,8 +11,8 @@
     elseif ($_GET['m']=="booking") {
         include ("modules/view/booking.php");
     }
-    elseif($_GET['m']=='about'){
-        include ("modules/view/about.php");
+    elseif($_GET['m']=='cart'){
+        include ("modules/view/cart.php");
     }
     elseif($_GET['m']=='services'){
         include ("modules/view/services.php");

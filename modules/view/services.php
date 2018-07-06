@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-12">
 			 	<h6>Penanganan Pada Mobil yang sering kami tangani untuk di cuci maupun poles body + jamur kaca	</h6>
-			 	<div class="main-servicesareas">
+			 	<div class="main-servicesareas table-responsive">
 			 		<table class="table table-hover table-striped">
 						<thead>
 							<tr>
@@ -28,6 +28,34 @@
 								<td><?php echo $fetch['nama_mobil'];?></td>
 								<td><?php echo $fetch['ukuran_mobil'];?></td>
 								<td><?php echo $fetch['keterangan'];?></td>
+							</tr>		 			
+							<?php $no++; } ?>
+						</tbody>
+			 		</table>
+			 	</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-sm-12 col-md-12">
+			 	<h6>Jenis Layanan yang kami sediakan pada CROWN CARWASH</h6>
+			 	<div class="main-servicesareas table-responsive">
+			 		<table class="table table-hover table-striped">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Jenis Layanan / Nama Layanan </th>
+								<th>Harga Layanan</th>
+							</tr>	
+						</thead>
+						<tbody>
+							<?php
+								$no =1;
+								$getQueryAll = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
+								while ($fetch = mysqli_fetch_array($getQueryAll)) {
+							 ?>
+							<tr>
+								<td><?php echo $no;?></td>
+								<td><?php echo $fetch['jenis_layanan'];?></td>
+								<td>Rp.<?php echo number_format($fetch['harga_layanan']).',-';?></td>
 							</tr>		 			
 							<?php $no++; } ?>
 						</tbody>
