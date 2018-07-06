@@ -11,7 +11,7 @@ if( empty( $_SESSION['id_user'] ) ){
          $tgl1 = $_REQUEST['tgl1'];
          $tgl2 = $_REQUEST['tgl2'];
 
-		 $sql = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
+		 $sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking WHERE tanggal_pesan BETWEEN '$tgl1' AND '$tgl2'");
 		 if(mysqli_num_rows($sql) > 0){
 			 $no = 0;
 
@@ -45,8 +45,8 @@ if( empty( $_SESSION['id_user'] ) ){
 			<tr>
 			  <td>'.$no.'</td>
 			  <td>'.$row['no_nota'].'</td>
-			  <td>'.$row['nama'].'</td>
-			  <td>'.$row['jenis'].'</td>
+			  <td>'.$row['nama_pemesan'].'</td>
+			  <td>'.$row['email_pemesan'].'</td>
 			  <td>RP. '.number_format($row['total']).'</td>
 			  <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>';
 		 }
@@ -58,10 +58,10 @@ if( empty( $_SESSION['id_user'] ) ){
 		<div class="col-sm-6"><table class="table table-bordered">';
 		 echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
-		 $sql = mysqli_query($koneksi, "SELECT count(nama), sum(total) FROM transaksi WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
+		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
 
-		 list($nama, $total) = mysqli_fetch_array($sql);{
-			echo '<tr><td><span class="pull-right"><h4><b>'.$nama.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
+		 list($nama_pemesan, $total) = mysqli_fetch_array($sql);{
+			echo '<tr><td><span class="pull-right"><h4><b>'.$nama_pemesan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
 
 		 }
 		 echo '
@@ -90,13 +90,13 @@ if( empty( $_SESSION['id_user'] ) ){
 	</form>
 	</div>
 <?php
-
-      echo '<div class="col-sm-6"><table class="table table-bordered">';
+	echo "<div class='row'>";
+      echo '<div class="col-sm-12 col-md-12"><table class="table table-bordered">';
       echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
 	  $tanggal =  date('Y-m-d');
 
-	  $sql = mysqli_query($koneksi, "SELECT count(nama), sum(total) FROM transaksi WHERE tanggal='$tanggal'");
+	  $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal_pesan='$tanggal'");
 
       list($nama, $total) = mysqli_fetch_array($sql);{
          echo '<tr><td><span class="pull-right"><h4><b>'.$nama.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
@@ -105,11 +105,12 @@ if( empty( $_SESSION['id_user'] ) ){
       echo '
 	  		</table>
 	  	</div>
-		<div class="col-sm-1">
+		<div class="col-sm-12 col-md-12">
 		  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
 		 </div>
 	  	</div>
 	  </div>';
+	echo "</div>";
    }
    }
 ?>

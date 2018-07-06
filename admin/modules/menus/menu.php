@@ -36,7 +36,13 @@
 				<li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi">Transaksi Offline</a></li>
 			</ul>
 		</li>
-        <li><a href="?hlm=laporan"><i class="fa fa-file-text-o" aria-hidden="true"></i> Laporan</a></li>
+        <li class="dropdown">
+			<a href=""class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-text-o" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="?hlm=laporan">Laporan Pemasukan</a></li>
+				<li><a href="?hlm=laporan">Laporan Member</a></li>
+			</ul>
+		</li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">

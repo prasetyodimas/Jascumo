@@ -41,7 +41,7 @@ if(empty( $_SESSION['id_user'])){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM user");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM user ORDER BY id_user DESC");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 				 while($row = mysqli_fetch_array($sql)){
