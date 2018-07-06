@@ -15,7 +15,7 @@ if( empty( $_SESSION['id_user'] ) ){
 		 if(mysqli_num_rows($sql) > 0){
 			 $no = 0;
 
-		 echo '<h2>Rekap Laporan Penghasilan <small>'.$tgl1.' sampai '.$tgl2.'</small></h2><hr>
+		 echo '<h3>Rekap Laporan Penghasilan <small>'.$tgl1.' sampai '.$tgl2.'</small></h3><hr>
 
 		 <div class="col-sm-1">
 		  <a href="?hlm=laporan" id="tombol" class="btn btn-info pull-left"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Kembali</a><br/><br/><br/>
@@ -73,7 +73,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
 	 } else {
 
-		echo '<h2>Rekap Laporan Penghasilan Hari Ini (<small>'.date('d-m-Y').'</small>)</h2><hr>';
+		echo '<h3>Rekap Laporan Penghasilan Hari Ini (<small>'.date('d-m-Y').'</small>)</h3><hr>';
 
 ?>
 	<div class="well well-sm noprint">

@@ -29,9 +29,12 @@ if(isset($_REQUEST['hlm'])){
 			case 'cetak':
 				include "cetak_nota.php";
 				break;
-			case 'laporan':
-				include "laporan.php";
-				break;
+			case 'lapincome':
+				include "laporan_pemasukan.php";
+			break;
+			case 'lapmember':
+				include "laporan_member.php";
+			break;
 		}
 	} else {
 ?>

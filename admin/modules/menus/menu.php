@@ -37,10 +37,10 @@
 			</ul>
 		</li>
         <li class="dropdown">
-			<a href=""class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-text-o" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
+			<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file-text-o" aria-hidden="true"></i> Laporan <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="?hlm=laporan">Laporan Pemasukan</a></li>
-				<li><a href="?hlm=laporan">Laporan Member</a></li>
+				<li><a href="<?php echo $site;?>admin/admin.php?hlm=lapincome">Laporan Pemasukan</a></li>
+				<li><a href="<?php echo $site;?>admin/admin.php?hlm=lapmember">Laporan Member</a></li>
 			</ul>
 		</li>
 	  </ul>
