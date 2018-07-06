@@ -105,7 +105,7 @@ if ($act=='booking') {
 	                                <tr>Notelp / Handphone : 084234234 </tr>
 	                            </thead>
 	                       </table>'
-	                    .'<h4>Crown Carwash We Serve With Profesional Way Open 9 AM - Closed 6 PM <span style="font-size:10px;font-style:italic;"> Please Contact Us We Care About You :) </span> Cheeers</h4>'
+	                    .'<h4>Crown Carwash We Serve With Profesional Way Open 9 AM - Closed 6 PM <span style="font-size:11px;font-style:italic;"> Please Contact Us We Care About You :) Cheers </span></h4>'
 	                    .'<p style="margin-bottom:1em;">Warm Regard</p>'
 	                    .'</br>'
 	                    .'<p>Customer Services</p>'
