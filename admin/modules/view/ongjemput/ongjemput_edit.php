@@ -47,7 +47,7 @@ if(isset($_REQUEST['submit'])){
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-					<a href="./admin.php?hlm=katemobil" class="btn btn-danger">Batal</a>
+					<a href="./admin.php?hlm=ongjemput" class="btn btn-danger">Batal</a>
 				</div>
 			</div>
 		</form>
