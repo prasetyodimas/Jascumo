@@ -1,4 +1,4 @@
-<?php
+<?php error_reporting(0);
 if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
