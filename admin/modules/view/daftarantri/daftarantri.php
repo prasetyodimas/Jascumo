@@ -23,8 +23,7 @@ if(empty($_SESSION['id_user'])){
 	}else{
 		echo '
 			<div class="container">
-				<h3>Daftar Transaksi</h3>
-					<a href="./admin.php?hlm=transaksi&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Transaksi Baru</a>
+				<h3>Daftar Antrian Crown Cars Wash</h3>
 				<div class="clearfix form-group"></div>
 				<table class="table table-bordered table-hover">
 				 <thead>
@@ -42,7 +41,11 @@ if(empty($_SESSION['id_user'])){
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking WHERE status_pemesanan !='pesan' ORDER BY no_nota DESC");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking tb
+		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
+		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  ORDER BY no_nota DESC");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 
@@ -56,7 +59,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['nama'].'</td>
 					 <td>'.$row['jenis'].'</td>
 					 <td>Rp. '.number_format($row['total']).'</td>
-					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
+					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td></td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
@@ -66,12 +69,12 @@ if(empty($_SESSION['id_user'])){
 							  	else return false;
 							}
 						</script>
-					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
+					 	<a href="#" class="btn btn-info btn-s">Konfirmasi Antrian</a>
 					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 					</td>';
 				}
 			}else{
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u><a href="?hlm=transaksi&aksi=baru">Tambah transaksi baru</a></u> </p></center></td></tr>';
+				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}
 			echo '
 			 	</tbody>

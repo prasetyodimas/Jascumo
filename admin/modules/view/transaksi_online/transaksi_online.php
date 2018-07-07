@@ -31,20 +31,25 @@ if(empty($_SESSION['id_user'])){
 					 <th width="5%">No</th>
 					 <th width="">No. Nota</th>
 					 <th width="">Nama Pelanggan</th>
+					 <th width="">Nama Kendaran</th>
 					 <th width="">Jenis</th>
-					 <th width="">Total Bayar</th>
 					 <th width="">Tanggal</th>
+					 <th width="">Total Bayar</th>
 					 <th width="">Status</th>
-					 <th width="">Tindakan</th>
+					 <th width="">Antrian</th>
+					 <th width="">Aksi</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
 
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking tb
+		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
+		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  ORDER BY no_nota DESC");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
-
 				 while($row = mysqli_fetch_array($sql)){
 	 				$no++;
 	 			echo '
@@ -53,10 +58,12 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$row['nama_pemesan'].'</td>
-					 <td>'.$row['alamat_pemesan'].'</td>
+					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
+					 <td>'.$row['jenis_layanan'].'</td>
+					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>Rp. '.number_format($row['total']).'</td>
-					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
-					 <td></td>
+					 <td>'.$row['status_pemesanan'].'</td>
+					 <td style="background-color:#ff0a0a;color:#fff;">'.$row['no_antrian'].'</td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
 						  	function konfirmasi(){
@@ -65,14 +72,15 @@ if(empty($_SESSION['id_user'])){
 							  	else return false;
 							}
 						</script>
-					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
-					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					 	<a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
+					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()" class="btn btn-warning btn-s">Batal</a>
 					</td>';
 				}
 			}else{
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+				echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}
-			echo '
+				echo '
 			 	</tbody>
 			</table>
 		</div>';
