@@ -136,7 +136,7 @@
 					<div class="box-area__layanan row">
 						<div class="col-sm-12 col-md-12">
 							<label>Layanan Antar / Jemput</label>
-							<p>Ketentuan : Klik dsini untuk melakukan layanan ini</p>
+							<p id="clicked">Ketentuan : Klik dsini untuk melakukan layanan ini</p>
 						</div>
 						<div class="col-md-12 col-sm-12">
 							<div class="input-group-prepend">
@@ -149,16 +149,30 @@
 										Layanan Antar & Jemput  <input type="checkbox" aria-label="Checkbox for following text input">
 									</div>
 								  </div>
-								  <div class="col-sm-5 col-md-5" style="padding-bottom: 2em;">
-								  	<select name="" class="form-control">
-								  		<option value="">Pilih</option>
-								  	<?php
-										$getQuery = mysqli_query($db_con,"SELECT * FROM ongkos_jemput ORDER BY id_ongkos DESC");
-										while ($data = mysqli_fetch_array($getQuery)) {
-											echo "<option value='".$data['id_ongkos']."'>".$data['nama_wilayah']."</option>";
-									 	}
-									 ?>
-								  	</select>
+
+								  <div class="col-sm-12 col-md-12" style="padding-bottom: 2em;">
+								  	<div class="row">
+								  		<div class="col-sm-4 col-md-4">
+										  	<div class="form-group">
+												<label>Nama Wilayah</label>
+											  	<select name="ongkir_services" class="form-control">
+											  		<option value="">Pilih</option>
+												  	<?php
+														$getQuery = mysqli_query($db_con,"SELECT * FROM ongkos_jemput ORDER BY id_ongkos DESC");
+														while ($data = mysqli_fetch_array($getQuery)) {
+															echo "<option value='".$data['id_ongkos']."'>".$data['nama_wilayah']."</option>";
+													 	}
+												 	?>
+											  	</select>
+										  	</div>
+									  	</div>
+									  	<div class="col-sm-4 col-md-4">
+										  	<div class="form-group">
+												<label>Harga</label>
+											  	<input type="text" name="" class="form-control" readonly id="">
+										  	</div>
+								  		</div>
+								  	</div>
 								  </div>
 								</div>
 							</div>
@@ -180,9 +194,28 @@
 		let choose_car     = $('.choose_car');
 		let choose_cartype = $('.choose_cartype');
 		let choose_service = $('.choose-services');
-
 		$('.book-now').on('click',function(){
-			alert('this function was clicked !');
+			let url_aplication = '<?php echo $site;?>';
+			let bookingarray   = $('').serializeArray();  
+			$.ajax({
+				url: url_aplication+"modules/backend/booking.php?&act=booking",
+				method :"POST",
+				data : dataLogin,
+				beforeSend: function(response){
+					$('#log-member').prop('disabled',true);
+				},
+				success : function (response) {
+  					alert('Selamat Datang Di Sistem Crown Carwash !!');
+					setTimeout(function(){
+					  window.location = '<?php echo $site;?>'+'index.php?m=booking';
+					},1000);
+				},
+		        error : function (response) {
+  					alert('Whoops Registrasi Member Gagal !!');
+					$('#log-member').prop('disabled',false);
+		        }
+			});
+
 		});
 		
 		//get json services
@@ -210,9 +243,16 @@
 	            });
 			}
 		});
+		//function slide toggles
+		let selector     = $('.input-group-prepend');
+		let hideselector = selector.hide();
+		$('#clicked').on('click',function(){
+			selector.slideToggle(1000);
+		});
 
 		choose_cartype.on("select2:selecting", function(e) { 
-			alert('selecting !');
+			// alert('selecting !');
+
 		});
 
 		choose_cartype.select2({

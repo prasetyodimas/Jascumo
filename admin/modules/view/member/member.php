@@ -11,7 +11,7 @@ if(empty( $_SESSION['id_user'])){
 				include 'member_baru.php';
 				break;
 			case 'edit':
-				include 'member_edit';
+				include 'member_edit.php';
 				break;
 			case 'hapus':
 				include 'member_hapus.php';
