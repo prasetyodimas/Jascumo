@@ -19,6 +19,14 @@
 		}
 ?>
 <?php }else{ ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#tables-merekmobil_paginate{
+		margin-left: 34em;
+	}
+</style>
 <div class="container">
 	<div class="col-md-12">
 		<div class="heading-katemobil">
@@ -26,7 +34,7 @@
 			<a href="./admin.php?hlm=merekmobil&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Merek Mobil</a>
 		</div>
 		<div class="clearfix form-group"></div>
-	<table class="table table-bordered table-hover" style="width:100%;" id="tables-katemobil">
+	<table class="table table-bordered table-hover" style="width:100%;" id="tables-merekmobil">
 	 <thead>
 	   <tr class="info">
 		 <th width="5%">No</th>
@@ -56,6 +64,9 @@
 	</div>
 </div>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#tables-merekmobil').DataTable();
+	});
   	function konfirmasi(){
 	  	tanya = confirm("Anda yakin akan menghapus user ini?");
 	  	if (tanya == true){
@@ -66,3 +77,4 @@
 	}
 </script>
 <?php } } ?>
+

@@ -16,6 +16,9 @@ if(empty($_SESSION['id_user'])){
 			case 'hapus':
 				include 'transaksi_hapus.php';
 				break;
+			case 'proses_confrim':
+				include 'transaksi_checkinprocess.php';
+				break;
 			case 'cetak':
 				include 'cetak_nota.php';
 				break;
@@ -23,7 +26,7 @@ if(empty($_SESSION['id_user'])){
 	}else{
 		echo '
 			<div class="container">
-				<h3>Daftar Transaksi</h3>
+				<h3>Daftar Transaksi Online</h3>
 				<div class="clearfix form-group"></div>
 				<table class="table table-bordered table-hover">
 				 <thead>
@@ -32,7 +35,7 @@ if(empty($_SESSION['id_user'])){
 					 <th width="">No. Nota</th>
 					 <th width="">Nama Pelanggan</th>
 					 <th width="">Nama Kendaran</th>
-					 <th width="">Jenis</th>
+					 <th width="">Jenis + Harga</th>
 					 <th width="">Tanggal</th>
 					 <th width="">Total Bayar</th>
 					 <th width="">Status</th>
@@ -66,11 +69,11 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$nama_pemesan.'</td>
 					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
-					 <td>'.$row['jenis_layanan'].'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.number_format($row['harga_layanan']).',-'.'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>Rp. '.number_format($row['total']).'</td>
 					 <td>'.$row['status_pemesanan'].'</td>
-					 <td style="background-color:#ff0a0a;color:#fff;">'.$row['no_antrian'].'</td>
+					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['no_antrian'].'</td>
 					 <td>
 						<script type="text/javascript" language="JavaScript">
 						  	function konfirmasi(){
@@ -83,12 +86,10 @@ if(empty($_SESSION['id_user'])){
 						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
-						    <li><a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" target="_blank">Cetak Nota</a></li>
+						    <li><a href="?hlm=checkkonfrim&id_transaksi='.$row['no_nota'].'">Konfirmasi Booking</a></li>
+						    <li><a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" target="_blank">Cetak Nota / Kwitansi</a></li>
 						    <li><a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()">Hapus</a></li>
-						    <li>
-					 			<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()">Batal</a>
-						    </li>
-						  </ul>
+						    <li><a href="?hlm=transaksi&aksi=cancel&submit=yes&id_transaksi='.$row['no_nota'].'">Cancel / Batal Booking</a></li></ul>
 						</div>
 					</td>';
 				}

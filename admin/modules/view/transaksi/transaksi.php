@@ -16,6 +16,12 @@ if(empty($_SESSION['id_user'])){
 			case 'hapus':
 				include 'transaksi_hapus.php';
 				break;
+			case 'konfirmasi':
+				include 'transaksi_checkin.php';
+				break;
+			case 'cancel':
+				include 'transaksi_modify.php';
+				break;
 			case 'cetak':
 				include 'cetak_nota.php';
 				break;
@@ -23,7 +29,7 @@ if(empty($_SESSION['id_user'])){
 	}else{
 		echo '
 			<div class="container">
-				<h3>Daftar Transaksi</h3>
+				<h3>Daftar Transaksi </h3>
 					<a href="./admin.php?hlm=transaksi&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Transaksi Baru</a>
 				<div class="clearfix form-group"></div>
 				<table class="table table-bordered table-hover">

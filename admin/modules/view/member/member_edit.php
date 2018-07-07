@@ -20,7 +20,12 @@ if(empty($_SESSION['id_user'])){
             die();
         }
 
-		$sql = mysqli_query($db_con, "UPDATE member SET id_member='$id_member', nama_member='$nama_member', alamat_member='$alamat_member','' WHERE id_member='$id_member'");
+		$sql = mysqli_query($db_con, "UPDATE member SET 
+											id_member='$id_member', 
+											nama_member='$nama_member', 
+											alamat_member='$alamat_member',
+											status_member='$status_member'
+											WHERE id_member='$id_member'");
 		if($sql == true){
 			header('Location: ./admin.php?hlm=member');
 			die();
@@ -62,7 +67,7 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama" class="col-sm-2 control-label">Alamat Member</label>
 		<div class="col-sm-4">
-			<textarea class="form-control" value="alamat_member"><?php echo $row['alamat_member']; ?></textarea>
+			<textarea class="form-control" name="alamat_member" value="alamat_member"><?php echo $row['alamat_member']; ?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
