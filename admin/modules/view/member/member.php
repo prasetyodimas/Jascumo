@@ -41,15 +41,14 @@ if(empty( $_SESSION['id_user'])){
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
-			<?php  	
-			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM member ORDER BY id_member DESC");
-		 	if(mysqli_num_rows($sql) > 0){
-		 		$no = 0;
-				 while($row = mysqli_fetch_array($sql)){
-	 				$no++;
-	 			echo '
 				 <tbody>
+				<?php  	
+				//skrip untuk menampilkan data dari database
+		 		$no = 0;
+			 	$sql = mysqli_query($db_con, "SELECT * FROM member ORDER BY id_member DESC");
+				 		while($row = mysqli_fetch_array($sql)){
+		 				$no++;
+		 			echo '
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['id_member'].'</td>
@@ -69,13 +68,11 @@ if(empty( $_SESSION['id_user'])){
 						 <a href="?hlm=member&aksi=edit&id_member='.$row['id_member'].'" class="btn btn-warning btn-s"><i class="fa fa-check-square-o" aria-hidden="true"></i> Edit</a>
 						 <a href="?hlm=member&aksi=hapus&submit=yes&id_member='.$row['id_member'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s"><i class="fa fa-times" aria-hidden="true"></i> Hapus</a>
 					 </td>';
-				}
-			} else {
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan. <u></p></center></td></tr>';
-			}
-			echo '
+				} ?>
 			 	</tbody>
 			</table>
+			<?php 
+			echo '
 			</div>
 		</div>';
 	}
