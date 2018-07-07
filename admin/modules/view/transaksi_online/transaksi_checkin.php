@@ -2,9 +2,6 @@
   $getInfomationMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb LEFT JOIN member m ON tb.id_member=m.id_member
                                                WHERE tb.no_nota='$_GET[id_transaksi]'"));
   $getQueue            = mysqli_fetch_array(mysqli_query($db_con,"SELECT count(no_nota) AS antrian FROM transaksi_booking WHERE status_pemesanan='konfrimasi'")); 
-
-
-
 ?>
 <div class="container">
   <div class="col-sm-12 col-md-12">

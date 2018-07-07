@@ -1,4 +1,4 @@
-<?php error_reporting(0);
+<?php 
 if(empty($_SESSION['id_user'])){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
@@ -30,10 +30,10 @@ if(empty($_SESSION['id_user'])){
 					 <th>No</th>
 					 <th>No. Nota</th>
 					 <th>Nama Pelanggan</th>
-					 <th>Jenis</th>
+					 <th>Jenis+ Layanan</th>
 					 <th>Total Bayar</th>
 					 <th>Tanggal</th>
-					 <th>Status</th>
+					 <th>Antrian Pengerjaan</th>
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
@@ -44,6 +44,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  LEFT JOIN member m ON tb.id_member=m.id_member
 		 								  ORDER BY no_nota DESC");
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
 		 	if(mysqli_num_rows($sql) > 0){
@@ -57,8 +58,8 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$row['nama_member'].'</td>
-					 <td>'.$row['jenis'].'</td>
-					 <td>Rp. '.number_format($row['total']).'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
+					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td></td>
 					 <td>
@@ -80,11 +81,14 @@ if(empty($_SESSION['id_user'])){
 	.dataTables_filter {
 		margin-left: 25em;
 	}
-	#table-layanan_paginate{
+	#table-daftarantri_paginate{
 		margin-left: 36em;
 	}
 </style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#table-daftarantri').DataTable();
+	});
 	function konfirmasi(){
 		tanya = confirm("Anda yakin akan menghapus data ini?");
 		if (tanya == true) return true;

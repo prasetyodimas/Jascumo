@@ -69,9 +69,9 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$nama_pemesan.'</td>
 					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
-					 <td>'.$row['jenis_layanan'].' Rp.'.number_format($row['harga_layanan']).',-'.'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).',-'.'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
-					 <td>Rp. '.number_format($row['total']).'</td>
+					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.$row['status_pemesanan'].'</td>
 					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['no_antrian'].'</td>
 					 <td>

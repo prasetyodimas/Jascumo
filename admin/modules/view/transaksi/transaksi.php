@@ -47,7 +47,11 @@ if(empty($_SESSION['id_user'])){
 				 <tbody>
 			<?php
 			//skrip untuk menampilkan data dari database
-		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking WHERE status_pemesanan !='pesan' ORDER BY no_nota DESC");
+		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking tb
+		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
+		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  ORDER BY no_antrian ASC");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 
@@ -60,17 +64,10 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$row['nama'].'</td>
 					 <td>'.$row['jenis'].'</td>
-					 <td>Rp. '.number_format($row['total']).'</td>
+					 <td>Rp.'.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
 					 <td></td>
 					 <td>
-						<script type="text/javascript" language="JavaScript">
-						  	function konfirmasi(){
-							  	tanya = confirm("Anda yakin akan menghapus data ini?");
-							  	if (tanya == true) return true;
-							  	else return false;
-							}
-						</script>
 					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
 					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 					</td>';
@@ -97,4 +94,9 @@ if(empty($_SESSION['id_user'])){
 	$(document).ready(function(){
 		$('#tables-transaksi_offline').DataTable();
 	});
+	function konfirmasi(){
+	  	tanya = confirm("Anda yakin akan menghapus data ini?");
+	  	if (tanya == true) return true;
+	  	else return false;
+	}
 </script>
