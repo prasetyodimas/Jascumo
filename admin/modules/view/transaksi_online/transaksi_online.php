@@ -31,16 +31,17 @@ if(empty($_SESSION['id_user'])){
 				<table class="table table-bordered table-hover" id="tables-transaksi_online">
 				 <thead>
 				   <tr class="info">
-					 <th width="5%">No</th>
-					 <th width="">No. Nota</th>
-					 <th width="">Nama Pelanggan</th>
-					 <th width="">Nama Kendaran</th>
-					 <th width="">Jenis + Harga</th>
-					 <th width="">Tanggal</th>
-					 <th width="">Total Bayar</th>
-					 <th width="">Status</th>
-					 <th width="">Antrian Booking</th>
-					 <th width=""></th>
+					 <th>No</th>
+					 <th>No. Nota</th>
+					 <th>Nama Pelanggan</th>
+					 <th>Nama Kendaran</th>
+					 <th>Jenis + Harga</th>
+					 <th>Antarjemput</th>
+					 <th>Tanggal</th>
+					 <th>Total Bayar</th>
+					 <th>Status</th>
+					 <th>Antrian book</th>
+					 <th></th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -50,6 +51,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  LEFT JOIN ongkos_jemput oj ON tb.id_ongkos=oj.id_ongkos
 		 								  ORDER BY no_antrian ASC");
 
 		 	if(mysqli_num_rows($sql) > 0){
@@ -60,8 +62,14 @@ if(empty($_SESSION['id_user'])){
 				 	if ($row['id_member']!='') {
 				 		$nama_pemesan = $getMember['nama_member'];
 				 	}else{
-				 		$row['nama_pemesan'];
-				 	}	
+				 		$nama_pemesan = $row['nama_pemesan'];
+				 	}
+				 	//check condition antarjemput
+				 	if ($row['id_ongkos']=="" || $row['id_ongkos']== null) {
+			 			$layanan = '-';
+			 		}else{
+			 			$layanan = $row['nama_wilayah'].' Rp.'.formatuang($row['biaya_jemput']);
+			 		}	
 	 			echo '
 
 				   <tr>
@@ -70,6 +78,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$nama_pemesan.'</td>
 					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
+					 <td>'.$layanan.'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.$row['status_pemesanan'].'</td>

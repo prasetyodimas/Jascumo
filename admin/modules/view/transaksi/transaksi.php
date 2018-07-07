@@ -51,6 +51,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+		 								  LEFT JOIN member m ON tb.id_member=m.id_member
 		 								  ORDER BY no_antrian ASC");
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
@@ -62,8 +63,8 @@ if(empty($_SESSION['id_user'])){
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
-					 <td>'.$row['nama'].'</td>
-					 <td>'.$row['jenis'].'</td>
+					 <td>'.$row['nama_member'].'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>Rp.'.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
 					 <td></td>
