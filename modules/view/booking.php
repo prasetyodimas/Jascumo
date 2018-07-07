@@ -231,7 +231,7 @@
 					console.log(response);
   					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
 					setTimeout(function(){
-					  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+					  // window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
 					},1000);
 				},
 		        error : function (response) {

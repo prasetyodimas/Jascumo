@@ -46,7 +46,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h4></h4></div>
                 <div class="panel-body">
-                   <table class="table borderless table-hover table-striped">
+                   <table class="table borderless table-hover table-striped" style="font-size: 14px;">
                     <thead>
                         <?php $count = mysqli_fetch_array(mysqli_query($db_con," SELECT count(no_nota) as item FROM transaksi_booking 
                                        WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='lunas'")); ?>
@@ -54,9 +54,8 @@
                             <td colspan="7"><strong>Daftar Pemesanaan anda: <?php echo $count['item']; ?> item</strong></td>
                         </tr>
                         <tr>
-                            <th>No</th>
-                            <th>Merek Mobil</th>
-                            <th>Nama Mobil</th>
+                            <th>kode Book</th>
+                            <th>Nama Kendaraan</th>
                             <th>Harga</th>
                             <th>Harga</th>
                             <th>Status</th>
@@ -64,7 +63,6 @@
                     </thead>
                     <tbody>
                         <?php
-                            $no =1;
                             $getQuery = mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
                                                               JOIN layanan la ON tb.id_layanan=la.id_layanan 
                                                               JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
@@ -74,15 +72,14 @@
                                         while ($res = mysqli_fetch_array($getQuery)) {
                          ?>
                         <tr>
-                            <td> <h5 class="media-heading"><?php echo $no; ?></h5> </td>
-                            <td class="text-left"><?php echo $res['nama_kendaraan']; ?></td>
-                            <td class="text-left"><?php echo $res['nama_mobil']; ?></td>
+                            <td class="text-left"><?php echo $res['no_nota']; ?></td>
+                            <td class="text-left"><?php echo $res['nama_kendaraan'].''.$res['nama_mobil'];?></td>
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
                             <td class="text-center"><?php echo number_format($res['status_pemesanan']);?></td>
                             <td class="text-right"><button type="button" class="btn btn-danger" id="modify-book">Batalkan</button></td>
                         </tr>
-                        <?php $no++; } ?>
+                        <?php } ?>
                     </tbody>
                 </table> 
                 </div>

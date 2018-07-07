@@ -90,13 +90,10 @@ if(empty($_SESSION['id_user'])){
 						    </li>
 						  </ul>
 						</div>
-
-					 	
-					 	
 					</td>';
 				}
 			}else{
-				echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+				echo '<td colspan="10"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}
 				echo '
 			 	</tbody>
