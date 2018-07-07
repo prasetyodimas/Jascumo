@@ -37,7 +37,7 @@ if(empty($_SESSION['id_user'])){
 					 <th width="">Total Bayar</th>
 					 <th width="">Status</th>
 					 <th width="">Antrian</th>
-					 <th width="">Aksi</th>
+					 <th width=""></th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -48,16 +48,23 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  ORDER BY no_nota DESC");
+
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 				 while($row = mysqli_fetch_array($sql)){
 	 				$no++;
+					$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$row[id_member]'"));
+				 	if ($row['id_member']!='') {
+				 		$nama_pemesan = $getMember['nama_member'];
+				 	}else{
+				 		$row['nama_pemesan'];
+				 	}	
 	 			echo '
 
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
-					 <td>'.$row['nama_pemesan'].'</td>
+					 <td>'.$nama_pemesan.'</td>
 					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
@@ -72,9 +79,20 @@ if(empty($_SESSION['id_user'])){
 							  	else return false;
 							}
 						</script>
-					 	<a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
-					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
-					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()" class="btn btn-warning btn-s">Batal</a>
+						<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" target="_blank">Cetak Nota</a></li>
+						    <li><a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()">Hapus</a></li>
+						    <li>
+					 			<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()">Batal</a>
+						    </li>
+						  </ul>
+						</div>
+
+					 	
+					 	
 					</td>';
 				}
 			}else{
