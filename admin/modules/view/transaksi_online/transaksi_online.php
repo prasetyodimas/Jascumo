@@ -28,7 +28,7 @@ if(empty($_SESSION['id_user'])){
 			<div class="container">
 				<h3>Daftar Transaksi Online</h3>
 				<div class="clearfix form-group"></div>
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover" id="tables-transaksi_online">
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
@@ -103,3 +103,16 @@ if(empty($_SESSION['id_user'])){
 	}
 }
 ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#tables-transaksi_online_paginate{
+		margin-left: 37em;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tables-transaksi_online').DataTable();
+	});
+</script>

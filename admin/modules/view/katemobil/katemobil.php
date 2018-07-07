@@ -63,7 +63,18 @@
 	</table>	
 	</div>
 </div>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#tables-katemobil_paginate{
+		margin-left: 34em;
+	}
+</style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#tables-katemobil').DataTable();
+	});
   	function konfirmasi(){
 	  	tanya = confirm("Anda yakin akan menghapus user ini?");
 	  	if (tanya == true){
