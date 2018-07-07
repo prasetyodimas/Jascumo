@@ -84,7 +84,6 @@
 </div>  
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#tables-merekmobil').DataTable();
     $('#confrimation_proccess').on('click',function(){
       alert('this clicked !');
     });

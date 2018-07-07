@@ -26,27 +26,26 @@ if(empty($_SESSION['id_user'])){
 				include 'cetak_nota.php';
 				break;
 		}
-	}else{
-		echo '
+	}else{ ?>
 			<div class="container">
 				<h3>Daftar Transaksi </h3>
 					<a href="./admin.php?hlm=transaksi&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Transaksi Baru</a>
 				<div class="clearfix form-group"></div>
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover" id="tables-transaksi_offline">
 				 <thead>
 				   <tr class="info">
-					 <th width="5%">No</th>
-					 <th width="">No. Nota</th>
-					 <th width="">Nama Pelanggan</th>
-					 <th width="">Jenis</th>
-					 <th width="">Total Bayar</th>
-					 <th width="">Tanggal</th>
-					 <th width="">Status</th>
-					 <th width="">Tindakan</th>
+					 <th>No</th>
+					 <th>No. Nota</th>
+					 <th>Nama Pelanggan</th>
+					 <th>Jenis</th>
+					 <th>Total Bayar</th>
+					 <th>Tanggal</th>
+					 <th>Status</th>
+					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
-				 <tbody>';
-
+				 <tbody>
+			<?php
 			//skrip untuk menampilkan data dari database
 		 	$sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking WHERE status_pemesanan !='pesan' ORDER BY no_nota DESC");
 		 	if(mysqli_num_rows($sql) > 0){
@@ -86,3 +85,16 @@ if(empty($_SESSION['id_user'])){
 	}
 }
 ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#tables-transaksi_offline_paginate{
+		margin-left: 37em;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tables-transaksi_offline').DataTable();
+	});
+</script>
