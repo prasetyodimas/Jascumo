@@ -37,10 +37,10 @@
 	<table class="table table-bordered table-hover" style="width:100%;" id="tables-merekmobil">
 	 <thead>
 	   <tr class="info">
-		 <th width="5%">No</th>
-		 <th width="50%;">Kode Kendaraan</th>
+		 <th>No</th>
+		 <th>Kode Kendaraan</th>
 		 <th>Nama Kendaraan</th>
-		 <th>Aksi</th>
+		 <th class="col-sm-2">Aksi</th>
 	   </tr>
 	 </thead>
 	 <tbody>

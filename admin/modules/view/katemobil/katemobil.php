@@ -31,12 +31,12 @@
 	<table class="table table-bordered table-hover" style="width:100%;" id="tables-katemobil">
 	 <thead>
 	   <tr class="info">
-		 <th width="5%">No</th>
+		 <th>No</th>
 		 <th>Merek Mobil</th>
 		 <th>Nama Mobil</th>
 		 <th>Ukuran</th>
 		 <th>Keterangan</th>
-		 <th>Aksi</th>
+		 <th class="col-sm-2">Aksi</th>
 	   </tr>
 	 </thead>
 	 <tbody>

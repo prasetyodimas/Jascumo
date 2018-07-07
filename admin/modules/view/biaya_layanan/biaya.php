@@ -34,7 +34,7 @@ if(empty( $_SESSION['id_user'])){
 					 <th>Kode Layanan</th>
 					 <th>Jenis Layanan</th>
 					 <th>Biaya Jasa</th>
-					 <th>Tindakan</th>
+					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -74,8 +74,16 @@ if(empty( $_SESSION['id_user'])){
 	}
 }
 ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#table-layanan_paginate{
+		margin-left: 36em;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#tables-layanan').DataTable();
+		$('#table-layanan').DataTable();
 	});
 </script>
