@@ -11,8 +11,11 @@ if(isset($_REQUEST['submit'])){
 
     $sql = mysqli_query($db_con, "DELETE FROM tipe_mobil WHERE id_tipe_mobil='$id_tipemobil'");
         if($sql == true){
-            header("Location: ./admin.php?hlm=katemobil");
-            die();
+            echo "<script>alert('success menghapus data kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
+        }else{
+            echo "<script>alert('gagal menghapus data kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
         }
     }
 }

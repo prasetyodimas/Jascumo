@@ -39,7 +39,7 @@ if(empty($_SESSION['id_user'])){
 					 <th width="">Tanggal</th>
 					 <th width="">Total Bayar</th>
 					 <th width="">Status</th>
-					 <th width="">Antrian</th>
+					 <th width="">Antrian Booking</th>
 					 <th width=""></th>
 				   </tr>
 				 </thead>
@@ -69,7 +69,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$nama_pemesan.'</td>
 					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
-					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).',-'.'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.$row['status_pemesanan'].'</td>
