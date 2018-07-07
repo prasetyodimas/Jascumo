@@ -3,114 +3,81 @@ if( empty( $_SESSION['id_user'] ) ){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
-} else {
+} else { ?>
+<style type="text/css">
+.custom-headtables{background-color:#949494;}.col-md-push-custom {left: 4.333333%; } tbody tr td{border-bottom: 1px solid #ddd; }
+h4.customize-size{font-size: 16px; } .main-detail-information{margin-top: 50px; } .main-detail-information .main-tanda-tangan ,.main-paraf-area{text-align:center; font-size:15px; } 
+table th{color: #fff !important;}
 
-      if(isset($_REQUEST['submit'])){
-
-	     $submit = $_REQUEST['submit'];
-         $tgl1 = $_REQUEST['tgl1'];
-         $tgl2 = $_REQUEST['tgl2'];
-
-		 $sql = mysqli_query($db_con, "SELECT * FROM transaksi_booking WHERE tanggal_pesan BETWEEN '$tgl1' AND '$tgl2'");
-		 if(mysqli_num_rows($sql) > 0){
-			 $no = 0;
-
-		 echo '<h3>Rekap Laporan Penghasilan <small>'.$tgl1.' sampai '.$tgl2.'</small></h3><hr>
-
-		 <div class="col-sm-1">
-		  <a href="?hlm=laporan" id="tombol" class="btn btn-info pull-left"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Kembali</a><br/><br/><br/>
-
-		   <button id="tombol" onclick="window.print()" class="btn btn-warning"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
-
-		   </div>
-
-		  <div class="col-sm-11">
-		  <table class="table table-bordered">
-		  <thead>
-			<tr class="info">
-			  <th width="5%">No</th>
-			  <th width="10%">No. Nota</th>
-			  <th width="20%">Nama Pelanggan</th>
-			  <th width="20%">Jenis</th>
-			  <th width="10%">Total Bayar</th>
-			  <th width="10%">Tanggal</th>
-			</tr>
-		  </thead>
-		  <tbody>';
-
-		  while($row = mysqli_fetch_array($sql)){
-			 $no++;
-		 echo '
-
-			<tr>
-			  <td>'.$no.'</td>
-			  <td>'.$row['no_nota'].'</td>
-			  <td>'.$row['nama_pemesan'].'</td>
-			  <td>'.$row['email_pemesan'].'</td>
-			  <td>RP. '.number_format($row['total']).'</td>
-			  <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>';
-		 }
-	 }
-	 echo '
-		 </tbody>
-	 </table>
-
-		<div class="col-sm-6"><table class="table table-bordered">';
-		 echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
-
-		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
-
-		 list($nama_pemesan, $total) = mysqli_fetch_array($sql);{
-			echo '<tr><td><span class="pull-right"><h4><b>'.$nama_pemesan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
-
-		 }
-		 echo '
-			   </table>
-		   </div>
-		   </div>
-		   </div>
-		 </div>';
-
-	 } else {
-
-		echo '<h3>Laporan Data Member Crown Cars Wash</h3><hr>';
-
-?>
-	<div class="well well-sm noprint">
-	<form class="form-inline" role="form" method="post" action="">
-	  <div class="form-group">
-	    <label class="sr-only" for="tgl1">Mulai</label>
-	    <input type="date" class="form-control" id="tgl1" name="tgl1" required>
-	  </div>
-	  <div class="form-group">
-	    <label class="sr-only" for="tgl2">Hingga</label>
-	    <input type="date" class="form-control" id="tgl2" name="tgl2" required>
-	  </div>
-	  <button type="submit" name="submit" class="btn btn-success">Tampilkan</button>
-	</form>
+@media print {
+	.control-action-pages{
+		display: none;
+	}
+	.heading-child{
+		margin-left: 150px;
+	}
+}
+</style>
+<div class='main-containpages'>
+	<div class="col-lg-12">
+		<div class="col-sm-2 col-md-2">
+			<!-- <img src="<?php echo $site;?>frontend/logo/crown-cars.png" class="img-responsive" style="width: 80%;height:auto;"> -->
+		</div>
+		<div class="col-md-8 col-md-push-custom">
+			<h3 style="margin-left:129px;">LAPORAN MEMBER CROWN CARS WASH </h3>
+			<h5 class="col-md-8 col-md-push-2 heading-child">Jln. Arteri RIngrouad Utara Depok Sleman Yogyakarta, 555282 </h5>			
+		</div>
 	</div>
-<?php
-	echo "<div class='row'>";
-      echo '<div class="col-sm-12 col-md-12"><table class="table table-bordered">';
-      echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
+ 	<div class="col-lg-12">
+ 		<table class="table table-hover">
+ 			<thead class="custom-headtables">
+ 				<tr>
+ 					<th>No</th>
+ 					<th>Kode</th>
+ 					<th>Nama Pemesan</th>
+ 					<th>Alamat</th>
+ 					<th>No telp</th>
+ 					<th>Email</th>
+ 					<th>Status Member</th>
+ 					<!-- <th>Action</th> -->
+ 				</tr>
+ 			</thead>
+ 			<tbody>
+ 			<?php 
+ 				$no =1;
+ 				$get_datamember = mysqli_query($db_con,"SELECT * FROM member ORDER BY id_member DESC");
+ 				while ($result = mysqli_fetch_array($get_datamember)) {
+ 			?>
+ 				<tr>
+ 					<td width="50"><?php echo $no;?></td>
+ 					<td><?php echo $result['id_member'];?></td>
+ 					<td width="200"><?php echo $result['nama_member'];?></td>
+ 					<td><?php echo $result['alamat_member'];?></td>
+ 					<td><?php echo $result['notelp_member'];?></td>
+ 					<td><?php echo $result['email_member'];?></td>
+ 					<td><?php echo $result['status_member'];?></td>
+					<!-- <td> <a href="homeadmin.php?page=laporan_member_onepages&id=<?php echo $result['id_member'];?>">View</a> </td> </tr> -->
+			<?php $no++; } ?>
+ 			</tbody>
+ 		</table>
+ 		<div class="col pull-right main-detail-information">
+ 			<h4 class="customize-size">Yogyakarta <?php echo tgl_indo(date('Y-m-d'));?></h4>
+			<div class="main-tanda-tangan">
+				<p class="">Pimpinan</p>
+			</div>
+			<div class="main-paraf-area">(...................................)</div>
+ 		</div>
+ 		<div class="control-action-pages">
+ 			<a href="#" class="btn btn-primary" onclick="myWindows();">Cetak Semua Laporan</a>
+ 		</div>
+ 	</div>
+</div>        
+<?php } ?>
+<script type="text/javascript">
+	function myWindows() {
+    	window.print();
+	}	
+</script>
 
-	  $tanggal =  date('Y-m-d');
 
-	  $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal_pesan='$tanggal'");
 
-      list($nama, $total) = mysqli_fetch_array($sql);{
-         echo '<tr><td><span class="pull-right"><h4><b>'.$nama.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
-
-      }
-      echo '
-	  		</table>
-	  	</div>
-		<div class="col-sm-12 col-md-12">
-		  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
-		 </div>
-	  	</div>
-	  </div>';
-	echo "</div>";
-   }
-   }
-?>

@@ -58,10 +58,11 @@ if( empty( $_SESSION['id_user'] ) ){
 		<div class="col-sm-6"><table class="table table-bordered">';
 		 echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
-		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
+		 //$sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
+		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking");
 
-		 list($nama_pemesan, $total) = mysqli_fetch_array($sql);{
-			echo '<tr><td><span class="pull-right"><h4><b>'.$nama_pemesan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
+		 list($pelanggan, $total) = mysqli_fetch_array($sql);{
+			echo '<tr><td><span class="pull-right"><h4><b>'.$pelanggan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
 
 		 }
 		 echo '
@@ -91,25 +92,26 @@ if( empty( $_SESSION['id_user'] ) ){
 	</div>
 <?php
 	echo "<div class='row'>";
-      echo '<div class="col-sm-12 col-md-12"><table class="table table-bordered">';
-      echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
+	echo "<div class='col-sm-12'><h4>Total Pendapatan Keseluruhan Transaksi</h4></div>";
+	echo '<div class="col-sm-12 col-md-12"><table class="table table-bordered">';
+	echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
-	  $tanggal =  date('Y-m-d');
+	$tanggal =  date('Y-m-d');
 
-	  $sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal_pesan='$tanggal'");
+	$sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking");
 
-      list($nama, $total) = mysqli_fetch_array($sql);{
-         echo '<tr><td><span class="pull-right"><h4><b>'.$nama.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
+	list($pelanggan, $total) = mysqli_fetch_array($sql);{
+	 echo '<tr><td><span class="pull-right"><h4><b>'.$pelanggan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
 
-      }
-      echo '
-	  		</table>
-	  	</div>
-		<div class="col-sm-12 col-md-12">
-		  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
-		 </div>
-	  	</div>
-	  </div>';
+	}
+	echo '
+			</table>
+		</div>
+	<div class="col-sm-12 col-md-12">
+	  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
+	 </div>
+		</div>
+	</div>';
 	echo "</div>";
    }
    }
