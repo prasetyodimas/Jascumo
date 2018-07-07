@@ -47,7 +47,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN layanan la ON tb.id_layanan=la.id_layanan
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
-		 								  ORDER BY no_nota DESC");
+		 								  ORDER BY no_antrian ASC");
 
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;

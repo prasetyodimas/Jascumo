@@ -33,7 +33,7 @@ if ($act=='booking') {
 	//count all transaction
 	$countTrans 		= $total+$biaya_jemput;
 
-	$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$row[id_member]'"));
+	$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$id_member'"));
 
 
 	if ($id_member =='' || $id_member == null) {
@@ -114,13 +114,14 @@ if ($act=='booking') {
 		$saveBooking = mysqli_query($db_con,$addBooking);
 	}
 
-	//check detail trasaction 
+	//check detail trasaction and mailer member or not !!
 	if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
 		$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
 						          JOIN layanan la ON tb.id_layanan=la.id_layanan 
 						          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
 						          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
 						          WHERE id_member='$_POST[id_member]' AND status_pemesanan!='lunas'")); 
+
 	}else{
 		$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
 						          JOIN layanan la ON tb.id_layanan=la.id_layanan 
@@ -157,7 +158,7 @@ if ($act=='booking') {
 
 	    //Recipients
 	    $mail->setFrom('carwashcrowns@gmail.com', 'CrownCars Wash');
-	    $mail->addAddress('dimasprasetyo485@gmail.com', "'".$nama_pemesan."'");     // Add a recipient
+	    $mail->addAddress(''.$getMember['email_member'].'', ''.$getMember['nama_member'].'');     // Add a recipient
 	    $mail->addReplyTo('carwashcrowns@gmail.com', 'Information / Custtomer Service');
 
 	    //Attachments
@@ -168,7 +169,7 @@ if ($act=='booking') {
 	    $mail->isHTML(true);                                     // Set email format to HTML
 	    $mail->Subject = 'Crown Carswash Solution';
 	    // Compose a simple HTML email message
-	    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">Dimas Prasetyo</span></h3>'
+	    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$getMember['nama_member'].'</span></h3>'
 	                     .'<p>Terimakasih telah menggunakan layanan dan kepercayaan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
 	                     .'<p>Booking Information :</p>'
 	                     .'<table style="border:1px solid #b9b9b9;padding:10px;">

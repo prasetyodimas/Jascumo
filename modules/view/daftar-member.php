@@ -109,8 +109,8 @@
 					$('#reg-members').prop('disabled',true);
 				},
 				success : function (response) {
-  					alert('Registrasi Member Berhasil Dilakukan !!');
-  					location.reload();
+  					// alert('Registrasi Member Berhasil Dilakukan !!');
+  					// location.reload();
 				},
 		        error : function (response) {
   					alert('Whoops Registrasi Member Gagal !!');

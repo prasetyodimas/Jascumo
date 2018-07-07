@@ -3,6 +3,8 @@
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+//Load Composer's autoloader
+require '../../vendor/autoload.php';
 
 $act = $_GET['act'];
 	if ($act =='registrasi') {
@@ -37,7 +39,7 @@ $act = $_GET['act'];
 
 		    //Recipients
 		    $mail->setFrom('carwashcrowns@gmail.com', 'CrownCars Wash');
-		    $mail->addAddress('dimasprasetyo485@gmail.com', "'".$nama_member."'");     // Add a recipient
+		    $mail->addAddress(''.$email_member.'', ''.$nama_member.'');     // Add a recipient
 		    $mail->addReplyTo('carwashcrowns@gmail.com', 'Information / Custtomer Service');
 
 		    //Attachments
@@ -48,13 +50,13 @@ $act = $_GET['act'];
 		    $mail->isHTML(true);                                     // Set email format to HTML
 		    $mail->Subject = 'Crown Carswash Solution';
 		    // Compose a simple HTML email message
-		    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$nama_pemesan.'</span></h3>'
+		    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$nama_member.'</span></h3>'
 		                     .'<p>Pendaftaran Member Anda Telah Berhasil Terimakasih telah menggunakan layanan dan kepercayaanya <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
-		                     .'<p>Booking Information :</p>'
+		                     .'<p>Account Information :</p>'
 		                     .'<table style="border:1px solid #b9b9b9;padding:10px;">
 		                            <thead>
 		                                <tr>No Member          : '.$id_member.' </tr>
-		                                <tr>Nama Pemesan       : '.$nama_pemesan.' </tr>
+		                                <tr>Nama Pemesan       : '.$nama_member.' </tr>
 		                                <tr>Alamat             : '.$alamat_member.'</tr>
 		                                <tr>Notelp / Handphone : '.$notelp_member.' </tr>
 		                                <tr>Status  		   : '.$status_mem.' </tr>
