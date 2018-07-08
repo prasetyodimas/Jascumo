@@ -76,7 +76,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$nama_pemesan.'</td>
-					 <td>'.$row['nama_kendaraan'].''.$row['nama_mobil'].'</td>
+					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>'.$layanan.'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>

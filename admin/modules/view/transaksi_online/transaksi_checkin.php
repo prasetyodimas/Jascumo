@@ -47,17 +47,30 @@
             </div>
         </div>
         <div class="col-lg-6">
-          <div class="panel panel-default" style="margin-top: 5em;">
+          <div class="panel panel-default">
             <div class="panel-body">
               <div class="col-sm-12 col-lg-12">
-                <label for="heading-barloket__queue"><strong style="font-size:1.5em;">Jumlah Antrian Saat Ini : </strong></label>                  
+                <label for="heading-barloket__queue"><strong style="font-size:1.5em;">No Antrian Booking / Pesanan Anda : </strong></label>                  
                 <div class="panel outerlines-area">
                   <div class="border__booking">
-                    <h4 class="text-center"><span class="days-now"></span> <?php echo date('d-m-Y');?> <span id="jam"></span></h4>
+                    <h4 class="text-center"><span class="days-now"></span> Tanggal <?php echo date('d-m-Y');?> <span id="jam"></span></h4>
                   </div>
                   <div class="queue__list__booking">
-                    <p class="text-center" style="font-size: 5em;"><?php echo $getQueue['antrian'];?></p>
-                    <input type="hidden" name="no_queue" value="<?php echo $show_queue+1; ?>">
+                    <p class="text-center" style="font-size: 6em;"><?php echo $getInfomationMember['no_antrian'];?></p>
+                  </div>
+                </div>
+                <div class="panel outerlines-area">
+                  <label for="heading-barloket__queue"><strong style="font-size:1.5em;">No Antrian Pengerjaan : </strong></label>                  
+                  <div class="queue__list__booking">
+                    <?php
+                      if ($getInfomationMember['checkin_noantrian']=="" || $getInfomationMember['checkin_noantrian']==null) {
+                          $no_queuetask  = 1;
+                      }else{
+                          $no_queuetask  = $getQueue['antrian']+1;
+                      }
+                    ?>
+                    <p class="text-center" style="font-size: 6em;"><?php echo $no_queuetask;?></p>
+                    <input type="text" name="no_queue" value="<?php echo $no_queuetask;?>">
                   </div>
                 </div>
                 <div class="terms-condition">
