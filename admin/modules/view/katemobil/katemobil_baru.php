@@ -15,10 +15,11 @@ if(empty($_SESSION['id_user'])){
 		$sql = mysqli_query($db_con, "INSERT INTO tipe_mobil(id_tipe_mobil , id_merek_mobil ,nama_mobil, ukuran_mobil, keterangan)
 									  VALUES('$join_kodeStr', '$id_merek_mobil', '$nama_mobil', '$ukuran_mobil','$keterangan')");
 		if($sql == true){
-			header('Location: ./admin.php?hlm=katemobil');
-			die();
+			echo "<script>alert('success menambah data master kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
 		}else{
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('gagal menambah data master kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
 		}
 	} else {
 ?>
@@ -35,7 +36,8 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama_mobil" class="col-sm-2 control-label">Merek Kendaraan</label>
 		<div class="col-sm-4">
-			<select name="id_merek_mobil" class="form-control" id="">
+			<select name="id_merek_mobil" class="form-control" id="" required>
+				<option value="">Pilih</option>
 				<?php
 					$getQuery = mysqli_query($db_con,"SELECT * FROM merek_mobil");
 					while ($data = mysqli_fetch_array($getQuery)) {

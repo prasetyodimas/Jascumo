@@ -26,13 +26,13 @@ if (empty($_SESSION['id_user'])) {
 			<a href="./admin.php?hlm=ongjemput&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Ongkos Jemput</a>
 		</div>
 		<div class="clearfix form-group"></div>
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover" id="table-ongkosjemput">
 	 <thead>
 	   <tr class="info">
-		 <th width="5%">No</th>
-		 <th width="22%">Nama Wilayah / Kecamatan</th>
-		 <th width="20%">Biaya Jemput</th>
-		 <th width="10%">Aksi</th>
+		 <th>No</th>
+		 <th>Nama Wilayah / Kecamatan</th>
+		 <th>Biaya Jemput</th>
+		 <th class="col-sm-2">Aksi</th>
 	   </tr>
 	 </thead>
 	 <tbody>
@@ -55,7 +55,18 @@ if (empty($_SESSION['id_user'])) {
 	</table>	
 	</div>
 </div>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#table-ongkosjemput_paginate{
+		margin-left: 36em;
+	}
+</style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#table-ongkosjemput').DataTable();
+	});
   	function konfirmasi(){
 	  	tanya = confirm("Anda yakin akan menghapus user ini?");
 	  	if (tanya == true){

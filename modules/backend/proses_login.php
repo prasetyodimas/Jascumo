@@ -12,6 +12,8 @@
 			$_SESSION['id_member']       = $finding ['id_member'];
 			$_SESSION['nama_member']     = $finding ['nama_member'];
 			$_SESSION['alamat_member']   = $finding ['alamat_member'];
+			$_SESSION['email_member']    = $finding ['email_member'];
+			$_SESSION['notelp_member']   = $finding ['notelp_member'];
 			$_SESSION['password_member'] = $finding ['password_member'];
 			echo "<script>alert('Selamat datang ".$_SESSION['nama_admin']." !!')</script>";
 			echo "<meta http-equiv=refresh content=0;url=".$site."homeadmin.php?page=homebase>";

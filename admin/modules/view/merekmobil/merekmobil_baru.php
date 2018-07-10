@@ -33,7 +33,7 @@ if(empty($_SESSION['id_user'])){
 	<div class="form-group">
 		<label for="nama_mobil" class="col-sm-2 control-label">Merek Kendaraan</label>
 		<div class="col-sm-4">
-			<input type="text" name="nama_kendaraan" class="form-control">
+			<input type="text" name="nama_kendaraan" class="form-control" required="">
 		</div>
 	</div>
 	<div class="form-group">

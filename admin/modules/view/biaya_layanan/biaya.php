@@ -27,14 +27,14 @@ if(empty( $_SESSION['id_user'])){
 				<a href="./admin.php?hlm=biaya_layanan&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Layanan / Jasa</a>
 			</div>
 			<div class="clearfix form-group"></div>
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover" id="table-layanan">
 				 <thead>
 				   <tr class="info">  
-					 <th width="10%">No</th>
+					 <th>No</th>
 					 <th>Kode Layanan</th>
 					 <th>Jenis Layanan</th>
 					 <th>Biaya Jasa</th>
-					 <th>Tindakan</th>
+					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>';
@@ -74,3 +74,16 @@ if(empty( $_SESSION['id_user'])){
 	}
 }
 ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#table-layanan_paginate{
+		margin-left: 36em;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#table-layanan').DataTable();
+	});
+</script>

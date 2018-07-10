@@ -26,6 +26,12 @@ if(isset($_REQUEST['hlm'])){
 			case 'member':
 				include "modules/view/member/member.php";
 				break;
+			case 'daftarantri':
+				include "modules/view/daftarantri/daftarantri.php";
+				break;
+			case 'checkkonfrim':
+				include "modules/view/transaksi_online/transaksi_checkin.php";
+				break;
 			case 'cetak':
 				include "cetak_nota.php";
 				break;

@@ -16,12 +16,46 @@ if(empty( $_SESSION['id_user'])){
 		$tangal_pesan		= $_REQUEST['tangal_pesan'];
 		$no_antrian  		= $_REQUEST['no_antrian'];
 
-		$bayar    = $_REQUEST['bayar'];
-		$kembali  = $_REQUEST['kembali'];
-		$total    = $_REQUEST['total'];
-		$id_user  = $_SESSION['id_user'];
+		$bayar    			= $_REQUEST['bayar'];
+		$kembali  			= $_REQUEST['kembali'];
+		$total    			= $_REQUEST['total'];
+		$id_user  			= $_SESSION['id_user'];
+		$tgl_pesan 			= date('Y-m-d H:i:s');
 
-		$sql = mysqli_query($db_con, "INSERT INTO transaksi(no_nota, jenis, nama, bayar, kembali, total, tanggal, id_user) VALUES('$no_nota', '$jenis', '$nama', '$bayar', '$kembali', '$total', NOW(), '$id_user')");
+		$sql = mysqli_query($db_con, "INSERT INTO transaksi_booking(no_nota, 
+								   id_layanan, 
+								   id_member, 
+								   id_merek_mobil, 
+								   id_ongkos,
+								   id_user,
+								   nama_pemesan,
+								   alamat_pemesan,
+								   notelp_pemesan,
+								   email_pemesan,
+								   tanggal_pesan,
+								   no_antrian,
+								   checkin_noantrian,
+								   status_pemesanan,
+								   bayar,
+								   kembali,
+								   total) 
+							VALUES ('$no_nota',
+									'$id_layanan',
+									'$id_tipe_mobil',
+									'$id_merek_mobil',
+									'$id_ongkos',
+									'',
+									'$nama_pemesan',
+									'$alamat_user',
+									'$notelp_pemesan',
+									'$email_user',
+									'$tgl_pesan',
+									'$no_antrian',
+									'$checking_noantrian',
+									'pesan',
+									'$bayar',
+									'$kembali',
+									'$countTrans'");
 		if($sql == true){
 			header('Location: ./admin.php?hlm=transaksi');
 			die();

@@ -6,7 +6,7 @@ body {
 
 /*Custom Bootsrap*/
 .navbar-inverse{
-	background-color:#eac702;
+	background-color:#d6a029;
     border-color: transparent;
 }
 .navbar-inverse .navbar-brand{
@@ -22,7 +22,7 @@ body {
 	margin-top: 8px;
 }
 .dropdown-menu >li > a:hover{
-	background-color:#eac702;
+	background-color:#d6a029;
 }
 
 .table>thead>tr>td.info, .table>tbody>tr>td.info, .table>tfoot>tr>td.info, .table>thead>tr>th.info, .table>tbody>tr>th.info, .table>tfoot>tr>th.info, .table>thead>tr.info>td, .table>tbody>tr.info>td, .table>tfoot>tr.info>td, .table>thead>tr.info>th, .table>tbody>tr.info>th, .table>tfoot>tr.info>th{

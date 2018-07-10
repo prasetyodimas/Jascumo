@@ -1,18 +1,18 @@
-<?php include 'config/koneksi.php';
+
+<?php include '../config/koneksi.php';
 
 if( empty( $_SESSION['id_user'] ) ){
 	$_SESSION['err'] = '<strong>ERROR!</strong> Anda harus login terlebih dahulu.';
 	header('Location: ./');
 	die();
-} else {
 
-if(isset($_REQUEST['submit'])){
+}else{
+    if(isset($_REQUEST['submit'])){
 
-    $id_transaksi = $_REQUEST['id_transaksi'];
-
-    $sql = mysqli_query($db_con, "DELETE FROM transaksi WHERE id_transaksi='$id_transaksi'");
+        $id_transaksi = $_REQUEST['id_transaksi'];
+        $sql = mysqli_query($db_con, "DELETE FROM transaksi_booking WHERE no_nota='$id_transaksi'");
         if($sql == true){
-            header("Location: ./admin.php?hlm=transaksi");
+            header("Location: ./admin.php?hlm=transaksi_online");
             die();
         }
     }
