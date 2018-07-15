@@ -70,12 +70,11 @@
                       }
                     ?>
                     <p class="text-center" style="font-size: 6em;"><?php echo $no_queuetask;?></p>
-                    <input type="text" name="no_queue" value="<?php echo $no_queuetask;?>">
+                    <input type="hidden" name="no_queue" value="<?php echo $no_queuetask;?>">
                   </div>
                 </div>
                 <div class="terms-condition">
-                  <p>Ketentuan : Untuk Melakukan prosedur booking / reservasi pencucian pelanggan di harapkan melakukan pemesanan pada jam operasional 
-                  / jam kerja. Jam operasional 8.00 Am - 17.00 PM, jika diluar jam kerja maka pemesanan akan di proses pada hari berikutnya </p>
+                  <p>Ketentuan :  </p>
                 </div>
               </div>
             </div>
@@ -96,6 +95,10 @@
   $(document).ready(function(){
     $('#confrimation_proccess').on('click',function(){
       alert('this clicked !');
+
+
+
     });
+    
   });
 </script>
