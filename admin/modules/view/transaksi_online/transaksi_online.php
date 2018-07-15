@@ -52,6 +52,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  LEFT JOIN ongkos_jemput oj ON tb.id_ongkos=oj.id_ongkos
+		 								  WHERE tb.status_pemesanan!='transots'
 		 								  ORDER BY no_antrian ASC");
 
 		 	if(mysqli_num_rows($sql) > 0){
