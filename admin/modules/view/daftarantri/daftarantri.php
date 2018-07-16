@@ -46,7 +46,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  LEFT JOIN member m ON tb.id_member=m.id_member
 		 								  WHERE tb.status_pemesanan='konfrimasi'
-		 								  ORDER BY tb.checkin_noantrian DESC");
+		 								  ORDER BY tb.checkin_noantrian ASC");
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;

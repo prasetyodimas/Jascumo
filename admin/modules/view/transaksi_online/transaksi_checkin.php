@@ -1,12 +1,10 @@
 <?php
   $getInfomationMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb LEFT JOIN member m ON tb.id_member=m.id_member
-                                               WHERE tb.no_nota='$_GET[id_transaksi]'"));
+                                                                  WHERE tb.no_nota='$_GET[id_transaksi]'"));
   $getQueue            = mysqli_fetch_array(mysqli_query($db_con,"SELECT count(no_nota) AS antrian FROM transaksi_booking WHERE status_pemesanan='konfrimasi'")); 
-  if ($getInfomationMember['checkin_noantrian']=="" || $getInfomationMember['checkin_noantrian']==null) {
-      $no_queuetask  = 1;
-  }else{
-      $no_queuetask  = $getQueue['antrian']+1;
-  }
+  
+  $cekRowsQueue        = mysqli_fetch_array(mysqli_query($db_con,"SELECT count(checkin_noantrian) as antrian_pengerjaan FROM transaksi_booking WHERE checkin_noantrian!=''"));  
+
 ?>
 <div class="container">
   <div class="col-sm-12 col-md-12">
@@ -14,7 +12,7 @@
       <div class="col-lg-6">
           <h3>Konfirmasi Booking Carwash</h3>
           <h5>Informasi Akun Pemesan</h4>
-          <form action="<?php echo $site?>admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=konfirmasi&id=<?php echo $_GET['id_transaksi'];?>&queue=<?php echo $no_queuetask;?>" method="post" id="formData">
+          <form action="<?php echo $site?>admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=konfirmasi&id=<?php echo $_GET['id_transaksi'];?>&queue=<?php echo $cekRowsQueue['antrian_pengerjaan']+1;?>" method="post" id="formData">
             <div class="form-horizontal">
               <div class="col-sm-12 col-md-12">
                 <div class="form-group">
@@ -65,12 +63,17 @@
                     <p class="text-center" style="font-size: 6em;"><?php echo $getInfomationMember['no_antrian'];?></p>
                   </div>
                 </div>
+                <label for="heading-barloket__queue"><strong style="font-size:1.5em;">No Antrian Saat Ini / Sedang Berlangsung : </strong></label>                  
                 <div class="panel outerlines-area">
-                  <label for="heading-barloket__queue"><strong style="font-size:1.5em;">No Antrian Pengerjaan : </strong></label>                  
                   <div class="queue__list__booking">
-                    
-                    <p class="text-center" style="font-size: 6em;"><?php echo $no_queuetask;?></p>
-                    <input type="hidden" name="no_queue" value="<?php echo $no_queuetask;?>">
+                    <p class="text-center" style="font-size: 6em;"><?php echo $cekRowsQueue['antrian_pengerjaan'];?></p>
+                  </div>
+                </div>  
+                <div class="panel outerlines-area">
+                  <label for="heading-barloket__queue"><strong style="font-size:1.5em;">No Antrian Pengerjaan Anda : </strong></label>                  
+                  <div class="queue__list__booking">
+                    <p class="text-center" style="font-size: 6em;"><?php echo $cekRowsQueue['antrian_pengerjaan']+1;?></p>
+                    <input type="hidden" name="no_queue" value="<?php echo $cekRowsQueue['antrian_pengerjaan']+1;?>">
                   </div>
                 </div>
                 <div class="terms-condition">
