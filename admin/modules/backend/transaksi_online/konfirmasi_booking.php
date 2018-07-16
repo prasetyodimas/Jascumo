@@ -2,8 +2,10 @@
 	$act = $_GET['act'];
 
 	if ($act =='konfirmasi') {
+
 		$id_transaksi = $_GET['id'];
-        $sql          = "UPDATE transaksi_booking SET status_pemesanan='konfrimasi' WHERE no_nota='$id_transaksi'";
+		$queue 		  = $_GET['queue'];
+        $sql          = "UPDATE transaksi_booking SET status_pemesanan='konfrimasi', checkin_noantrian='$queue' WHERE no_nota='$id_transaksi'";
         $processDb = mysqli_query($db_con,$sql);
 
         if($processDb){
