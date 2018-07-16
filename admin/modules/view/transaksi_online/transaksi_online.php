@@ -37,7 +37,7 @@ if(empty($_SESSION['id_user'])){
 					 <th>Nama Kendaran</th>
 					 <th>Jenis + Harga</th>
 					 <th>Antarjemput</th>
-					 <th>Tanggal</th>
+					 <th>Tanggal Pesan</th>
 					 <th>Total Bayar</th>
 					 <th>Status</th>
 					 <th>Antrian book</th>

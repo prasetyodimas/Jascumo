@@ -9,10 +9,11 @@
       <div class="col-lg-6">
           <h4>Konfirmasi Booking Carwash</h4>
           <h5>Informasi Akun Pemesan</h5>
-          <form action="" method="post" id="formData">
+          <form action="<?php echo $site?>admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=konfirmasi&id=<?php echo $_GET['id_transaksi']?>" method="post" id="formData">
             <div class="form-horizontal">
               <div class="col-sm-12 col-md-12">
                 <div class="form-group">
+                  <input type="hidden" name="kode_booking" value="<?php echo $_GET['id_transaksi'] ?>">
                   <input type="hidden" name="queue_no" value="<?php echo $getInfomationMember['no_antrian'] ?>">
                   <label>Id Member</label>
                   <input type="text" name="id_member" class="form-control" value="<?php echo $getInfomationMember['id_member'];?>" readonly>

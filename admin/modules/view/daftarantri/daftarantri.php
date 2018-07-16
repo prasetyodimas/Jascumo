@@ -32,7 +32,7 @@ if(empty($_SESSION['id_user'])){
 					 <th>Nama Pelanggan</th>
 					 <th>Jenis+ Layanan</th>
 					 <th>Total Bayar</th>
-					 <th>Tanggal</th>
+					 <th>Tanggal Pesan</th>
 					 <th>Antrian Pengerjaan</th>
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>

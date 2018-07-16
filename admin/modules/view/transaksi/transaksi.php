@@ -39,7 +39,7 @@ if(empty($_SESSION['id_user'])){
 					 <th>Nama Pelanggan</th>
 					 <th>Jenis</th>
 					 <th>Total Bayar</th>
-					 <th>Tanggal</th>
+					 <th>Tanggal Pesan</th>
 					 <th>Status</th>
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
@@ -73,7 +73,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['nama_member'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>Rp.'.formatuang($row['total']).'</td>
-					 <td>'.date("d M Y", strtotime($row['tanggal'])).'</td>
+					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>'.$statusbook.'</td>
 					 <td>
 					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
