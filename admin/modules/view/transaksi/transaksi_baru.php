@@ -66,7 +66,7 @@ if(empty( $_SESSION['id_user'])){
 ?>
 <h2>Tambah Transaksi Baru</h2>
 <div class="clearfix form-group"></div>
-<form method="post" action="" class="form-horizontal" role="form">
+<form method="post" action="backend/transaksi_online/konfirmasi.php" class="form-horizontal" role="form">
 	<div class="col-lg-12">
 		<div class="row">
 			<div class="col-lg-7">

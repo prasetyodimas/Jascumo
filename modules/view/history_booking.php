@@ -3,8 +3,8 @@
     $getInfoNonMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking WHERE id_member='' ORDER BY no_nota DESC "));
 
 ?>
-<div class="container" style="margin-top: 2rem;margin-bottom:6rem;">
-<div class="panel-heading text-left" style="margin-bottom:3em;"> <h4>Review Order / Informasi Pemesanan</h4> </div> 
+<div class="container" style="margin-top: 2rem;margin-bottom:9rem;">
+<div class="panel-heading text-left" style="margin-bottom:3em;"> <h4>History Pemesanan / Riwayat Transaksi</h4> </div> 
     <!--REVIEW ORDER-->
     <div class="row">
         <div class="col-sm-3 col-md-3">
@@ -30,7 +30,6 @@
                         <strong>Email</strong>
                         <div class="pull-right"><span><?php echo  $_SESSION['email_member']; ?></span></div>
                     </div>
-                    <a href="<?php echo $site ?>index.php?m=detailprofile" class="btn btn-primary btn-lg btn-block">More Information </a>
                 <?php }else{ ?>
                     <div class="col-md-12">
                         <strong>Nama Pemesan</strong>
@@ -77,7 +76,7 @@
                                                               JOIN layanan la ON tb.id_layanan=la.id_layanan 
                                                               JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
                                                               LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
-                                                              WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='lunas' 
+                                                              WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='pesan' 
                                                               ORDER BY no_nota DESC");
                                         while ($res = mysqli_fetch_array($getQuery)) {
                          ?>
@@ -87,7 +86,6 @@
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
                             <td class="text-center"><?php echo $res['status_pemesanan'];?></td>
-                            <td class="text-right"><a href="<?php echo $site;?>modules/backend/proses_cancelbooking.php?act=cancel_booking&id=<?php echo $res['no_nota'];?>" class="btn btn-danger" id="modify-book">Batalkan</button></td>
                         </tr>
                         <?php } ?>
                     </tbody>

@@ -81,11 +81,12 @@ if( empty( $_SESSION['id_user'] ) ){
 	<form class="form-inline" role="form" method="post" action="">
 	  <div class="form-group">
 	    <label class="sr-only" for="tgl1">Mulai</label>
-	    <input type="date" class="form-control" id="tgl1" name="tgl1" required>
+	    <input type="text" class="form-control" id="tgl1" name="tgl1" required autocomplete="off">
 	  </div>
+	  <label>S/d</label>
 	  <div class="form-group">
 	    <label class="sr-only" for="tgl2">Hingga</label>
-	    <input type="date" class="form-control" id="tgl2" name="tgl2" required>
+	    <input type="text" class="form-control" id="tgl2" name="tgl2" required autocomplete="off">
 	  </div>
 	  <button type="submit" name="submit" class="btn btn-success">Tampilkan</button>
 	</form>
@@ -116,3 +117,9 @@ if( empty( $_SESSION['id_user'] ) ){
    }
    }
 ?>
+<script type="text/javascript">
+	$(function(){
+		$('#tgl1').datepicker();
+		$('#tgl2').datepicker();
+	});
+</script>

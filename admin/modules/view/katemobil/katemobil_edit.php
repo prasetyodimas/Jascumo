@@ -12,13 +12,13 @@ if(empty( $_SESSION['id_user'])){
 		$ukuran_mobil 	= $_REQUEST['ukuran_mobil'];
 
 		$sql = mysqli_query($db_con, "UPDATE tipe_mobil SET id_tipe_mobil='$id_tipe_mobil', nama_mobil='$nama_mobil' , ukuran_mobil='$ukuran_mobil' WHERE id_tipe_mobil='$id_tipe_mobil'");
-
 		if($sql == true){
-			header('Location: ./admin.php?hlm=katemobil');
-			die();
-		} else {
-			echo 'ERROR! Periksa penulisan querynya.';
-		}
+            echo "<script>alert('success edit data kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
+        }else{
+            echo "<script>alert('gagal edit data kategori mobil !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=katemobil>";
+        }
 	} else {
 
 		$id_tipe_mobil = $_REQUEST['id_tipe_mobil'];

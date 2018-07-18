@@ -18,6 +18,7 @@
 							<div class="form-">
 								<label>Kode Booking</label>
 								<input type="text" name="book_kode" class="form-control" value="<?php echo $token;?>" readonly>
+								<input type="hidden" name="validation_status" class="form-control" value="lunas" readonly>
 							</div>
 							<?php if ($_SESSION['id_member']=='') { ?>
 								<div class="form-">
@@ -39,7 +40,7 @@
 							<?php }else{ ?>
 								<div class="form-">
 									<label>Id Member</label>
-									<input type="text" name="id_member" class="form-control" value="<?php echo $_SESSION['id_member'];?>" readonly>
+									<input type="text" name="id_member" id="memberId" class="form-control" value="<?php echo $_SESSION['id_member'];?>" readonly>
 								</div>
 								<div class="form-">
 									<label>Nama Lengkap</label>
@@ -212,35 +213,60 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		//declaring variables
-		let choose_car        = $('.choose_car');
+		let choose_car         = $('.choose_car');
 		let choose_cartype     = $('.choose_cartype');
 		let choose_service     = $('.choose-services');
 		let choose_deliveryjpt = $('.select-antarjmput');
+		let getstatus 		   = $('input[name=validation_status]').val();
+		let url_aplication = '<?php echo $site;?>';
 		$('.book-now').on('click',function(){
-			let url_aplication = '<?php echo $site;?>';
+			validateBooking();
+		});
+
+		//function validation form
+		function validateBooking(){
 			let bookingarray   = $('#formData').serializeArray();  
-			console.log(bookingarray);
+			let memberId       = $('#memberId').val();
+			// console.log(bookingarray);
 			$.ajax({
-				url: url_aplication+"modules/backend/proses_booking.php?&act=booking",
-				method :"POST",
-				data : bookingarray,
-				beforeSend: function(response){
-					$('.book-now').prop('disabled',true);
+				url:"modules/backend/proses_booking.php?&act=check_bookValidation&id_member="+memberId,
+				method:'GET',
+				success: function(response){
+					if (response.status_pemesanan != getstatus) {
+						console.log(response.status_pemesanan);
+						alert('maaf anda tidak bisa melakukan pemesanan checkstatus pemesanan anda !!');
+			    		setTimeout(function(){
+					  		 window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+						},2000);
+					}else{
+						$.ajax({
+							url: url_aplication+"modules/backend/proses_booking.php?&act=booking",
+							method :"POST",
+							data : bookingarray,
+							beforeSend: function(response){
+								$('.book-now').prop('disabled',true);
+							},
+							success : function (response) {
+								console.log(response);
+			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
+								setTimeout(function(){
+								  // window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+								},1000);
+							},
+					        error : function (response) {
+			  					alert('Whoops Registrasi Member Gagal !!');
+								$('.book-now').prop('disabled',false);
+					        }
+						});
+					}
 				},
-				success : function (response) {
-					console.log(response);
-  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
-					setTimeout(function(){
-					  // window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
-					},1000);
-				},
-		        error : function (response) {
-  					alert('Whoops Registrasi Member Gagal !!');
-					$('.book-now').prop('disabled',false);
-		        }
+				error: function(response){
+  					// alert('Whoops Validation Failed !!');
+					console.log('Whoops Validation Failed !!');
+				}
 			});
 
-		});
+		}
 		
 		//get json services
 		$('#selected-services').on('change',function(){

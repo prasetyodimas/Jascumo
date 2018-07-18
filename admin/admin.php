@@ -26,6 +26,7 @@ if(empty( $_SESSION['id_user'])){
     <link href="<?php echo $site?>frontend/favicon/favicon.png" type="image/x-icon" rel="icon">
     <script src="<?php echo $site;?>admin/js/datatables/css/jquery.dataTables.min.css"></script>
     <script src="<?php echo $site;?>admin/js/datatables/css/dataTables.bootstrap.min.css"></script>
+    <script src="<?php echo $site;?>admin/js/datepicker/css/datepicker.css"></script>
     <!-- Javascript core  -->
     <script src="<?php echo $site;?>admin/js/corejs/jquery.min.js"></script>
     <script src="<?php echo $site;?>admin/js/corejs/bootstrap.min.js"></script>
@@ -34,6 +35,7 @@ if(empty( $_SESSION['id_user'])){
     <!-- Javascript library -->
     <script src="<?php echo $site;?>admin/js/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo $site;?>admin/js/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo $site;?>admin/js/datepicker/js/bootstrap-datepicker.js"></script>
   </head>
   <body>
       <?php include "modules/menus/menu.php"; ?>

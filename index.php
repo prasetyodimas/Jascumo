@@ -51,7 +51,6 @@
       $.ajax({
         url: url_aplication+"modules/backend/proses_logout.php?&act=logout-process",
         method :"POST",
-        cache: false,
         success : function (response) {
           alert('Berhasil Logout dari Sistem Crown Carwash !!');
           window.location = '<?php echo $site;?>'+'index.php?m=home';

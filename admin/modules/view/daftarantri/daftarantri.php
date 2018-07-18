@@ -32,7 +32,7 @@ if(empty($_SESSION['id_user'])){
 					 <th>Nama Pelanggan</th>
 					 <th>Jenis+ Layanan</th>
 					 <th>Total Bayar</th>
-					 <th>Tanggal</th>
+					 <th>Tanggal Pesan</th>
 					 <th>Antrian Pengerjaan</th>
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
@@ -45,7 +45,8 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  LEFT JOIN member m ON tb.id_member=m.id_member
-		 								  ORDER BY no_nota DESC");
+		 								  WHERE tb.status_pemesanan='konfrimasi'
+		 								  ORDER BY tb.checkin_noantrian ASC");
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
@@ -61,7 +62,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
-					 <td></td>
+					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['checkin_noantrian'].'</td>
 					 <td>
 					 	<a href="#" class="btn btn-info btn-s">Konfirmasi</a>
 					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>

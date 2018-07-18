@@ -32,12 +32,13 @@ if(empty( $_SESSION['id_user'])){
 				 <thead>
 				   <tr class="info">  
 					 <th>No</th>
-					 <th>Kode Member</th>
-					 <th>Nama Lengkap</th>
+					 <th>Id</th>
+					 <th>Username</th>
+					 <th>Nama</th>
 					 <th>Email</th>
 					 <th>No telp</th>
 					 <th>Alamat</th>
-					 <th>Status Member</th>
+					 <th>Status</th>
 					 <th class="col-sm-2">Tindakan</th>
 				   </tr>
 				 </thead>
@@ -52,6 +53,7 @@ if(empty( $_SESSION['id_user'])){
 				   <tr>
 					 <td>'.$no.'</td>
 					 <td>'.$row['id_member'].'</td>
+					 <td>'.$row['username_member'].'</td>
 					 <td>'.$row['nama_member'].'</td>
 					 <td>'.$row['email_member'].'</td>
 					 <td>'.$row['notelp_member'].'</td>
