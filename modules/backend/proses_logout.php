@@ -4,7 +4,7 @@
 	  	session_start();
 	  	session_destroy();
 		unset($_SESSION['id_member']);
-		unset($_SESSION['nama_member']);
+		unset($_SESSION['username']);
 		unset($_SESSION['password_member']);
 	}
 ?>
