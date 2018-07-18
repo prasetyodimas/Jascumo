@@ -294,31 +294,30 @@
 
 		//get json services
 		$('#services_jempt').on('change',function(){
-        	let getValue = $('#hidden-jemputan').val();
-        	valueParse    = parseFloat(getValue);
 			choose_deliveryjpt.on("select2:select", function (e) { 
 			  let select_val = $(e.currentTarget).val();
 			  $('#hidden-jemputan').val(select_val);
 			  // console.log(valueParse);
+			  getserviceOngkir();
 			});
 			
-            if(valueParse =='' || null) {
-            	// alert('Pilih layananan dulu !!');
-            }else{
-	            $.ajax({
-	                url:'../modules/backend/json/jsonservices_ongkos.php',
-	                type:'GET',
-	                dataType:'json',
-	                data: {'ongkos':valueParse},
-	                success:function (results) {
-	                	$('#biaya_jemput').val(results[0].biaya_jemput);
-	            	},
-	            	fail: function(jqXHR, textStatus, errorThrown) {
-	    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
-					}
-	            });
-			}
 		});
+		function getserviceOngkir(){
+        	let getValue  = $('#hidden-jemputan').val();
+        	valueParse    = parseFloat(getValue);
+	        $.ajax({
+	            url:'../modules/backend/json/jsonservices_ongkos.php',
+	            type:'GET',
+	            dataType:'json',
+	            data: {'ongkos':valueParse},
+	            success:function (results) {
+	            	$('#biaya_jemput').val(results[0].biaya_jemput);
+	        	},
+	        	fail: function(jqXHR, textStatus, errorThrown) {
+					console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
+				}
+	        });
+		}
 
 		//function slide toggles
 		let selector     = $('.input-group-prepend');
