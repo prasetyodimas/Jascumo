@@ -7,6 +7,9 @@
         if ($checkQuery['status_pemesanan']=='cancel') {
              echo "<script>alert('Mohon maaf anda telah mengajukan permohonan pembatalan pemesanan !!')</script>";
              echo "<meta http-equiv=refresh content=1;url=$site"."index.php?m=pemesanan>";
+        }elseif($checkQuery['status_pemesanan']=='konfrimasi'){
+             echo "<script>alert('Mohon maaf anda tidak dapat membatalkan pemesanan yang sudah di konfirmasi !!')</script>";
+             echo "<meta http-equiv=refresh content=1;url=$site"."index.php?m=pemesanan>";
         }else{
             $sql       = "UPDATE transaksi_booking SET status_pemesanan='cancel' WHERE no_nota='$id_transaksi'";
             $processDb = mysqli_query($db_con,$sql);

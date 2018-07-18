@@ -77,7 +77,7 @@
                                                               JOIN layanan la ON tb.id_layanan=la.id_layanan 
                                                               JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
                                                               LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
-                                                              WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='lunas' AND status_pemesanan='cancel' 
+                                                              WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='lunas' 
                                                               ORDER BY no_nota DESC");
                                         while ($res = mysqli_fetch_array($getQuery)) {
                          ?>
