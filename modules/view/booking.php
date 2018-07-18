@@ -136,7 +136,6 @@
 								<label>Jenis Layanan</label>
 								<input type="hidden" class="hidden-value-service" name="hidden_servicesval">
 								<select name="services_layanan" class="form-control choose-services" required="" id="selected-services">
-									<option value=""> Pilih </option> 
 									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
@@ -250,7 +249,7 @@
 								console.log(response);
 			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
 								setTimeout(function(){
-								  // window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
 								},1000);
 							},
 					        error : function (response) {
@@ -261,29 +260,27 @@
 					}
 				},
 				error: function(response){
-  					// alert('Whoops Validation Failed !!');
 					console.log('Whoops Validation Failed !!');
 				}
 			});
 
 		}
 		
-		//get json services
+		//event triggered get json services
 		$('#selected-services').on('change',function(){
+			getServicesLayanan();
+		});
+
+		function getServicesLayanan(){
         	let getValue	   = $('.hidden-value-service').val();
-			choose_service.on("select2:select", function (e) { 
-			  let select_val = $(e.currentTarget).val();
-			  $('.hidden-value-service').val(select_val);
-			});
-			
-            if(getValue =='' || null) {
-            	// alert('Pilih layananan dulu !!');
-            }else{
+			choose_service.on("select2:select", function () { 
+			    let select_val = $(this).val();
+			  	console.log(select_val);
 	            $.ajax({
 	                url:'../modules/backend/json/jsonservices.php',
 	                type:'GET',
 	                dataType:'json',
-	                data: {'jenis_layanan' : getValue},
+	                data: {'jenis_layanan' : select_val},
 	                success:function (results) {
 	                	$('#harga_layanan').val(results[0].harga_layanan);
 	            	},
@@ -291,8 +288,8 @@
 	    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
 					}
 	            });
-			}
-		});
+			});
+		}
 
 		//get json services
 		$('#services_jempt').on('change',function(){
@@ -335,8 +332,9 @@
 			selectorForm.slideToggle(1000);
 		});
 
-		choose_cartype.on("select2:selecting", function(e) { 
-		// alert('selecting !');
+		choose_cartype.on('change', function() { 
+			var selections = $(this).val();
+		    console.log('Selected options: ' + selections);
 		});
 
 		choose_deliveryjpt.select2({
