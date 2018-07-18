@@ -9,6 +9,7 @@ require '../../vendor/autoload.php';
 $act = $_GET['act'];
 	if ($act =='registrasi') {
 		$id_member	   		= $_POST['id_member'];
+		$username_member    = $_POST['username_member'];
 		$nama_member   		= $_POST['name_lengkap'];
 		$email_member  		= $_POST['email_member'];
 		$notelp_member 		= $_POST['notelp_member'];
@@ -16,8 +17,8 @@ $act = $_GET['act'];
 		$password_member    = md5($_POST['password_member']);
 		$status_mem	   		= 'aktif';
 
-		$sql = mysqli_query($db_con, "INSERT INTO member (id_member, nama_member, email_member, notelp_member, alamat_member, password_member, status_member)
-									  VALUES ('$id_member','$nama_member','$email_member','$notelp_member','$alamat_member','$password_member','$status_mem')");
+		$sql = mysqli_query($db_con, "INSERT INTO member (id_member, username_member , nama_member, email_member, notelp_member, alamat_member, password_member, status_member)
+									  VALUES ('$id_member','$username_member','$nama_member','$email_member','$notelp_member','$alamat_member','$password_member','$status_mem')");
 		if ($sql === false) {
 			throw new Exception("Error cannot saved data !", 500);
 			alert('Error Function !!');
@@ -56,6 +57,7 @@ $act = $_GET['act'];
 		                     .'<table style="border:1px solid #b9b9b9;padding:10px;">
 		                            <thead>
 		                                <tr>No Member          : '.$id_member.' </tr>
+		                                <tr>No Member          : '.$username_member.' </tr>
 		                                <tr>Nama Pemesan       : '.$nama_member.' </tr>
 		                                <tr>Alamat             : '.$alamat_member.'</tr>
 		                                <tr>Notelp / Handphone : '.$notelp_member.' </tr>

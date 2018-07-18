@@ -35,6 +35,12 @@
 				 			</div>
 				 		</div>
 				 		<div class="form-group">
+				 			<label class="col-sm-4">Username</label>
+				 			<div class="col-sm-9 col-md-9">
+				 				<input type="text" name="username_member" class="form-control" required="">
+				 			</div>
+				 		</div>
+				 		<div class="form-group">
 				 			<label class="col-sm-4">Nama Lengkap</label>
 				 			<div class="col-sm-9 col-md-9">
 				 				<input type="text" name="name_lengkap" class="form-control" required="">
@@ -109,8 +115,8 @@
 					$('#reg-members').prop('disabled',true);
 				},
 				success : function (response) {
-  					// alert('Registrasi Member Berhasil Dilakukan !!');
-  					// location.reload();
+  					alert('Registrasi Member Berhasil Dilakukan !!');
+  					location.reload();
 				},
 		        error : function (response) {
   					alert('Whoops Registrasi Member Gagal !!');
@@ -139,7 +145,7 @@
 					$('#log-member').prop('disabled',true);
 				},
 				success : function (response) {
-  					alert('Selamat Datang Di Sistem Crown Carwash !!');
+  					alert('Selamat Datang Di  SistemCrown Carwash !!');
 					setTimeout(function(){
 					  window.location = '<?php echo $site;?>'+'index.php?m=booking';
 					},1000);

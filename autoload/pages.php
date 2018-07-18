@@ -29,6 +29,9 @@
     elseif ($_GET['m']=='detailprofile') {
         include ("modules/view/profile-member.php");
     }
+    elseif($_GET['m']=='historybook'){
+        include ("modules/view/history_booking.php");
+    }
     else {
         echo "<p><b> Whoops Your Page Request Was Not Found !!</b></p>";
 
