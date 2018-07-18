@@ -136,6 +136,7 @@
 								<label>Jenis Layanan</label>
 								<input type="hidden" class="hidden-value-service" name="hidden_servicesval">
 								<select name="services_layanan" class="form-control choose-services" required="" id="selected-services">
+									<option value=""> Pilih </option>
 									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
