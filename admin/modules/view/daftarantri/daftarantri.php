@@ -63,7 +63,7 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['nama_member'].'</td>
 					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
-					 <td></td>
+					 <td>'.$row['jenis_layanan'].'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['checkin_noantrian'].'</td>

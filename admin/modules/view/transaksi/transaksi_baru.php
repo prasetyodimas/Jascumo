@@ -78,50 +78,76 @@ if(empty( $_SESSION['id_user'])){
 			<div class="col-lg-7">
 			<?php if ($_GET['id']!='') { ?>
 				<div class="form-group">
-					<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
+					<label for="no_nota" class="col-sm-3">No. Nota</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="no_nota" readonly="" value="<?php echo $_GET['id'];?>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="nama" class="col-sm-4 control-label">Nama Pelanggan</label>
+					<label for="nama" class="col-sm-3">Nama Pelanggan</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="nama_member" readonly value="<?php echo $getInformation['nama_member'] ?>">
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="nama" class="col-sm-4 control-label">Alamat Pelanggan</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" name="alamat_member" readonly value="<?php echo $getInformation['alamat_member'];?>">
+				<div class="" style="display: none;">
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Alamat Pelanggan</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="alamat_member" readonly value="<?php echo $getInformation['alamat_member'];?>">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="nama" class="col-sm-4 control-label">Email Pelanggan</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" name="email_member" readonly value="<?php echo $getInformation['email_member'];?>">
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Email Pelanggan</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="email_member" readonly value="<?php echo $getInformation['email_member'];?>">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="nama" class="col-sm-4 control-label">Notelp</label>
-					<div class="col-sm-4">
-						<input type="number" class="form-control" name="notelp_member" readonly value="<?php echo $getInformation['notelp_member'] ?>">
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Notelp</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="notelp_member" readonly value="<?php echo $getInformation['notelp_member'] ?>">
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="panel panel-body">
 						<h4>Information Transaction</h4>
 					</div>
-					<div class="row">
-						<div class="col-sm-5">
-							<div class="form-group">
-								<label>Merek Mobil</label>
-								<input type="text" name="" class="form-control" value="<?php echo $getInformation[''] ?>">
-							</div>
-						</div>
-						<div class="col-sm-5">
-							<div class="form-group">
-								<label>Nama Kendaraan</label>
-								<input type="text" name="" class="form-control" value="">
+					<div class="col-sm-12 col-md-12">
+						<div class="row">
+							<div class="col-sm-12 col-md-12">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Merek Mobil</label>
+										<div class="col-sm-5">
+											<input type="text" name="merek_mobil" class="form-control" value="<?php echo $getInformation['nama_kendaraan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Nama Kendaraan</label>
+										<div class="col-sm-5">
+											<input type="text" name="nama_kendaraan" class="form-control" value="<?php echo $getInformation['nama_mobil'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Nama Layanan</label>
+										<div class="col-sm-6">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['jenis_layanan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Harga Layanan</label>
+										<div class="col-sm-4">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['harga_layanan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Ongkos Jemput</label>
+										<div class="col-sm-5">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -233,6 +259,12 @@ if(empty( $_SESSION['id_user'])){
 	                </div>
 		            <div class="rown form-horizontal">
 						<div class="form-group">
+							<label for="total" class="col-sm-4 control-label">Total Transaksi</label>
+							<div class="col-sm-7">
+								<input type="number" class="form-control" id="total" name="total_transaksi" readonly value="<?php echo $getInformation['total'];?>">
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="bayar" class="col-sm-4 control-label">Bayar</label>
 							<div class="col-sm-7">
 								<input type="number" class="form-control" id="bayar" name="bayar" placeholder="Isi dengan angka" required>
@@ -244,12 +276,6 @@ if(empty( $_SESSION['id_user'])){
 								<input type="number" class="form-control" id="kembali" name="kembali" placeholder="Kembalian" required>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="total" class="col-sm-4 control-label">Total Bayar</label>
-							<div class="col-sm-7">
-								<input type="number" class="form-control" id="total" name="total" placeholder="Total Bayar" required>
-							</div>
-						</div>
 		            </div>
 				</div>
 		        <div class="terms-condition">
@@ -257,14 +283,14 @@ if(empty( $_SESSION['id_user'])){
 		            / jam kerja. Jam operasional 8.00 Am - 17.00 Pm </p>
 		        </div>
 			</div>
-			<div class="col-lg-12">
+			<!-- <div class="col-lg-12">
 				<div class="form-group">
 					<div class="col-sm-offset-2 pull-right">
 						<button type="submit" name="submit" class="btn btn-success">Simpan</button>
 						<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </form>
