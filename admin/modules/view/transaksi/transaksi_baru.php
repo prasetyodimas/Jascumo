@@ -124,15 +124,12 @@ if(empty( $_SESSION['id_user'])){
 					<div class="col-sm-5">
 						<select name="jenis" class="form-control" id="jenis" required>
 							<option value="" disable> Pilih Jenis Kendaraan </option>
-						<?php
-
-							$q = mysqli_query($db_con, "SELECT * FROM tipe_mobil ORDER BY id_tipemobil DESC");
-							while(list($jenis) = mysqli_fetch_array($q)){
-								echo '<option value="'.$jenis['id_tipemobil'].'">'.$jenis['nama_mobil'].'</option>';
-							}
-
-						?>
-
+							<?php 
+								$data = mysqli_query($db_con, "SELECT * FROM tipe_mobil ORDER BY id_merek_mobil DESC");
+								while ($res =mysqli_fetch_array($data)){
+									echo "<option value=".$res['id_tipe_mobil'].">".$res['nama_mobil']."</option>";
+								}
+							 ?>
 						</select>
 					</div>
 				</div>

@@ -76,8 +76,17 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>'.$statusbook.'</td>
 					 <td>
-					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
+					 	<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="?hlm=checkkonfrim&id_transaksi='.$row['no_nota'].'">Konfirmasi Booking</a></li>
+						    <li><a href="?hlm=cetak&id_transaksi='.$row['no_nota'].'" target="_blank">Cetak Nota / Kwitansi</a></li>
+						    <li><a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['no_nota'].'" onclick="return konfirmasi()">Hapus</a></li>
+						    <li><a href="?hlm=transaksi&aksi=cancel&submit=yes&id_transaksi='.$row['no_nota'].'">Cancel / Batal Booking</a></li></ul>
+						</div>
 					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					 	<a href="?hlm=cetak&id_transaksi='.$row['id_transaksi'].'" class="btn btn-info btn-s" target="_blank">Cetak Nota</a>
 					</td>';
 				}
 			}else{
