@@ -118,13 +118,13 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-2 col-md-2">
+						<div class="col-sm-2 col-md-2" style="display: none;">
 							<div class="form-group">
 								<label>Ukuran</label>
 								<input type="text" name="size-car" class="form-control" readonly id="val_ukuran">
 							</div>
 						</div>
-						<div class="col-sm-4 col-md-4	">
+						<div class="col-sm-4 col-md-4" style="display: none;">
 							<div class="form-group">
 								<label>Keterangan</label>
 								<input type="text" name="note-car" class="form-control" readonly id="val_teks">
