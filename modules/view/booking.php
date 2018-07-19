@@ -109,22 +109,22 @@
 								<label>Nama Mobil</label>
 								<select name="cars_name" class="form-control choose_car" required="" id="val_namecars">
 									<option value=""> Pilih </option>
-									<?php
+									<!-- <?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM tipe_mobil ORDER BY id_tipe_mobil DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
 											echo "<option value='".$data['id_tipe_mobil']."'>".$data['nama_mobil']."</option>";
 									 	}
-									 ?>
+									 ?> -->
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-3">
+						<div class="col-sm-2 col-md-2">
 							<div class="form-group">
 								<label>Ukuran</label>
 								<input type="text" name="size-car" class="form-control" readonly id="val_ukuran">
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-3">
+						<div class="col-sm-4 col-md-4">
 							<div class="form-group">
 								<label>Keterangan</label>
 								<input type="text" name="note-car" class="form-control" readonly id="val_teks">
@@ -302,6 +302,7 @@
 			});
 			
 		});
+
 		function getserviceOngkir(){
         	let getValue  = $('#hidden-jemputan').val();
         	valueParse    = parseFloat(getValue);
@@ -335,6 +336,17 @@
 		choose_cartype.on('change', function() { 
 			var selections = $(this).val();
 		    console.log('Selected options: ' + selections);
+		    $.ajax({
+		        url: "../modules/backend/proses_findcar.php",
+		        dataType: 'JSON',
+		         success:function (results) {
+	                	$('#val_ukuran').val(results[0].ukuran_mobil);
+	                	$('#val_teks').val(results[0].keterangan);
+            	},
+            	fail: function(jqXHR, textStatus, errorThrown) {
+    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
+				}
+			});
 		});
 
 		choose_deliveryjpt.select2({
@@ -342,7 +354,31 @@
 		});
 		choose_cartype.select2({
 			placeholder:'jenis tipemobil',
+
+			// ajax: {
+		 //        url: "<?php echo $site;?>modules/backend/proses_findcar.php",
+		 //        data : function (params) {
+		 //       	  console.log(params.term);
+		 //          return {
+		 //            q:params.term ||'', // search term
+		 //            id: params.term,
+   //    				text: params.term,
+		 //          };
+		 //        },
+		 //      	cache: true
+		 //    },
+   //      	templateSelection: formatState
 		});
+
+  //       function formatState (state) {
+  //       	console.log(state);
+		//   if (!state.id) {
+		//     return state.text;
+		//   }
+		//   return $state;
+		//   $('#val_ukuran').val(state.id);
+		// };
+		
 		choose_car.select2({
 			placeholder:'nama mobil',
 		});
