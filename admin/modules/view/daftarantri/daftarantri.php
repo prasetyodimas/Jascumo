@@ -72,7 +72,7 @@ if(empty($_SESSION['id_user'])){
 						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
-						    <li><a href="?hlm=transaksi&='.$row['no_nota'].'">Proses Pembayaran</a></li>
+						    <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 						</div>
 					</td>';
 				}

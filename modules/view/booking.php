@@ -109,12 +109,12 @@
 								<label>Nama Mobil</label>
 								<select name="cars_name" class="form-control choose_car" required="" id="val_namecars">
 									<option value=""> Pilih </option>
-									<!-- <?php
+									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM tipe_mobil ORDER BY id_tipe_mobil DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
 											echo "<option value='".$data['id_tipe_mobil']."'>".$data['nama_mobil']."</option>";
 									 	}
-									 ?> -->
+									 ?>
 								</select>
 							</div>
 						</div>
@@ -124,7 +124,7 @@
 								<input type="text" name="size-car" class="form-control" readonly id="val_ukuran">
 							</div>
 						</div>
-						<div class="col-sm-4 col-md-4">
+						<div class="col-sm-4 col-md-4	">
 							<div class="form-group">
 								<label>Keterangan</label>
 								<input type="text" name="note-car" class="form-control" readonly id="val_teks">

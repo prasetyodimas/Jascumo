@@ -63,6 +63,12 @@ if(empty( $_SESSION['id_user'])){
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
+	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb
+							 								  LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
+							 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+							 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+							 								  LEFT JOIN member m ON tb.id_member=m.id_member
+							 								  WHERE tb.no_nota='$_GET[id]'"));
 ?>
 <h2>Tambah Transaksi Baru</h2>
 <div class="clearfix form-group"></div>
@@ -70,6 +76,58 @@ if(empty( $_SESSION['id_user'])){
 	<div class="col-lg-12">
 		<div class="row">
 			<div class="col-lg-7">
+			<?php if ($_GET['id']!='') { ?>
+				<div class="form-group">
+					<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="no_nota" readonly="" value="<?php echo $_GET['id'];?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Nama Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="nama_member" readonly value="<?php echo $getInformation['nama_member'] ?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Alamat Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="alamat_member" readonly value="<?php echo $getInformation['alamat_member'];?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Email Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="email_member" readonly value="<?php echo $getInformation['email_member'];?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-4 control-label">Notelp</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" name="notelp_member" readonly value="<?php echo $getInformation['notelp_member'] ?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="panel panel-body">
+						<h4>Information Transaction</h4>
+					</div>
+					<div class="row">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Merek Mobil</label>
+								<input type="text" name="" class="form-control" value="<?php echo $getInformation[''] ?>">
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="form-group">
+								<label>Nama Kendaraan</label>
+								<input type="text" name="" class="form-control" value="">
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php }else{ ?>
+
 				<div class="form-group">
 					<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
 					<div class="col-sm-4">
@@ -153,17 +211,25 @@ if(empty( $_SESSION['id_user'])){
 						<input type="number" class="form-control" id="biaya" name="biaya" value="" required>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 			<div class="col-lg-5">
 				<div class="col-lg-12">
 	               <div class="panel outerlines-area">
-		                <div class="border__booking">
-	              		  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
-		                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
-		                </div>
-		                <div class="queue__list__booking">
-		                  <h1 class="text-center">1</h1>
-		                </div>
+	               		<?php if ($_GET['id']!='') { ?>
+	               			<div class="border__booking">
+		              		  <h2 class="text-center"><strong>Nomor Transaksi Anda</strong></h2>                  
+			                  <h3 class="text-center"><?php echo $_GET['id']?></h3>
+			                </div>
+	               		<?php }else{ ?>
+			                <div class="border__booking">
+		              		  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
+			                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
+			                </div>
+			                <div class="queue__list__booking">
+			                  <h1 class="text-center">1</h1>
+			                </div>
+	               		<?php } ?>
 	                </div>
 		            <div class="rown form-horizontal">
 						<div class="form-group">
