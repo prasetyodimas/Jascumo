@@ -198,16 +198,16 @@ if ($act=='booking') {
 		}
 
 }elseif($act=='check_bookValidation'){
+	
 	$id_member  = $_GET['id_member'];
-	//check status transcation / validation 
-    // $checkTrans   = mysqli_fetch_array(mysqli_query($db_con,"SELECT status_pemesanan FROM transaksi_booking tb 
-    // 													     JOIN member m ON tb.id_member=m.id_member"));
     $result = mysqli_fetch_array(mysqli_query($db_con,"SELECT status_pemesanan FROM transaksi_booking tb 
-    													     JOIN member m ON tb.id_member=m.id_member WHERE tb.id_member='$id_member'")) or die("Data not found."); 
+    													     JOIN member m ON tb.id_member=m.id_member WHERE tb.id_member='$id_member'")); 
 	$rows  = array(); 
 	$merge = $rows = $result;
 	header("Content-type:application/json"); 
 		echo json_encode($merge);
-	}
+
+		
+}
 
 ?>

@@ -232,13 +232,14 @@
 				url:"modules/backend/proses_booking.php?&act=check_bookValidation&id_member="+memberId,
 				method:'GET',
 				success: function(response){
-					if (response.status_pemesanan != getstatus) {
-						console.log(response.status_pemesanan);
-						alert('maaf anda tidak bisa melakukan pemesanan checkstatus pemesanan anda !!');
-			    		setTimeout(function(){
-					  		 window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
-						},2000);
-					}else{
+					// if (response.status_pemesanan != getstatus) {
+					// 	console.log(response.status_pemesanan);
+					// 	alert('maaf anda tidak bisa melakukan pemesanan checkstatus pemesanan anda !!');
+			  //   		setTimeout(function(){
+					//   		 window.location = '<?php echo $site;?>'+'index.php?m=booking';
+					// 	},2000);
+					// }
+					// if (response==null) {
 						$.ajax({
 							url: url_aplication+"modules/backend/proses_booking.php?&act=booking",
 							method :"POST",
@@ -258,7 +259,7 @@
 								$('.book-now').prop('disabled',false);
 					        }
 						});
-					}
+					// }
 				},
 				error: function(response){
 					console.log('Whoops Validation Failed !!');
@@ -386,31 +387,5 @@
 			placeholder:'Pilih Jenis Layanan',
 			data: '', 
 		});
-
-		// $("#e6").select2({
-		//     placeholder: "Enter an item id please",
-		//     minimumInputLength: 1,
-		//     ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-		//         url: "index.php?r=sia/searchresults",
-		//         dataType: 'jsonp',
-		//         quietMillis: 3000,
-		//         data: function (term, page) {
-		//         return {
-		//             q: term, // search term
-		//             page_limit: 10,
-		//             id: 10
-		//             };
-		//         },
-		//         results: function (data, page) { // parse the results into the format expected by Select2.
-		//             // since we are using custom formatting functions we do not need to alter remote JSON data
-		//             return {results: data};
-		//         },
-		//     },
-
-		//     formatResult: movieFormatResult, // omitted for brevity, see the source of this page
-		//     formatSelection: movieFormatSelection, // omitted for brevity, see the source of this page
-		//     dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-		//     escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
-		// });
 	});
 </script>
