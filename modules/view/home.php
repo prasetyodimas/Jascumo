@@ -7,7 +7,8 @@
       </div>
       <div class="clearfix"></div>
       <div class="col-md-12" style="margin-top: 4.2em;">
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Make Appointment / Booking</button>
+        <!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Make Appointment / Booking</button> -->
+        <a href="<?php echo $site;?>index.php?m=booking" class="btn btn-primary btn-lg">Make Appointment / Booking</a>
       </div>
     </div>
 </header>
