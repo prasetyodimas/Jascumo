@@ -70,7 +70,11 @@ if(empty( $_SESSION['id_user'])){
 							 								  LEFT JOIN member m ON tb.id_member=m.id_member
 							 								  WHERE tb.no_nota='$_GET[id]'"));
 ?>
-<h2>Tambah Transaksi Baru</h2>
+<?php if($_GET['id']!=''){ ?>	
+	<h2>Cashier Crown Cars Wash</h2>
+<?php }else { ?>
+	<h2>Tambah Transaksi Baru </h2>
+<?php } ?>
 <div class="clearfix form-group"></div>
 <form method="post" action="backend/transaksi_online/konfirmasi.php" class="form-horizontal" role="form">
 	<div class="col-lg-12">
@@ -142,7 +146,13 @@ if(empty( $_SESSION['id_user'])){
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="no_nota" class="col-sm-4">Ongkos Jemput</label>
+										<label for="no_nota" class="col-sm-4">Layanan Jemput</label>
+										<div class="col-sm-5">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Cash / Tarif Antar Jemput</label>
 										<div class="col-sm-5">
 											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
 										</div>
