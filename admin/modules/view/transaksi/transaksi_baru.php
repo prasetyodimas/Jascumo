@@ -63,6 +63,12 @@ if(empty( $_SESSION['id_user'])){
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
+	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb
+							 								  LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
+							 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+							 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+							 								  LEFT JOIN member m ON tb.id_member=m.id_member
+							 								  WHERE tb.no_nota='$_GET[id]'"));
 ?>
 <h2>Tambah Transaksi Baru</h2>
 <div class="clearfix form-group"></div>
@@ -70,6 +76,84 @@ if(empty( $_SESSION['id_user'])){
 	<div class="col-lg-12">
 		<div class="row">
 			<div class="col-lg-7">
+			<?php if ($_GET['id']!='') { ?>
+				<div class="form-group">
+					<label for="no_nota" class="col-sm-3">No. Nota</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="no_nota" readonly="" value="<?php echo $_GET['id'];?>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nama" class="col-sm-3">Nama Pelanggan</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="nama_member" readonly value="<?php echo $getInformation['nama_member'] ?>">
+					</div>
+				</div>
+				<div class="" style="display: none;">
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Alamat Pelanggan</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="alamat_member" readonly value="<?php echo $getInformation['alamat_member'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Email Pelanggan</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="email_member" readonly value="<?php echo $getInformation['email_member'];?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nama" class="col-sm-3">Notelp</label>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="notelp_member" readonly value="<?php echo $getInformation['notelp_member'] ?>">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="panel panel-body">
+						<h4>Information Transaction</h4>
+					</div>
+					<div class="col-sm-12 col-md-12">
+						<div class="row">
+							<div class="col-sm-12 col-md-12">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Merek Mobil</label>
+										<div class="col-sm-5">
+											<input type="text" name="merek_mobil" class="form-control" value="<?php echo $getInformation['nama_kendaraan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Nama Kendaraan</label>
+										<div class="col-sm-5">
+											<input type="text" name="nama_kendaraan" class="form-control" value="<?php echo $getInformation['nama_mobil'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Nama Layanan</label>
+										<div class="col-sm-6">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['jenis_layanan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Harga Layanan</label>
+										<div class="col-sm-4">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['harga_layanan'];?>">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="no_nota" class="col-sm-4">Ongkos Jemput</label>
+										<div class="col-sm-5">
+											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php }else{ ?>
+
 				<div class="form-group">
 					<label for="no_nota" class="col-sm-4 control-label">No. Nota</label>
 					<div class="col-sm-4">
@@ -124,15 +208,12 @@ if(empty( $_SESSION['id_user'])){
 					<div class="col-sm-5">
 						<select name="jenis" class="form-control" id="jenis" required>
 							<option value="" disable> Pilih Jenis Kendaraan </option>
-						<?php
-
-							$q = mysqli_query($db_con, "SELECT * FROM tipe_mobil ORDER BY id_tipemobil DESC");
-							while(list($jenis) = mysqli_fetch_array($q)){
-								echo '<option value="'.$jenis['id_tipemobil'].'">'.$jenis['nama_mobil'].'</option>';
-							}
-
-						?>
-
+							<?php 
+								$data = mysqli_query($db_con, "SELECT * FROM tipe_mobil ORDER BY id_merek_mobil DESC");
+								while ($res =mysqli_fetch_array($data)){
+									echo "<option value=".$res['id_tipe_mobil'].">".$res['nama_mobil']."</option>";
+								}
+							 ?>
 						</select>
 					</div>
 				</div>
@@ -156,19 +237,33 @@ if(empty( $_SESSION['id_user'])){
 						<input type="number" class="form-control" id="biaya" name="biaya" value="" required>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 			<div class="col-lg-5">
 				<div class="col-lg-12">
 	               <div class="panel outerlines-area">
-		                <div class="border__booking">
-	              		  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
-		                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
-		                </div>
-		                <div class="queue__list__booking">
-		                  <h1 class="text-center">1</h1>
-		                </div>
+	               		<?php if ($_GET['id']!='') { ?>
+	               			<div class="border__booking">
+		              		  <h2 class="text-center"><strong>Nomor Transaksi Anda</strong></h2>                  
+			                  <h3 class="text-center"><?php echo $_GET['id']?></h3>
+			                </div>
+	               		<?php }else{ ?>
+			                <div class="border__booking">
+		              		  <h2 class="text-center"><strong>Nomor Antrian Anda</strong></h2>                  
+			                  <h4 class="text-center"><span class="days-now"></span> <?php echo tgl_indo(date('Y-m-d')); ?><span id="jam"></span></h4>
+			                </div>
+			                <div class="queue__list__booking">
+			                  <h1 class="text-center">1</h1>
+			                </div>
+	               		<?php } ?>
 	                </div>
 		            <div class="rown form-horizontal">
+						<div class="form-group">
+							<label for="total" class="col-sm-4 control-label">Total Transaksi</label>
+							<div class="col-sm-7">
+								<input type="number" class="form-control" id="total" name="total_transaksi" readonly value="<?php echo $getInformation['total'];?>">
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="bayar" class="col-sm-4 control-label">Bayar</label>
 							<div class="col-sm-7">
@@ -181,12 +276,6 @@ if(empty( $_SESSION['id_user'])){
 								<input type="number" class="form-control" id="kembali" name="kembali" placeholder="Kembalian" required>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="total" class="col-sm-4 control-label">Total Bayar</label>
-							<div class="col-sm-7">
-								<input type="number" class="form-control" id="total" name="total" placeholder="Total Bayar" required>
-							</div>
-						</div>
 		            </div>
 				</div>
 		        <div class="terms-condition">
@@ -194,14 +283,14 @@ if(empty( $_SESSION['id_user'])){
 		            / jam kerja. Jam operasional 8.00 Am - 17.00 Pm </p>
 		        </div>
 			</div>
-			<div class="col-lg-12">
+			<!-- <div class="col-lg-12">
 				<div class="form-group">
 					<div class="col-sm-offset-2 pull-right">
 						<button type="submit" name="submit" class="btn btn-success">Simpan</button>
 						<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </form>

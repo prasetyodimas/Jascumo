@@ -30,11 +30,13 @@ if(empty($_SESSION['id_user'])){
 					 <th>No</th>
 					 <th>No. Nota</th>
 					 <th>Nama Pelanggan</th>
-					 <th>Jenis+ Layanan</th>
+					 <th>Nama Kendaraan	</th>
+					 <th>Jenis+ Harga</th>
+					 <th>Antar Jemput</th>
 					 <th>Total Bayar</th>
 					 <th>Tanggal Pesan</th>
 					 <th>Antrian Pengerjaan</th>
-					 <th class="col-sm-2">Tindakan</th>
+					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
 				 <tbody>
@@ -59,15 +61,23 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$no.'</td>
 					 <td>'.$row['no_nota'].'</td>
 					 <td>'.$row['nama_member'].'</td>
+					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
+					 <td>'.$row['jenis_layanan'].'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['checkin_noantrian'].'</td>
 					 <td>
-					 	<a href="#" class="btn btn-info btn-s">Konfirmasi</a>
-					 	<a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
+					 	<div class="dropdown">
+						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
+						</div>
 					</td>';
 				}
+					 	// <a href="#" class="btn btn-info btn-s">Konfirmasi</a>
+					 	// <a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 			}else{
 				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}

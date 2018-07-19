@@ -118,13 +118,13 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-3">
+						<div class="col-sm-2 col-md-2">
 							<div class="form-group">
 								<label>Ukuran</label>
 								<input type="text" name="size-car" class="form-control" readonly id="val_ukuran">
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-3">
+						<div class="col-sm-4 col-md-4	">
 							<div class="form-group">
 								<label>Keterangan</label>
 								<input type="text" name="note-car" class="form-control" readonly id="val_teks">
@@ -136,7 +136,7 @@
 								<label>Jenis Layanan</label>
 								<input type="hidden" class="hidden-value-service" name="hidden_servicesval">
 								<select name="services_layanan" class="form-control choose-services" required="" id="selected-services">
-									<option value=""> Pilih </option> 
+									<option value=""> Pilih </option>
 									<?php
 										$getQuery = mysqli_query($db_con,"SELECT * FROM layanan ORDER BY id_layanan DESC");
 										while ($data = mysqli_fetch_array($getQuery)) {
@@ -250,7 +250,7 @@
 								console.log(response);
 			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
 								setTimeout(function(){
-								  // window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
 								},1000);
 							},
 					        error : function (response) {
@@ -261,29 +261,27 @@
 					}
 				},
 				error: function(response){
-  					// alert('Whoops Validation Failed !!');
 					console.log('Whoops Validation Failed !!');
 				}
 			});
 
 		}
 		
-		//get json services
+		//event triggered get json services
 		$('#selected-services').on('change',function(){
+			getServicesLayanan();
+		});
+
+		function getServicesLayanan(){
         	let getValue	   = $('.hidden-value-service').val();
-			choose_service.on("select2:select", function (e) { 
-			  let select_val = $(e.currentTarget).val();
-			  $('.hidden-value-service').val(select_val);
-			});
-			
-            if(getValue =='' || null) {
-            	// alert('Pilih layananan dulu !!');
-            }else{
+			choose_service.on("select2:select", function () { 
+			    let select_val = $(this).val();
+			  	console.log(select_val);
 	            $.ajax({
 	                url:'../modules/backend/json/jsonservices.php',
 	                type:'GET',
 	                dataType:'json',
-	                data: {'jenis_layanan' : getValue},
+	                data: {'jenis_layanan' : select_val},
 	                success:function (results) {
 	                	$('#harga_layanan').val(results[0].harga_layanan);
 	            	},
@@ -291,36 +289,36 @@
 	    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
 					}
 	            });
-			}
-		});
+			});
+		}
 
 		//get json services
 		$('#services_jempt').on('change',function(){
-        	let getValue = $('#hidden-jemputan').val();
-        	valueParse    = parseFloat(getValue);
 			choose_deliveryjpt.on("select2:select", function (e) { 
 			  let select_val = $(e.currentTarget).val();
 			  $('#hidden-jemputan').val(select_val);
 			  // console.log(valueParse);
+			  getserviceOngkir();
 			});
 			
-            if(valueParse =='' || null) {
-            	// alert('Pilih layananan dulu !!');
-            }else{
-	            $.ajax({
-	                url:'../modules/backend/json/jsonservices_ongkos.php',
-	                type:'GET',
-	                dataType:'json',
-	                data: {'ongkos':valueParse},
-	                success:function (results) {
-	                	$('#biaya_jemput').val(results[0].biaya_jemput);
-	            	},
-	            	fail: function(jqXHR, textStatus, errorThrown) {
-	    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
-					}
-	            });
-			}
 		});
+
+		function getserviceOngkir(){
+        	let getValue  = $('#hidden-jemputan').val();
+        	valueParse    = parseFloat(getValue);
+	        $.ajax({
+	            url:'../modules/backend/json/jsonservices_ongkos.php',
+	            type:'GET',
+	            dataType:'json',
+	            data: {'ongkos':valueParse},
+	            success:function (results) {
+	            	$('#biaya_jemput').val(results[0].biaya_jemput);
+	        	},
+	        	fail: function(jqXHR, textStatus, errorThrown) {
+					console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
+				}
+	        });
+		}
 
 		//function slide toggles
 		let selector     = $('.input-group-prepend');
@@ -335,8 +333,20 @@
 			selectorForm.slideToggle(1000);
 		});
 
-		choose_cartype.on("select2:selecting", function(e) { 
-		// alert('selecting !');
+		choose_cartype.on('change', function() { 
+			var selections = $(this).val();
+		    console.log('Selected options: ' + selections);
+		    $.ajax({
+		        url: "../modules/backend/proses_findcar.php",
+		        dataType: 'JSON',
+		         success:function (results) {
+	                	$('#val_ukuran').val(results[0].ukuran_mobil);
+	                	$('#val_teks').val(results[0].keterangan);
+            	},
+            	fail: function(jqXHR, textStatus, errorThrown) {
+    				console.log( 'Could not get posts, server response: ' + textStatus + ': ' + errorThrown );
+				}
+			});
 		});
 
 		choose_deliveryjpt.select2({
@@ -344,7 +354,31 @@
 		});
 		choose_cartype.select2({
 			placeholder:'jenis tipemobil',
+
+			// ajax: {
+		 //        url: "<?php echo $site;?>modules/backend/proses_findcar.php",
+		 //        data : function (params) {
+		 //       	  console.log(params.term);
+		 //          return {
+		 //            q:params.term ||'', // search term
+		 //            id: params.term,
+   //    				text: params.term,
+		 //          };
+		 //        },
+		 //      	cache: true
+		 //    },
+   //      	templateSelection: formatState
 		});
+
+  //       function formatState (state) {
+  //       	console.log(state);
+		//   if (!state.id) {
+		//     return state.text;
+		//   }
+		//   return $state;
+		//   $('#val_ukuran').val(state.id);
+		// };
+		
 		choose_car.select2({
 			placeholder:'nama mobil',
 		});
