@@ -63,12 +63,34 @@ if(empty( $_SESSION['id_user'])){
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
-	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb
-							 								  LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
-							 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
-							 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
-							 								  LEFT JOIN member m ON tb.id_member=m.id_member
-							 								  WHERE tb.no_nota='$_GET[id]'"));
+	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT
+															   tb.no_nota, 
+															   tb.id_layanan, 
+														       m.nama_member, 
+														       m.alamat_member, 
+														       m.notelp_member,
+														       m.email_member, 
+														       m.status_member, 
+														       tb.nama_pemesan, 
+														       tb.alamat_pemesan, 
+														       tb.notelp_pemesan,
+														       tb.email_pemesan,
+														       tb.tanggal_pesan,
+														       tb.bayar,
+														       tb.kembali,
+														       tb.total,
+														       la.jenis_layanan,
+														       la.harga_layanan,
+														       tm.nama_mobil,
+														       mm.nama_kendaraan,
+														       oj.
+														    FROM transaksi_booking tb
+															LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
+															LEFT JOIN ongkos_jemput oj ON oj.id_ongkos=tb.id_ongkos
+															JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+															JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+															LEFT JOIN member m ON tb.id_member=m.id_member
+							 								WHERE tb.no_nota='$_GET[id]'"));
 ?>
 <?php if($_GET['id']!=''){ ?>	
 	<h2>Cashier Crown Cars Wash</h2>

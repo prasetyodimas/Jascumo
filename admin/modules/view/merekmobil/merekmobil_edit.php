@@ -14,10 +14,11 @@ if(empty( $_SESSION['id_user'])){
 								      WHERE id_merek_mobil='$id_merek_mobil'");
 
 		if($sql == true){
-			header('Location: ./admin.php?hlm=merekmobil');
-			die();
-		} else {
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('success edit data master merekmobil!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=merekmobil>";
+		}else{
+			echo "<script>alert('ERROR! Periksa penulisan querynya!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=merekmobil>";
 		}
 	} else {
 

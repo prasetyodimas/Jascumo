@@ -14,10 +14,11 @@ if(empty( $_SESSION['id_user'])){
 		$sql = mysqli_query($db_con, "UPDATE layanan SET jenis_layanan='$jenis_layanan', harga_layanan='$harga_layanan' WHERE id_layanan='$id_layanan'");
 
 		if($sql == true){
-			header('Location: ./admin.php?hlm=biaya_layanan');
-			die();
+			echo "<script>alert('success edit data master biaya layanan!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=biaya_layanan>";
 		} else {
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('ERROR! Periksa penulisan querynya!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=biaya_layanan>";
 		}
 	} else {
 
