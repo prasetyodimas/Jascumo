@@ -36,6 +36,7 @@ if(empty($_SESSION['id_user'])){
 					 <th>Total Bayar</th>
 					 <th>Tanggal Pesan</th>
 					 <th>Antrian Pengerjaan</th>
+					 <th>Status</th>
 					 <th>Tindakan</th>
 				   </tr>
 				 </thead>
@@ -47,7 +48,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  LEFT JOIN member m ON tb.id_member=m.id_member
-		 								  WHERE tb.status_pemesanan='konfrimasi'
+		 								  WHERE tb.status_pemesanan='konfrimasi' OR tb.status_pemesanan='progress' OR tb.status_pemesanan='selesai'
 		 								  ORDER BY tb.checkin_noantrian ASC");
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
 		 	if(mysqli_num_rows($sql) > 0){
@@ -55,6 +56,13 @@ if(empty($_SESSION['id_user'])){
 
 				 while($row = mysqli_fetch_array($sql)){
 	 				$no++;
+	 				if ($row['status_pemesanan']=='konfrimasi') {
+	 					$addclass = 'konfrimasi';
+	 				}elseif($row['status_pemesanan']=='progress') {
+	 					$addclass = 'progress-cuci';
+	 				}elseif($row['status_pemesanan']=='selesai') {
+	 					$addclass = 'selesai-cuci';
+	 				}
 	 			echo '
 
 				   <tr>
@@ -63,15 +71,18 @@ if(empty($_SESSION['id_user'])){
 					 <td>'.$row['nama_member'].'</td>
 					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
-					 <td>'.$row['jenis_layanan'].'</td>
+					 <td>'.$row['nama_wilayah'].'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
-					 <td style="background-color:#ff0a0a;color:#fff;font-size:1.6em;" class="text-center">'.$row['checkin_noantrian'].'</td>
+					 <td>'.$row['status_pemesanan'].'</td>
+					 <td class="text-center '.$addclass.'">'.$row['checkin_noantrian'].'</td>
 					 <td>
 					 	<div class="dropdown">
 						  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Aksi
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
+						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=progress_cuci&id='.$row['no_nota'].'">Proses Pencucian</a></li>
+						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=selesai_cuci&id='.$row['no_nota'].'">Selesai Cuci</a></li>
 						    <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 						</div>
 					</td>';
@@ -94,6 +105,15 @@ if(empty($_SESSION['id_user'])){
 	}
 	#table-daftarantri_paginate{
 		margin-left: 36em;
+	}
+	.konfrimasi{
+		background-color:#ff0000;color:#fff;font-size:1.6em;
+	}
+	.progress-cuci{
+		background-color:#fcb00a;color:#fff;font-size:1.6em;
+	}
+	.selesai-cuci{
+		background-color:#55fc0a;color:#fff;font-size:1.6em;
 	}
 </style>
 <script type="text/javascript">

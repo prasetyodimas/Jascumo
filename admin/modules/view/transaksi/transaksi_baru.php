@@ -83,7 +83,8 @@ if(empty( $_SESSION['id_user'])){
 														       la.harga_layanan,
 														       tm.nama_mobil,
 														       mm.nama_kendaraan,
-														       oj.
+														       oj.nama_wilayah,
+														       oj.biaya_jemput
 														    FROM transaksi_booking tb
 															LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
 															LEFT JOIN ongkos_jemput oj ON oj.id_ongkos=tb.id_ongkos
@@ -167,18 +168,23 @@ if(empty( $_SESSION['id_user'])){
 											<input type="text" name="" class="form-control" value="<?php echo $getInformation['harga_layanan'];?>">
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="no_nota" class="col-sm-4">Layanan Jemput</label>
-										<div class="col-sm-5">
-											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+									<?php if ($getInformation['id_ongkos']!='') { ?>
+
+									
+									<?php }else{ ?>
+										<div class="form-group">
+											<label for="no_nota" class="col-sm-4">Layanan Jemput</label>
+											<div class="col-sm-5">
+												<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										<label for="no_nota" class="col-sm-4">Cash / Tarif Antar Jemput</label>
-										<div class="col-sm-5">
-											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+										<div class="form-group">
+											<label for="no_nota" class="col-sm-4">Cash / Tarif Antar Jemput</label>
+											<div class="col-sm-5">
+												<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+											</div>
 										</div>
-									</div>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
