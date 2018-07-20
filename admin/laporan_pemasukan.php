@@ -59,7 +59,7 @@ if( empty( $_SESSION['id_user'] ) ){
 		 echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
 		 //$sql = mysqli_query($db_con, "SELECT count(nama_pemesan), sum(total) FROM transaksi_booking WHERE tanggal BETWEEN '$tgl1' AND '$tgl2'");
-		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking");
+		 $sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking WHERE status_pemesanan='lunas'");
 
 		 list($pelanggan, $total) = mysqli_fetch_array($sql);{
 			echo '<tr><td><span class="pull-right"><h4><b>'.$pelanggan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
@@ -99,7 +99,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
 	$tanggal =  date('Y-m-d');
 
-	$sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking");
+	$sql = mysqli_query($db_con, "SELECT count(nama_pemesan) as pelanggan, sum(total) FROM transaksi_booking WHERE status_pemesanan='lunas'");
 
 	list($pelanggan, $total) = mysqli_fetch_array($sql);{
 	 echo '<tr><td><span class="pull-right"><h4><b>'.$pelanggan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';

@@ -14,10 +14,11 @@ if(isset($_REQUEST['submit'])){
 		$update_sql = "UPDATE ongkos_jemput SET nama_wilayah='$nama_wilayah', biaya_jemput='$biaya_jemput' WHERE id_ongkos='$_GET[id_ongkos]'";
 		$sql = mysqli_query($db_con, $update_sql);
 		if($sql == true){
-			header('Location: ./admin.php?hlm=ongjemput');
-			die();
+			echo "<script>alert('success edit data master ongkos jemput !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=ongjemput>";
 		}else{
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('ERROR! Periksa penulisan querynya!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=ongjemput>";
 		}
 	}else{
 

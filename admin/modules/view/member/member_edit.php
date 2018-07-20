@@ -27,10 +27,11 @@ if(empty($_SESSION['id_user'])){
 											status_member='$status_member'
 											WHERE id_member='$id_member'");
 		if($sql == true){
-			header('Location: ./admin.php?hlm=member');
-			die();
+			echo "<script>alert('success edit data master member !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=member>";
 		} else {
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('ERROR! Periksa penulisan querynya !!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=member>";
 		}
 	} else {
 

@@ -63,14 +63,41 @@ if(empty( $_SESSION['id_user'])){
 			echo 'ERROR! Periksa penulisan querynya.';
 		}
 	} else {
-	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb
-							 								  LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
-							 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
-							 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
-							 								  LEFT JOIN member m ON tb.id_member=m.id_member
-							 								  WHERE tb.no_nota='$_GET[id]'"));
+	$getInformation = mysqli_fetch_array(mysqli_query($db_con,"SELECT
+															   tb.no_nota, 
+															   tb.id_layanan, 
+														       m.nama_member, 
+														       m.alamat_member, 
+														       m.notelp_member,
+														       m.email_member, 
+														       m.status_member, 
+														       tb.nama_pemesan, 
+														       tb.alamat_pemesan, 
+														       tb.notelp_pemesan,
+														       tb.email_pemesan,
+														       tb.tanggal_pesan,
+														       tb.bayar,
+														       tb.kembali,
+														       tb.total,
+														       la.jenis_layanan,
+														       la.harga_layanan,
+														       tm.nama_mobil,
+														       mm.nama_kendaraan,
+														       oj.nama_wilayah,
+														       oj.biaya_jemput
+														    FROM transaksi_booking tb
+															LEFT JOIN layanan la ON tb.id_layanan=la.id_layanan
+															LEFT JOIN ongkos_jemput oj ON oj.id_ongkos=tb.id_ongkos
+															JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
+															JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
+															LEFT JOIN member m ON tb.id_member=m.id_member
+							 								WHERE tb.no_nota='$_GET[id]'"));
 ?>
-<h2>Tambah Transaksi Baru</h2>
+<?php if($_GET['id']!=''){ ?>	
+	<h2>Cashier Crown Cars Wash</h2>
+<?php }else { ?>
+	<h2>Tambah Transaksi Baru </h2>
+<?php } ?>
 <div class="clearfix form-group"></div>
 <form method="post" action="backend/transaksi_online/konfirmasi.php" class="form-horizontal" role="form">
 	<div class="col-lg-12">
@@ -141,12 +168,23 @@ if(empty( $_SESSION['id_user'])){
 											<input type="text" name="" class="form-control" value="<?php echo $getInformation['harga_layanan'];?>">
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="no_nota" class="col-sm-4">Ongkos Jemput</label>
-										<div class="col-sm-5">
-											<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+									<?php if ($getInformation['id_ongkos']!='') { ?>
+
+									
+									<?php }else{ ?>
+										<div class="form-group">
+											<label for="no_nota" class="col-sm-4">Layanan Jemput</label>
+											<div class="col-sm-5">
+												<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+											</div>
 										</div>
-									</div>
+										<div class="form-group">
+											<label for="no_nota" class="col-sm-4">Cash / Tarif Antar Jemput</label>
+											<div class="col-sm-5">
+												<input type="text" name="" class="form-control" value="<?php echo $getInformation['biaya_jemput'];?>">
+											</div>
+										</div>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
