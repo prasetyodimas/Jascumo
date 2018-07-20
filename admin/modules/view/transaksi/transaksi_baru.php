@@ -99,7 +99,7 @@ if(empty( $_SESSION['id_user'])){
 	<h2>Tambah Transaksi Baru </h2>
 <?php } ?>
 <div class="clearfix form-group"></div>
-<form method="post" action="backend/transaksi_online/konfirmasi.php" class="form-horizontal" role="form">
+<form method="post" action="modules/backend/transaksi_online/konfirmasi_booking.php?act=lunas&id=<?php echo $_GET['id']; ?>" class="form-horizontal" role="form">
 	<div class="col-lg-12">
 		<div class="row">
 			<div class="col-lg-7">
