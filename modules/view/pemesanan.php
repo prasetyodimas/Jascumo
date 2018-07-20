@@ -66,7 +66,7 @@
                         <tr>
                             <th>kode Book</th>
                             <th>Nama Kendaraan</th>
-                            <th>Harga</th>
+                            <th>Jenis Layanan</th>
                             <th>Harga</th>
                             <th>Status</th>
                         </tr>
