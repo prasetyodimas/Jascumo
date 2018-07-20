@@ -58,9 +58,8 @@ if(empty($_SESSION['id_user'])){
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 				 while($row = mysqli_fetch_array($sql)){
-	 				$no++;
 					$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$row[id_member]'"));
-				 	
+	 				$no++;
 				 	//check condition antarjemput
 				 	if ($row['id_ongkos']=="" || $row['id_ongkos']== null) {
 			 			$layanan = '-';
