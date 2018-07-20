@@ -236,7 +236,7 @@
 					// if (response.status_pemesanan != getstatus) {
 					// 	console.log(response.status_pemesanan);
 					// 	alert('maaf anda tidak bisa melakukan pemesanan checkstatus pemesanan anda !!');
-			  //   		setTimeout(function(){
+			        //  setTimeout(function(){
 					//   		 window.location = '<?php echo $site;?>'+'index.php?m=booking';
 					// 	},2000);
 					// }

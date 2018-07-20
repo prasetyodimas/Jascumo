@@ -33,7 +33,7 @@
 			<a href=""class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Transaksi <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi_online">Transaksi Online</a></li>
-				<li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi">Transaksi Offline</a></li>
+				<!-- <li><a href="<?php echo $site;?>admin/admin.php?hlm=transaksi">Transaksi Offline</a></li> -->
 				<li><a href="<?php echo $site;?>admin/admin.php?hlm=daftarantri">Daftar Antrian</a></li>
 			</ul>
 		</li>
