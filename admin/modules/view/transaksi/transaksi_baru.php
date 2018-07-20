@@ -321,14 +321,14 @@ if(empty( $_SESSION['id_user'])){
 		            / jam kerja. Jam operasional 8.00 Am - 17.00 Pm </p>
 		        </div>
 			</div>
-			<!-- <div class="col-lg-12">
-				<div class="form-group">
-					<div class="col-sm-offset-2 pull-right">
-						<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-						<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
-					</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="form-group">
+				<div class="col-sm-offset-2 pull-right">
+					<button type="submit" name="submit" class="btn btn-success">Simpan</button>
+					<a href="./admin.php?hlm=transaksi" class="btn btn-danger">Batal</a>
 				</div>
-			</div> -->
+			</div>
 		</div>
 	</div>
 </form>

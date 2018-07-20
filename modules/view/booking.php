@@ -218,6 +218,7 @@
 		let choose_service     = $('.choose-services');
 		let choose_deliveryjpt = $('.select-antarjmput');
 		let getstatus 		   = $('input[name=validation_status]').val();
+		let bookcode  		   = $('input[name=book_kode]').val();
 		let url_aplication = '<?php echo $site;?>';
 		$('.book-now').on('click',function(){
 			validateBooking();
@@ -251,7 +252,7 @@
 								console.log(response);
 			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
 								setTimeout(function(){
-								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan&idtrans='+bookcode;
 								},1000);
 							},
 					        error : function (response) {

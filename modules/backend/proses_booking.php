@@ -39,7 +39,7 @@ if ($act=='booking') {
 		$addBooking = "INSERT INTO transaksi_booking(no_nota, 
 								   id_layanan, 
 								   id_member, 
-								   id_merek_mobil, 
+								   id_tipe_mobil, 
 								   id_ongkos,
 								   id_user,
 								   nama_pemesan,
@@ -55,14 +55,14 @@ if ($act=='booking') {
 								   total) 
 							VALUES ('$no_nota',
 									'$id_layanan',
+									'-',
 									'$id_tipe_mobil',
-									'$id_merek_mobil',
 									'$id_ongkos',
-									'',
+									'-',
 									'$nama_pemesan',
-									'$alamat_user',
+									'$alamat_pemesan',
 									'$notelp_pemesan',
-									'$email_user',
+									'$email_pemesan',
 									'$tgl_pesan',
 									'$no_antrian',
 									'$checking_noantrian',
@@ -70,6 +70,8 @@ if ($act=='booking') {
 									'$bayar',
 									'$kembali',
 									'$countTrans')";
+								echo 'nang kene !!';
+
 
 	}else{
 
