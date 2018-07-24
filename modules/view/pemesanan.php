@@ -90,14 +90,24 @@
                                                               ORDER BY no_nota DESC");
                             }
                             while ($res = mysqli_fetch_array($getQuery)) {
+                            //check kondition when booking was process
+                            $processWasing = $res['status_pemesanan'];
+                            if ($processWasing =='progress') {
+                                $addClasses = 'bg-red'; 
+                            }elseif($processWasing =='selesai'){
+                                $addClasses = 'bg-green'; 
+                            }
                          ?>
                         <tr>
                             <td class="text-left"><?php echo $res['no_nota']; ?></td>
                             <td class="text-left"><?php echo $res['nama_kendaraan'].''.$res['nama_mobil'];?></td>
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
-                            <td class="text-center"><?php echo $res['status_pemesanan'];?></td>
+                            <td class="text-center <?php echo $addClasses; ?>"><?php echo $res['status_pemesanan'];?></td>
+                            <?php if($processWasing =='progress' || $processWasing =='selesai') {?>
+                            <?php }else{?>
                             <td class="text-right"><a href="<?php echo $site;?>modules/backend/proses_cancelbooking.php?act=cancel_booking&id=<?php echo $res['no_nota'];?>" class="btn btn-danger" id="modify-book">Batalkan</button></td>
+                            <?php } ?>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -109,6 +119,16 @@
     </div>
     </div>
 </div>
+<style type="text/css">
+    .bg-red{
+        background-color: #ff0000;
+        color:#fff;
+    }
+    .bg-green{
+        background-color:#00d800;
+        color:#fff;
+    }
+</style>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#modify-book1').on('click',function(){

@@ -88,10 +88,10 @@ if(empty($_SESSION['id_user'])){
 						  <ul class="dropdown-menu">
 						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=progress_cuci&id='.$row['no_nota'].'">Proses Pencucian</a></li>
 						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=selesai_cuci&id='.$row['no_nota'].'">Selesai Cuci</a></li>
-						    <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 						</div>
 					</td>';
 				}
+						    // <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 					 	// <a href="#" class="btn btn-info btn-s">Konfirmasi</a>
 					 	// <a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 			}else{
