@@ -13,12 +13,10 @@ if( empty( $_SESSION['id_user'] ) ){
 
         $substrChar1 = str_replace('/', '-', $tgl1);
         $substrChar2 = str_replace('/', '-', $tgl2);
-        
         $datenow     = date('Y-m-d'); 
 
-
 		// $sql = "SELECT DATE(tanggal_pesan) FROM transaksi_booking WHERE tanggal_pesan BETWEEN '$substrChar1' AND '$substrChar2'";
-		$sql = mysqli_fetch_array(mysqli_query($db_con, "SELECT DATE(tanggal_pesan) FROM transaksi_booking WHERE tanggal_pesan BETWEEN '$substrChar1' AND '$substrChar2'"));
+		$sql = mysqli_fetch_array(mysqli_query($db_con, "SELECT DATE(tanggal_pesan) FROM transaksi_booking WHERE tanggal_pesan WHERE $tgl1"));
 
 		echo $sql;
 		if(mysqli_num_rows($sql) > 0){

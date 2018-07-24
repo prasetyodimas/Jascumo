@@ -5,16 +5,22 @@ if( empty( $_SESSION['id_user'] ) ){
 	die();
 } else { ?>
 <style type="text/css">
-.custom-headtables{background-color:#949494;}.col-md-push-custom {left: 4.333333%; } tbody tr td{border-bottom: 1px solid #ddd; }
+.custom-headtables{background-color:#000;}.col-md-push-custom {left: 4.333333%; } tbody tr td{border-bottom: 1px solid #ddd; }
 h4.customize-size{font-size: 16px; } .main-detail-information{margin-top: 50px; } .main-detail-information .main-tanda-tangan ,.main-paraf-area{text-align:center; font-size:15px; } 
 table th{color: #fff !important;}
-
+.heading-laporan-members{text-align: center;}
 @media print {
+	h3,h5{
+		text-align: center;
+	}
 	.control-action-pages{
 		display: none;
 	}
 	.heading-child{
 		margin-left: 150px;
+	}
+	table , .main-detail-information{
+		font-size: 11px;
 	}
 }
 </style>
@@ -23,9 +29,13 @@ table th{color: #fff !important;}
 		<div class="col-sm-2 col-md-2">
 			<!-- <img src="<?php echo $site;?>frontend/logo/crown-cars.png" class="img-responsive" style="width: 80%;height:auto;"> -->
 		</div>
-		<div class="col-md-8 col-md-push-custom">
+		<!-- <div class="col-md-8 col-md-push-custom">
 			<h3 style="margin-left:129px;">LAPORAN MEMBER CROWN CARS WASH </h3>
 			<h5 class="col-md-8 col-md-push-2 heading-child">Jln. Arteri RIngrouad Utara Depok Sleman Yogyakarta, 555282 </h5>			
+		</div> -->
+		<div class="heading-laporan-members">
+			<h3>LAPORAN MEMBER CROWN CARS WASH </h3>
+			<h5>Jln. Arteri RIngrouad Utara Depok Sleman Yogyakarta, 555282 </h5>			
 		</div>
 	</div>
  	<div class="col-lg-12">
@@ -48,9 +58,9 @@ table th{color: #fff !important;}
  				while ($result = mysqli_fetch_array($get_datamember)) {
  			?>
  				<tr>
- 					<td width="50"><?php echo $no;?></td>
+ 					<td><?php echo $no;?></td>
  					<td><?php echo $result['id_member'];?></td>
- 					<td width="200"><?php echo $result['nama_member'];?></td>
+ 					<td><?php echo $result['nama_member'];?></td>
  					<td><?php echo $result['alamat_member'];?></td>
  					<td><?php echo $result['notelp_member'];?></td>
  					<td><?php echo $result['email_member'];?></td>
