@@ -14,10 +14,11 @@ if(empty($_SESSION['id_user'])){
 									  VALUES('$join_kodeStr','$nama_kendaraan')");
 
 		if($sql == true){
-			header('Location: ./admin.php?hlm=merekmobil');
-			die();
+			echo "<script>alert('success menambah data master mobil!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=merekmobil>";
 		} else {
-			echo 'ERROR! Periksa penulisan querynya.';
+			echo "<script>alert('ERROR! Periksa penulisan querynya!!')</script>";
+            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=merekmobil>";
 		}
 	} else {
 ?>

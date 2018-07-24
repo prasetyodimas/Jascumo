@@ -31,8 +31,12 @@ if ($act=='booking') {
 	$total 				= $_POST['harga_layanan'];
 	$tgl_pesan			= date('Y-m-d H:i:s');
 	$biaya_jemput		= $_POST['biaya_jemput'];
+	//validatin carsother 
+	$carother 			= $_POST['other_cars'];
 	$countTrans 		= $total+$biaya_jemput;
+	echo $carother;
 
+exit();
 	//check detail trasaction and mailer member or not !!
 	if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
 
