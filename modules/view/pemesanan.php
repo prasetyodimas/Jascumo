@@ -110,7 +110,7 @@
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
                             <td class="text-center <?php echo $addClasses; ?>"><?php echo $res['status_pemesanan'];?></td>
-                            <?php if($processWasing =='progress' || $processWasing =='selesai' || $processWasing=='konfrimasi') {?>
+                            <?php if($processWasing =='progress' || $processWasing =='selesai' || $processWasing=='konfrimasi'|| $processWasing=='lunas') {?>
                             <?php }else{?>
                             <td class="text-right"><a href="<?php echo $site;?>modules/backend/proses_cancelbooking.php?act=cancel_booking&id=<?php echo $res['no_nota'];?>" class="btn btn-danger" id="modify-book">Batalkan</button></td>
                             <?php } ?>
