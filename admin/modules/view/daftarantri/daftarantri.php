@@ -95,7 +95,7 @@ if(empty($_SESSION['id_user'])){
 					 	// <a href="#" class="btn btn-info btn-s">Konfirmasi</a>
 					 	// <a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 			}else{
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+				 echo '<td colspan="12"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}
 			echo '
 			 	</tbody>

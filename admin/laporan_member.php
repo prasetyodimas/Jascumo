@@ -38,8 +38,7 @@ table th{color: #fff !important;}
  					<th>Alamat</th>
  					<th>No telp</th>
  					<th>Email</th>
- 					<th>Status Member</th>
- 					<!-- <th>Action</th> -->
+ 					<th>Status</th>
  				</tr>
  			</thead>
  			<tbody>

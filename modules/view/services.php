@@ -19,7 +19,7 @@
 							<?php
 								$no =1;
 								$getQueryAll = mysqli_query($db_con,"SELECT mm.id_merek_mobil, mm.nama_kendaraan, tm.nama_mobil, tm.ukuran_mobil, tm.keterangan
-																     FROM merek_mobil mm JOIN tipe_mobil tm ON mm.id_merek_mobil=tm.id_merek_mobil");
+																     FROM merek_mobil mm JOIN tipe_mobil tm ON mm.id_merek_mobil=tm.id_merek_mobil ORDER BY tm.id_merek_mobil ASC");
 								while ($fetch = mysqli_fetch_array($getQueryAll)) {
 							 ?>
 							<tr>
