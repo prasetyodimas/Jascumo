@@ -104,7 +104,15 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-3">
+						<div class="col-sm-3 col-md-3" style="display:none ;">
+							<input type="text" name="othercarsing" class="form-control" id="valothercars">
+							<input type="text" name="validation_values" value="LAIN" class="form-control" id="other-cars">
+						</div>
+						<div class="col-sm-3 col-md-3 is-hidding">
+							<label>Nama Mobil</label>
+							<input type="text" name="other_cars" placeholder="Masukkan Nama Mobil Anda" class="form-control">
+						</div>
+						<div class="col-sm-3 col-md-3 hidden-selected">
 							<div class="form-group">
 								<label>Nama Mobil</label>
 								<select name="cars_name" class="form-control choose_car" required="" id="val_namecars">
@@ -218,6 +226,7 @@
 		let choose_service     = $('.choose-services');
 		let choose_deliveryjpt = $('.select-antarjmput');
 		let getstatus 		   = $('input[name=validation_status]').val();
+		let bookcode  		   = $('input[name=book_kode]').val();
 		let url_aplication = '<?php echo $site;?>';
 		$('.book-now').on('click',function(){
 			validateBooking();
@@ -235,7 +244,7 @@
 					// if (response.status_pemesanan != getstatus) {
 					// 	console.log(response.status_pemesanan);
 					// 	alert('maaf anda tidak bisa melakukan pemesanan checkstatus pemesanan anda !!');
-			  //   		setTimeout(function(){
+			        //  setTimeout(function(){
 					//   		 window.location = '<?php echo $site;?>'+'index.php?m=booking';
 					// 	},2000);
 					// }
@@ -251,7 +260,7 @@
 								console.log(response);
 			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
 								setTimeout(function(){
-								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan';
+								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan&idtrans='+bookcode;
 								},1000);
 							},
 					        error : function (response) {
@@ -334,9 +343,10 @@
 			selectorForm.slideToggle(1000);
 		});
 
+		var selections = '' || selections == null;
 		choose_cartype.on('change', function() { 
 			var selections = $(this).val();
-		    console.log('Selected options: ' + selections);
+		    // console.log('Selected options: ' + selections);
 		    $.ajax({
 		        url: "../modules/backend/proses_findcar.php",
 		        dataType: 'JSON',
@@ -387,5 +397,24 @@
 			placeholder:'Pilih Jenis Layanan',
 			data: '', 
 		});
+
+		//check condition when carns not ready or not in the list dropdown
+		const thisOtherCars = $('#other-cars').val();
+		choose_cartype.on('change', function() { 
+			let carother = $(this).val();
+			console.log(carother);
+			$('#valothercars').val(carother);
+			if (carother=='221-MERKLAIN') {
+				let str = carother;
+				let res = str.replace(str, "LAIN");
+				if (thisOtherCars == res) {
+					$('.hidden-selected').addClass('hidden');
+					$('.is-hidding').removeClass('is-hidding');
+				}else if(thisOtherCars != res){
+					$('.hidden-selected').removeClass('is-hidding');
+				}
+			}
+		});
 	});
 </script>
+<style type="text/css"> .hidden{display: none; } .is-hidding{display: none; } </style>

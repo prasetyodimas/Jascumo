@@ -66,28 +66,48 @@
                         <tr>
                             <th>kode Book</th>
                             <th>Nama Kendaraan</th>
-                            <th>Harga</th>
+                            <th>Jenis Layanan</th>
                             <th>Harga</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $getQuery = mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
+                            if ($_SESSION['id_member']=='') {
+                                $getQuery = mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
+                                                          JOIN layanan la ON tb.id_layanan=la.id_layanan 
+                                                          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
+                                                          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
+                                                          WHERE status_pemesanan!='lunas' AND tb.no_nota='$_GET[idtrans]' 
+                                                          ORDER BY no_nota DESC");
+
+                            }else{
+                                $getQuery = mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
                                                               JOIN layanan la ON tb.id_layanan=la.id_layanan 
                                                               JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
                                                               LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
                                                               WHERE id_member='$_SESSION[id_member]' AND status_pemesanan!='lunas' 
                                                               ORDER BY no_nota DESC");
-                                        while ($res = mysqli_fetch_array($getQuery)) {
+                            }
+                            while ($res = mysqli_fetch_array($getQuery)) {
+                            //check kondition when booking was process
+                            $processWasing = $res['status_pemesanan'];
+                            if ($processWasing =='progress') {
+                                $addClasses = 'bg-red'; 
+                            }elseif($processWasing =='selesai'){
+                                $addClasses = 'bg-green'; 
+                            }
                          ?>
                         <tr>
                             <td class="text-left"><?php echo $res['no_nota']; ?></td>
                             <td class="text-left"><?php echo $res['nama_kendaraan'].''.$res['nama_mobil'];?></td>
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
-                            <td class="text-center"><?php echo $res['status_pemesanan'];?></td>
+                            <td class="text-center <?php echo $addClasses; ?>"><?php echo $res['status_pemesanan'];?></td>
+                            <?php if($processWasing =='progress' || $processWasing =='selesai') {?>
+                            <?php }else{?>
                             <td class="text-right"><a href="<?php echo $site;?>modules/backend/proses_cancelbooking.php?act=cancel_booking&id=<?php echo $res['no_nota'];?>" class="btn btn-danger" id="modify-book">Batalkan</button></td>
+                            <?php } ?>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -99,6 +119,16 @@
     </div>
     </div>
 </div>
+<style type="text/css">
+    .bg-red{
+        background-color: #ff0000;
+        color:#fff;
+    }
+    .bg-green{
+        background-color:#00d800;
+        color:#fff;
+    }
+</style>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#modify-book1').on('click',function(){

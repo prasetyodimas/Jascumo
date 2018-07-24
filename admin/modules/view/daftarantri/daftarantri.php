@@ -53,8 +53,8 @@ if(empty($_SESSION['id_user'])){
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
-
 				 while($row = mysqli_fetch_array($sql)){
+					$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$row[id_member]'"));
 	 				$no++;
 	 				if ($row['status_pemesanan']=='konfrimasi') {
 	 					$addclass = 'konfrimasi';
@@ -67,9 +67,18 @@ if(empty($_SESSION['id_user'])){
 
 				   <tr>
 					 <td>'.$no.'</td>
-					 <td>'.$row['no_nota'].'</td>
-					 <td>'.$row['nama_member'].'</td>
-					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
+					 <td>'.$row['no_nota'].'</td>';
+					 	if ($row['id_member']!='') {
+				 			echo '<td>'.$getMember['nama_member'].'</td>';
+				 		}else{
+				 			echo '<td>'.$row['nama_pemesan'].'</td>';
+				 		}
+				 		if ($row['id_tipe_mobil']=='031-MEREK LAIN') {
+					 		echo '<td>'.$row['carsothername'].'</td>';
+						}else{
+						 	echo '<td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>';
+						}
+				 	echo '
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>'.$row['nama_wilayah'].'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>
@@ -83,14 +92,14 @@ if(empty($_SESSION['id_user'])){
 						  <ul class="dropdown-menu">
 						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=progress_cuci&id='.$row['no_nota'].'">Proses Pencucian</a></li>
 						    <li><a href="'.$site.'admin/modules/backend/transaksi_online/konfirmasi_booking.php?act=selesai_cuci&id='.$row['no_nota'].'">Selesai Cuci</a></li>
-						    <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 						</div>
 					</td>';
 				}
+						    // <li><a href="?hlm=transaksi&aksi=baru&id='.$row['no_nota'].'">Proses Pembayaran</a></li>
 					 	// <a href="#" class="btn btn-info btn-s">Konfirmasi</a>
 					 	// <a href="?hlm=transaksi&aksi=hapus&submit=yes&id_transaksi='.$row['id_transaksi'].'" onclick="return konfirmasi()" class="btn btn-danger btn-s">Hapus</a>
 			}else{
-				 echo '<td colspan="8"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
+				 echo '<td colspan="12"><center><p class="add">Tidak ada data untuk ditampilkan.</p></center></td></tr>';
 			}
 			echo '
 			 	</tbody>

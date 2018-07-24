@@ -58,13 +58,8 @@ if(empty($_SESSION['id_user'])){
 		 	if(mysqli_num_rows($sql) > 0){
 		 		$no = 0;
 				 while($row = mysqli_fetch_array($sql)){
-	 				$no++;
 					$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$row[id_member]'"));
-				 	if ($row['id_member']!='') {
-				 		$nama_pemesan = $getMember['nama_member'];
-				 	}else{
-				 		$nama_pemesan = $row['nama_pemesan'];
-				 	}
+	 				$no++;
 				 	//check condition antarjemput
 				 	if ($row['id_ongkos']=="" || $row['id_ongkos']== null) {
 			 			$layanan = '-';
@@ -75,9 +70,18 @@ if(empty($_SESSION['id_user'])){
 
 				   <tr>
 					 <td>'.$no.'</td>
-					 <td>'.$row['no_nota'].'</td>
-					 <td>'.$nama_pemesan.'</td>
-					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
+					 <td>'.$row['no_nota'].'</td>';
+						if ($row['id_member']!='') {
+				 			echo '<td>'.$getMember['nama_member'].'</td>';
+				 		}else{
+				 			echo '<td>'.$row['nama_pemesan'].'</td>';
+				 		}
+						if ($row['id_tipe_mobil']=='031-MEREK LAIN') {
+					 		echo '<td>'.$row['carsothername'].'</td>';
+						}else{
+						 	echo '<td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>';
+						}
+					 echo'
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>'.$layanan.'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>

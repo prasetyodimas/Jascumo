@@ -31,15 +31,175 @@ if ($act=='booking') {
 	$total 				= $_POST['harga_layanan'];
 	$tgl_pesan			= date('Y-m-d H:i:s');
 	$biaya_jemput		= $_POST['biaya_jemput'];
+	//validatin carsother 
+	$othercarsing       = $_POST['othercarsing'];
+	$othercars  		= $_POST['other_cars'];
 	$countTrans 		= $total+$biaya_jemput;
+
+	$getIdtipeMobil =  mysqli_fetch_array(mysqli_query($db_con,"SELECT id_tipe_mobil FROM tipe_mobil WHERE id_merek_mobil='$othercarsing'"));
+	$idtipemobil    = $getIdtipeMobil['id_tipe_mobil'];
+	
+	//check detail trasaction and mailer member or not !!
+	if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
+
+		$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
+						          JOIN layanan la ON tb.id_layanan=la.id_layanan 
+						          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
+						          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
+						          WHERE tb.id_member='$id_member' AND tb.status_pemesanan!='lunas'")); 
+
+	}else{
+
+		$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
+						          JOIN layanan la ON tb.id_layanan=la.id_layanan 
+						          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
+						          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
+						          WHERE status_pemesanan!='lunas'")); 	
+	}
+
 	//count all transaction
 	$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$id_member'"));
 	
 	if ($id_member =='' || $id_member == null) {
-		$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+		if ($id_tipe_mobil =='' || $id_tipe_mobil == null) {
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+									   id_layanan, 
+									   id_member, 
+									   id_tipe_mobil, 
+									   id_ongkos,
+									   id_user,
+									   nama_pemesan,
+									   alamat_pemesan,
+									   notelp_pemesan,
+									   email_pemesan,
+									   tanggal_pesan,
+									   no_antrian,
+									   checkin_noantrian,
+									   status_pemesanan,
+									   bayar,
+									   kembali,
+									   total,
+									   carsothername) 
+								VALUES ('$no_nota',
+										'$id_layanan',
+										'',
+										'$idtipemobil',
+										'$id_ongkos',
+										'-',
+										'$nama_pemesan',
+										'$alamat_pemesan',
+										'$notelp_pemesan',
+										'$email_pemesan',
+										'$tgl_pesan',
+										'$no_antrian',
+										'$checking_noantrian',
+										'pesan',
+										'$bayar',
+										'$kembali',
+										'$countTrans',
+										'$othercars')";
+		}else{
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+									   id_layanan, 
+									   id_member, 
+									   id_tipe_mobil, 
+									   id_ongkos,
+									   id_user,
+									   nama_pemesan,
+									   alamat_pemesan,
+									   notelp_pemesan,
+									   email_pemesan,
+									   tanggal_pesan,
+									   no_antrian,
+									   checkin_noantrian,
+									   status_pemesanan,
+									   bayar,
+									   kembali,
+									   total,
+									   carsothername) 
+								VALUES ('$no_nota',
+										'$id_layanan',
+										'',
+										'$id_tipe_mobil',
+										'$id_ongkos',
+										'-',
+										'$nama_pemesan',
+										'$alamat_pemesan',
+										'$notelp_pemesan',
+										'$email_pemesan',
+										'$tgl_pesan',
+										'$no_antrian',
+										'$checking_noantrian',
+										'pesan',
+										'$bayar',
+										'$kembali',
+										'$countTrans',
+										'')";
+		}
+
+
+		// proses sending to mailer	
+		$mail = new PHPMailer(true);                               // Passing `true` enables exceptions
+		try {
+		    //Server settings
+		    $mail->isSMTP();                                       // Set mailer to use SMTP
+		    $mail->SMTPDebug  = 2;                                 // Enable verbose debug output
+		    $mail->Host       = 'smtp.gmail.com';                  // Specify main and backup SMTP servers
+		    $mail->SMTPAuth   = true;                              // Enable SMTP authentication
+		    $mail->Username   = 'carwashcrowns@gmail.com';         // SMTP username
+		    $mail->Password   = 'crowncar123';                     // SMTP password
+		    $mail->SMTPSecure = 'tls';                             // Enable TLS encryption, `ssl` also accepted
+		    $mail->Port       = 587;                               // TCP port to connect to
+
+		    //Recipients
+		    $mail->setFrom('carwashcrowns@gmail.com', 'CrownCars Wash');
+		    $mail->addAddress(''.$email_pemesan.'', ''.$nama_pemesan.'');     // Add a recipient
+		    $mail->addReplyTo('carwashcrowns@gmail.com', 'Information / Custtomer Service');
+
+		    //Attachments
+		    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+		    // $mail->addAttachment('../../frontend/logo/crown-cars.png', 'crownbranding.jpg');    // Optional name
+
+		    //Content
+		    $mail->isHTML(true);                                     // Set email format to HTML
+		    $mail->Subject = 'Crown Carswash Solution';
+		    // Compose a simple HTML email message
+		    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$nama_pemesan.'</span></h3>'
+		                     .'<p>Terimakasih telah menggunakan layanan dan kepercayaan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
+		                     .'<p>Booking Information :</p>'
+		                     .'<table style="border:1px solid #b9b9b9;padding:10px;">
+		                            <thead>
+		                                <tr>Kode Booking       : '.$no_nota.' </tr>
+		                                <tr>Tanggal Pesan      : '.$tgl_pesan.' </tr>
+		                                <tr>Nama Pemesan       : '.$nama_pemesan.' </tr>
+		                                <tr>Alamat             : '.$alamat_pemesan.'</tr>
+		                                <tr>Notelp / Handphone : '.$notelp_pemesan.' </tr>
+		                                <tr>Nama Kendaraan	   : '.$transact['nama_kendaran'].' </tr>
+		                                <tr>Subtotal		   : Rp.'.number_format($countTrans).',-'.' </tr>
+		                            </thead>
+		                       </table>'
+		                    .'<h3>Nomor Antrian Sementara Anda <span style"font-size:15px;">('.$no_antrian.')</span></h3>'
+		                    .'<p>Ketentuan : Tunjukan Kode Booking ini kepada kami sebagai bukti konfirmasi bahwa anda telah memesan jika anda ingin proses mencuci mobil. 
+		                      jika anda datang terlambat otomatis nomer antrian akan kami ganti untuk itu bawa bukti ini sebagai konfirmasi no antrian.</p>'
+		                    .'<h4>Crown Carwash We Serve With Profesional Way Open 9 AM - Closed 6 PM <span style="font-size:11px;font-style:italic;"> Please Contact Us We Care About You :) Cheers </span></h4>'
+		                    .'<p style="margin-bottom:1em;">Warm Regard</p>'
+		                    .'</br>'
+		                    .'<p>Customer Services</p>'
+		                     ;
+		    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+		    $mail->send();
+		    echo 'Message has been sent';
+		}catch (Exception $e) {
+		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+		}
+
+
+	}else{
+		if ($id_tipe_mobil =='' || $id_tipe_mobil == null) {
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
 								   id_layanan, 
 								   id_member, 
-								   id_merek_mobil, 
+								   id_tipe_mobil, 
 								   id_ongkos,
 								   id_user,
 								   nama_pemesan,
@@ -52,26 +212,27 @@ if ($act=='booking') {
 								   status_pemesanan,
 								   bayar,
 								   kembali,
-								   total) 
+								   total,
+								   carsothername) 
 							VALUES ('$no_nota',
 									'$id_layanan',
-									'$id_tipe_mobil',
-									'$id_merek_mobil',
+									'$id_member',
+									'$idtipemobil',
 									'$id_ongkos',
 									'',
-									'$nama_pemesan',
-									'$alamat_user',
-									'$notelp_pemesan',
-									'$email_user',
+									'-',
+									'-',
+									'-',
+									'-',
 									'$tgl_pesan',
 									'$no_antrian',
 									'$checking_noantrian',
 									'pesan',
 									'$bayar',
 									'$kembali',
-									'$countTrans')";
-
-	}else{
+									'$countTrans',
+									'$othercars')";
+		}else{
 
 		$addBooking = "INSERT INTO transaksi_booking(no_nota, 
 								   id_layanan, 
@@ -89,7 +250,8 @@ if ($act=='booking') {
 								   status_pemesanan,
 								   bayar,
 								   kembali,
-								   total) 
+								   total,
+								   carsothername) 
 							VALUES ('$no_nota',
 									'$id_layanan',
 									'$id_member',
@@ -106,41 +268,9 @@ if ($act=='booking') {
 									'pesan',
 									'$bayar',
 									'$kembali',
-									'$countTrans')";
-
-	}
-
-	$saveBooking = mysqli_query($db_con,$addBooking);
-	
-	if ($saveBooking === false) {
-		throw new Exception("Error cannot saved data !", 500);
-		alert('Error Function !!');
-	}
-
-	if ($saveBooking) {
-		echo "<script>alert('Pemesanan Berhasil Tunggu Konfirmasi Dari Kami Terimakasih !!')</script>";
-		echo "<meta http-equiv=refresh content=0;url=$site"."index.php?booking>";
-	}else{
-		echo "<script>alert('Error cannot saved data !!')</script>";
-		echo "<meta http-equiv=refresh content=0;url=$site"."index.php?booking>";
-	}	
-
-	// //check detail trasaction and mailer member or not !!
-	// if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
-	// 	$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
-	// 					          JOIN layanan la ON tb.id_layanan=la.id_layanan 
-	// 					          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
-	// 					          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
-	// 					          WHERE id_member='$_POST[id_member]' AND status_pemesanan!='lunas'")); 
-
-	// }else{
-	// 	$transact  = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking tb 
-	// 					          JOIN layanan la ON tb.id_layanan=la.id_layanan 
-	// 					          JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
-	// 					          LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
-	// 					          WHERE status_pemesanan!='lunas'")); 	
-	// }
-
+									'$countTrans',
+									'')";
+		}
 		// proses sending to mailer	
 		$mail = new PHPMailer(true);                               // Passing `true` enables exceptions
 		try {
@@ -196,6 +326,24 @@ if ($act=='booking') {
 		}catch (Exception $e) {
 		    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 		}
+
+	}
+
+	$saveBooking = mysqli_query($db_con,$addBooking);
+	
+	if ($saveBooking === false) {
+		throw new Exception("Error cannot saved data !", 500);
+		alert('Error Function !!');
+	}
+
+	if ($saveBooking) {
+		echo "<script>alert('Pemesanan Berhasil Tunggu Konfirmasi Dari Kami Terimakasih !!')</script>";
+		echo "<meta http-equiv=refresh content=0;url=$site"."index.php?booking>";
+	}else{
+		echo "<script>alert('Error cannot saved data !!')</script>";
+		echo "<meta http-equiv=refresh content=0;url=$site"."index.php?booking>";
+	}	
+
 
 }elseif($act=='check_bookValidation'){
 	
