@@ -34,18 +34,25 @@
 
     }else if ($act=='selesai_cuci'){
         $id_transaksi = $_GET['id'];
-
-        $sql       = "UPDATE transaksi_booking SET status_pemesanan='selesai' WHERE no_nota='$id_transaksi'";
-        $processDb = mysqli_query($db_con,$sql);
-
-        if($processDb){
-            echo "<script>alert('Transaksi berhasil di update ke status pengerjaan / pencucian !!')</script>";
+        //validasi
+        $getStatusPrevius = mysqli_fetch_array(mysqli_query($db_con,"SELECT status_pemesanan FROM transaksi_booking WHERE no_nota='$id_transaksi'"));
+        $status = $getStatusPrevius['status_pemesanan'];
+        if ($status == 'konfrimasi') {
+            echo "<script>alert('Maaf mobil anda belum melalui prosess pencucian !!')</script>";
             echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=daftarantri>";
         }else{
-            echo "<script>alert('Transaksi booking gagal di konfirmasi !!')</script>";
-            echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=daftarantri>";
-        }
+            $sql       = "UPDATE transaksi_booking SET status_pemesanan='selesai' WHERE no_nota='$id_transaksi'";
+            $processDb = mysqli_query($db_con,$sql);
 
+            if($processDb){
+                echo "<script>alert('Transaksi berhasil di update ke status pengerjaan / pencucian !!')</script>";
+                echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=daftarantri>";
+            }else{
+                echo "<script>alert('Transaksi booking gagal di konfirmasi !!')</script>";
+                echo "<meta http-equiv=refresh content=0;url=$site"."admin/admin.php?hlm=daftarantri>";
+            }
+
+        }
 
     }else if ($act=='lunas'){
         

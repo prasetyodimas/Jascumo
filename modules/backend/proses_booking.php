@@ -32,11 +32,13 @@ if ($act=='booking') {
 	$tgl_pesan			= date('Y-m-d H:i:s');
 	$biaya_jemput		= $_POST['biaya_jemput'];
 	//validatin carsother 
-	$carother 			= $_POST['other_cars'];
+	$othercarsing       = $_POST['othercarsing'];
+	$othercars  		= $_POST['other_cars'];
 	$countTrans 		= $total+$biaya_jemput;
-	echo $carother;
 
-exit();
+	$getIdtipeMobil =  mysqli_fetch_array(mysqli_query($db_con,"SELECT id_tipe_mobil FROM tipe_mobil WHERE id_merek_mobil='$othercarsing'"));
+	$idtipemobil    = $getIdtipeMobil['id_tipe_mobil'];
+	
 	//check detail trasaction and mailer member or not !!
 	if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
 
@@ -59,40 +61,83 @@ exit();
 	$getMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$id_member'"));
 	
 	if ($id_member =='' || $id_member == null) {
-		$addBooking = "INSERT INTO transaksi_booking(no_nota, 
-								   id_layanan, 
-								   id_member, 
-								   id_tipe_mobil, 
-								   id_ongkos,
-								   id_user,
-								   nama_pemesan,
-								   alamat_pemesan,
-								   notelp_pemesan,
-								   email_pemesan,
-								   tanggal_pesan,
-								   no_antrian,
-								   checkin_noantrian,
-								   status_pemesanan,
-								   bayar,
-								   kembali,
-								   total) 
-							VALUES ('$no_nota',
-									'$id_layanan',
-									'',
-									'$id_tipe_mobil',
-									'$id_ongkos',
-									'-',
-									'$nama_pemesan',
-									'$alamat_pemesan',
-									'$notelp_pemesan',
-									'$email_pemesan',
-									'$tgl_pesan',
-									'$no_antrian',
-									'$checking_noantrian',
-									'pesan',
-									'$bayar',
-									'$kembali',
-									'$countTrans')";
+		if ($id_tipe_mobil =='' || $id_tipe_mobil == null) {
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+									   id_layanan, 
+									   id_member, 
+									   id_tipe_mobil, 
+									   id_ongkos,
+									   id_user,
+									   nama_pemesan,
+									   alamat_pemesan,
+									   notelp_pemesan,
+									   email_pemesan,
+									   tanggal_pesan,
+									   no_antrian,
+									   checkin_noantrian,
+									   status_pemesanan,
+									   bayar,
+									   kembali,
+									   total,
+									   carsothername) 
+								VALUES ('$no_nota',
+										'$id_layanan',
+										'',
+										'$idtipemobil',
+										'$id_ongkos',
+										'-',
+										'$nama_pemesan',
+										'$alamat_pemesan',
+										'$notelp_pemesan',
+										'$email_pemesan',
+										'$tgl_pesan',
+										'$no_antrian',
+										'$checking_noantrian',
+										'pesan',
+										'$bayar',
+										'$kembali',
+										'$countTrans',
+										'$othercars')";
+		}else{
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+									   id_layanan, 
+									   id_member, 
+									   id_tipe_mobil, 
+									   id_ongkos,
+									   id_user,
+									   nama_pemesan,
+									   alamat_pemesan,
+									   notelp_pemesan,
+									   email_pemesan,
+									   tanggal_pesan,
+									   no_antrian,
+									   checkin_noantrian,
+									   status_pemesanan,
+									   bayar,
+									   kembali,
+									   total,
+									   carsothername) 
+								VALUES ('$no_nota',
+										'$id_layanan',
+										'',
+										'$id_tipe_mobil',
+										'$id_ongkos',
+										'-',
+										'$nama_pemesan',
+										'$alamat_pemesan',
+										'$notelp_pemesan',
+										'$email_pemesan',
+										'$tgl_pesan',
+										'$no_antrian',
+										'$checking_noantrian',
+										'pesan',
+										'$bayar',
+										'$kembali',
+										'$countTrans',
+										'')";
+		}
+
+
 		// proses sending to mailer	
 		$mail = new PHPMailer(true);                               // Passing `true` enables exceptions
 		try {
@@ -150,6 +195,44 @@ exit();
 
 
 	}else{
+		if ($id_tipe_mobil =='' || $id_tipe_mobil == null) {
+			$addBooking = "INSERT INTO transaksi_booking(no_nota, 
+								   id_layanan, 
+								   id_member, 
+								   id_tipe_mobil, 
+								   id_ongkos,
+								   id_user,
+								   nama_pemesan,
+								   alamat_pemesan,
+								   notelp_pemesan,
+								   email_pemesan,
+								   tanggal_pesan,
+								   no_antrian,
+								   checkin_noantrian,
+								   status_pemesanan,
+								   bayar,
+								   kembali,
+								   total,
+								   carsothername) 
+							VALUES ('$no_nota',
+									'$id_layanan',
+									'$id_member',
+									'$idtipemobil',
+									'$id_ongkos',
+									'',
+									'-',
+									'-',
+									'-',
+									'-',
+									'$tgl_pesan',
+									'$no_antrian',
+									'$checking_noantrian',
+									'pesan',
+									'$bayar',
+									'$kembali',
+									'$countTrans',
+									'$othercars')";
+		}else{
 
 		$addBooking = "INSERT INTO transaksi_booking(no_nota, 
 								   id_layanan, 
@@ -167,7 +250,8 @@ exit();
 								   status_pemesanan,
 								   bayar,
 								   kembali,
-								   total) 
+								   total,
+								   carsothername) 
 							VALUES ('$no_nota',
 									'$id_layanan',
 									'$id_member',
@@ -184,7 +268,9 @@ exit();
 									'pesan',
 									'$bayar',
 									'$kembali',
-									'$countTrans')";
+									'$countTrans',
+									'')";
+		}
 		// proses sending to mailer	
 		$mail = new PHPMailer(true);                               // Passing `true` enables exceptions
 		try {

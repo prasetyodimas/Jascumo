@@ -73,8 +73,12 @@ if(empty($_SESSION['id_user'])){
 				 		}else{
 				 			echo '<td>'.$row['nama_pemesan'].'</td>';
 				 		}
+				 		if ($row['id_tipe_mobil']=='031-MEREK LAIN') {
+					 		echo '<td>'.$row['carsothername'].'</td>';
+						}else{
+						 	echo '<td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>';
+						}
 				 	echo '
-					 <td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>
 					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
 					 <td>'.$row['nama_wilayah'].'</td>
 					 <td>Rp. '.formatuang($row['total']).'</td>

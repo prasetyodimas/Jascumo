@@ -105,6 +105,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3 col-md-3" style="display:none ;">
+							<input type="text" name="othercarsing" class="form-control" id="valothercars">
 							<input type="text" name="validation_values" value="LAIN" class="form-control" id="other-cars">
 						</div>
 						<div class="col-sm-3 col-md-3 is-hidding">
@@ -257,10 +258,10 @@
 							},
 							success : function (response) {
 								console.log(response);
-			  					// alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
-								// setTimeout(function(){
-								//   window.location = '<?php echo $site;?>'+'index.php?m=pemesanan&idtrans='+bookcode;
-								// },1000);
+			  					alert('Pemesanan berhasil dilakukan terimakasih telah menggunakan layanan kami');
+								setTimeout(function(){
+								  window.location = '<?php echo $site;?>'+'index.php?m=pemesanan&idtrans='+bookcode;
+								},1000);
 							},
 					        error : function (response) {
 			  					alert('Whoops Registrasi Member Gagal !!');
@@ -401,7 +402,9 @@
 		const thisOtherCars = $('#other-cars').val();
 		choose_cartype.on('change', function() { 
 			let carother = $(this).val();
-			if (carother=='434-MERK LAIN') {
+			console.log(carother);
+			$('#valothercars').val(carother);
+			if (carother=='221-MERKLAIN') {
 				let str = carother;
 				let res = str.replace(str, "LAIN");
 				if (thisOtherCars == res) {
