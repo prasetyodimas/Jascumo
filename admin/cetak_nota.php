@@ -96,7 +96,6 @@ include '../herpers/currency.php';
             </thead>
             <tbody>
                 <?php
-
                    $getQueryTrans = mysqli_query($db_con, "SELECT tb.no_nota, 
                                                                  tb.id_member,
                                                                  tb.nama_pemesan, 
@@ -109,6 +108,9 @@ include '../herpers/currency.php';
                                                                  mm.nama_kendaraan,
                                                                  tb.id_tipe_mobil,
                                                                  tb.carsothername,
+                                                                 oj.id_ongkos,
+                                                                 oj.nama_wilayah,
+                                                                 oj.biaya_jemput,
                                                                  tm.nama_mobil,
                                                                  tb.bayar, 
                                                                  tb.kembali, 
@@ -118,7 +120,9 @@ include '../herpers/currency.php';
                                                         JOIN layanan la ON tb.id_layanan=la.id_layanan
                                                         JOIN tipe_mobil tm ON tm.id_tipe_mobil=tb.id_tipe_mobil
                                                         LEFT JOIN merek_mobil mm ON mm.id_merek_mobil=tm.id_merek_mobil
+                                                        LEFT JOIN ongkos_jemput oj ON oj.id_ongkos=tb.id_ongkos
                                                         WHERE no_nota='$_GET[id_transaksi]'");
+
                    while ($res = mysqli_fetch_array($getQueryTrans)) {
                        
                  ?>
@@ -130,18 +134,15 @@ include '../herpers/currency.php';
                     <?php } ?>
                     <td class="col-md-3"><?php echo formatuang($res['harga_layanan']);?></td>
                 </tr>
+                <?php if($res['id_ongkos']!='') { ?>
                 <tr>
-                    <td class="text-right">
-                    <p> <strong>Total Amount: </strong> </p> 
-                </td>
-                    <td>
-                    <p>
-                        <strong><?php echo formatuang($res['harga_layanan']);?></strong>
-                    </p>
-                    </td>
+                    <tr>
+                        <td class="col-md-9">Antar / Jemput Wilayah <?php echo $res['nama_wilayah']; ?></td>
+                        <td><strong><?php echo formatuang($res['biaya_jemput']);?></strong></td>
+                    </tr>
                 </tr>
+                <?php } ?>
                 <tr>
-                   
                     <td class="text-right"><h2><strong>Subtotal: </strong></h2></td>
                     <td class="text-left text-danger"><h2><strong><?php echo formatuang($res['total']); ?></strong></h2></td>
                 </tr>
