@@ -96,7 +96,7 @@ include '../herpers/currency.php';
             </thead>
             <tbody>
                 <?php
-                   $getQueryTrans = mysqli_query($db_con, "SELECT tb.no_nota, 
+                       $getQueryTrans = mysqli_query($db_con, "SELECT tb.no_nota, 
                                                                  tb.id_member,
                                                                  tb.nama_pemesan, 
                                                                  tb.alamat_pemesan, 
@@ -166,9 +166,18 @@ include '../herpers/currency.php';
             </div>
         </div>
     </div>
-</div>    
+    <center>------------------------------------------ Terima Kasih ------------------------------------------- </center>
+    <div class="col-sm-12 col-md-12 hidden-print ">
+        <button onclick="printArea()" class="btn btn-primary">Print Kwitansi / Nota</button>
+    </div> 
+</div>   
 <?php } ?>
 <style type="text/css">
+    @media print(){
+       .hidden-print {
+             display: none !important;
+        }
+    }
     .text-danger strong {
         color: #9f181c;
     }
@@ -254,3 +263,8 @@ include '../herpers/currency.php';
         background-color: #dcdcdc;
     }
 </style>
+<script type="text/javascript">
+    function printArea(){
+        window.print();
+    }
+</script>
