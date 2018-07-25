@@ -34,19 +34,19 @@
                 <?php }else{ ?>
                     <div class="col-md-12">
                         <strong>Nama Pemesan</strong>
-                        <div class="pull-right"><span></span></div>
-                    </div>
-                    <div class="col-md-12">
-                        <strong>Nama Pemesan</strong>
-                        <div class="pull-right"><span></span></div>
+                        <div class="pull-right"><span><?php echo  $getInfoNonMember['nama_pemesan']; ?></span></div>
                     </div>
                     <div class="col-md-12">
                         <strong>Email</strong>
-                        <div class="pull-right"><span></span></div>
+                        <div class="pull-right"><span><?php echo  $getInfoNonMember['email_pemesan']; ?></span></div>
+                    </div>
+                    <div class="col-md-12">
+                        <strong>Notelp</strong>
+                        <div class="pull-right"><span><?php echo  $getInfoNonMember['notelp_pemesan']; ?></span></div>
                     </div>
                     <div class="col-md-12">
                         <strong>Alamat </strong>
-                        <div class="pull-right"><span></span></div>
+                        <div class="pull-right"><span><?php echo  $getInfoNonMember['alamat_pemesan']; ?></span></div>
                     </div>
                 <?php } ?>
             </div>
@@ -93,18 +93,24 @@
                             //check kondition when booking was process
                             $processWasing = $res['status_pemesanan'];
                             if ($processWasing =='progress') {
-                                $addClasses = 'bg-red'; 
+                                $addClasses = 'bg-warning'; 
                             }elseif($processWasing =='selesai'){
                                 $addClasses = 'bg-green'; 
+                            }elseif($processWasing =='konfrimasi'){
+                                $addClasses = 'bg-red'; 
                             }
                          ?>
                         <tr>
                             <td class="text-left"><?php echo $res['no_nota']; ?></td>
-                            <td class="text-left"><?php echo $res['nama_kendaraan'].''.$res['nama_mobil'];?></td>
+                            <?php if ($res['id_tipe_mobil']=='031-MEREK LAIN') { ?>
+                                <td class="text-left"><?php echo $res['carsothername'].' '.$res['nama_mobil'];?></td>
+                            <?php }else{ ?>
+                                <td class="text-left"><?php echo $res['nama_kendaraan'].' '.$res['nama_mobil'];?></td>
+                            <?php } ?>
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
                             <td class="text-center <?php echo $addClasses; ?>"><?php echo $res['status_pemesanan'];?></td>
-                            <?php if($processWasing =='progress' || $processWasing =='selesai') {?>
+                            <?php if($processWasing =='progress' || $processWasing =='selesai' || $processWasing=='konfrimasi'|| $processWasing=='lunas') {?>
                             <?php }else{?>
                             <td class="text-right"><a href="<?php echo $site;?>modules/backend/proses_cancelbooking.php?act=cancel_booking&id=<?php echo $res['no_nota'];?>" class="btn btn-danger" id="modify-book">Batalkan</button></td>
                             <?php } ?>
@@ -123,6 +129,9 @@
     .bg-red{
         background-color: #ff0000;
         color:#fff;
+    }
+    .bg-warning{
+        color: #fff;
     }
     .bg-green{
         background-color:#00d800;
