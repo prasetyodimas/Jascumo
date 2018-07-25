@@ -169,12 +169,12 @@
 							<div class="input-group-prepend">
 								<div class="card">
 								  <div class="card-body row">
-									<div class="col-sm-2">
+									<!-- <div class="col-sm-2">
 										Layanan Jemput <input type="checkbox" aria-label="Checkbox for following text input">
 									</div>
 									<div class="col-sm-6">
 										Layanan Antar & Jemput  <input type="checkbox" aria-label="Checkbox for following text input">
-									</div>
+									</div> -->
 								  </div>
 
 								  <div class="col-sm-12 col-md-12" style="padding-bottom: 2em;">

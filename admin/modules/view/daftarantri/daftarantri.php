@@ -48,6 +48,7 @@ if(empty($_SESSION['id_user'])){
 		 								  JOIN tipe_mobil tm ON tb.id_tipe_mobil=tm.id_tipe_mobil
 		 								  JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil 
 		 								  LEFT JOIN member m ON tb.id_member=m.id_member
+		 								  LEFT JOIN ongkos_jemput oj ON tb.id_ongkos=oj.id_ongkos
 		 								  WHERE tb.status_pemesanan='konfrimasi' OR tb.status_pemesanan='progress' OR tb.status_pemesanan='selesai'
 		 								  ORDER BY tb.checkin_noantrian ASC");
 		 	$getMmeber = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM member WHERE id_member='$_GET[id_member]'"));
@@ -79,8 +80,13 @@ if(empty($_SESSION['id_user'])){
 						 	echo '<td>'.$row['nama_kendaraan'].' '.$row['nama_mobil'].'</td>';
 						}
 				 	echo '
-					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>
-					 <td>'.$row['nama_wilayah'].'</td>
+					 <td>'.$row['jenis_layanan'].' Rp.'.formatuang($row['harga_layanan']).'</td>';
+						 if ($row['id_ongkos']!='') {
+						 	echo '<td>'.$row['nama_wilayah'].' Rp.'.formatuang($row['biaya_jemput']).'</td>';
+						 }else{
+						 	echo "<td>-</td>";
+						 }
+					 echo '
 					 <td>Rp. '.formatuang($row['total']).'</td>
 					 <td>'.date("d M Y", strtotime($row['tanggal_pesan'])).'</td>
 					 <td>'.$row['status_pemesanan'].'</td>
