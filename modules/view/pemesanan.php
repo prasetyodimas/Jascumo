@@ -102,10 +102,10 @@
                          ?>
                         <tr>
                             <td class="text-left"><?php echo $res['no_nota']; ?></td>
-                            <?php if ($row['id_tipe_mobil']=='031-MEREK LAIN') { ?>
-                                <td class="text-left"><?php echo $res['nama_kendaraan'].''.$res['nama_mobil'];?></td>
+                            <?php if ($res['id_tipe_mobil']=='031-MEREK LAIN') { ?>
+                                <td class="text-left"><?php echo $res['carsothername'].' '.$res['nama_mobil'];?></td>
                             <?php }else{ ?>
-                                <td class="text-left"><?php echo $res['carsothername'];?></td>
+                                <td class="text-left"><?php echo $res['nama_kendaraan'].' '.$res['nama_mobil'];?></td>
                             <?php } ?>
                             <td class="text-center"><?php echo $res['jenis_layanan']; ?></td>
                             <td class="text-center">Rp.<?php echo number_format($res['harga_layanan']).',-';?></td>
