@@ -51,7 +51,7 @@
 		 	<i class="fa fa-user" aria-hidden="true"></i> <?php echo $_SESSION['username']; ?> <b class="caret"></b>
 		  </a>
 		  <ul class="dropdown-menu">
-			<li><a href="<?php echo $site;?>admin/admin.php?hlm=pusat_bantuan"><i class="fa fa-cog" aria-hidden="true"></i> Pusat Bantuan</a></li>
+			<!-- <li><a href="<?php echo $site;?>admin/admin.php?hlm=pusat_bantuan"><i class="fa fa-cog" aria-hidden="true"></i> Pusat Bantuan</a></li> -->
 			<li><a href="<?php echo $site;?>admin/admin.php?hlm=user"><i class="fa fa-cog" aria-hidden="true"></i> User</a></li>
 			<li><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 		  </ul>
