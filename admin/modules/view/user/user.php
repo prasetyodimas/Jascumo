@@ -26,7 +26,7 @@ if(empty( $_SESSION['id_user'])){
 					<a href="./admin.php?hlm=user&aksi=baru" class="btn btn-success btn-s pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah User</a>
 				</div>
 				<div class="clearfix form-group"></div>
-				<table class="table table-hover table-bordered">
+				<table class="table table-hover table-bordered" id="table-users">
 				 <thead>
 				   <tr class="info">
 					 <th width="5%">No</th>
@@ -86,3 +86,16 @@ if(empty( $_SESSION['id_user'])){
 	}
 }
 ?>
+<style type="text/css">
+	.dataTables_filter {
+		margin-left: 25em;
+	}
+	#table-users_paginate{
+		margin-left: 36em;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#table-users	').DataTable();
+	});
+</script>
