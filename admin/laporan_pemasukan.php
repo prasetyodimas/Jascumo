@@ -13,9 +13,7 @@ if( empty( $_SESSION['id_user'] ) ){
 		$formatDateDbFrom = date("Y-m-d", strtotime($datefrom));
 		$formatDateDbTo = date("Y-m-d", strtotime($dateto));
 
-		
-        $formatFromDate = str_replace('/', '-', $datefrom);
-        $substrChar2 	= str_replace('/', '-', $tgl2);
+
         $datenow     	= date('Y-m-d'); 
 
 		$sql 			= "SELECT * FROM vw_transaksi_booking WHERE bookdate='$formatDateDbFrom'";
@@ -23,7 +21,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
 		if(mysqli_num_rows($QueryCheck) > 0){
 		$no = 0;
-		echo '<h3>Rekap Laporan Penghasilan <small>'.$formatFromDate.' sampai '.$substrChar2.'</small></h3><hr>
+		echo '<h3>Rekap Laporan Penghasilan <small>'.$formatDateDbFrom.' sampai '.$formatDateDbTo.'</small></h3><hr>
 			  <div class="row">
 			  	<div class="col-sm-12 col-md-12">
 				  	<table class="table table-bordered">
@@ -112,7 +110,7 @@ if( empty( $_SESSION['id_user'] ) ){
 	echo "<div class='col-sm-12'><h4>Total Pendapatan Keseluruhan Transaksi</h4></div>";
 	echo '<div class="col-sm-12 col-md-12">
 		  <div class="row">
-			<table class="table table-bordered">';
+		  <table class="table table-bordered">';
 	echo '<tr class="info"><th><h4>Jumlah Pelanggan</h4></th><th><h4>Jumlah Pendapatan</h4></th></tr>';
 
 		$tanggal =  date('Y-m-d');
@@ -122,18 +120,17 @@ if( empty( $_SESSION['id_user'] ) ){
 		 echo '<tr><td><span class="pull-right"><h4><b>'.$pelanggan.' Orang</b></h4></span></td><td><span class="pull-right"><h4><b>RP. '.number_format($total).'</b></h4></span></td></tr>';
 
 		}
-		echo '
-				</table>
-			</div>
-				<div class="col-sm-12 col-md-12">
-				  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
-				</div>
-			</div>
-			</div>
-		</div>
-		</div>';
+
 	   }
    }
+	echo '
+			</table>
+			</div>
+			<div class="col-sm-12 col-md-12">
+			  	<button id="tombol" onclick="window.print()" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Cetak</button>
+			</div>
+		</div>
+	</div>';
 ?>
 <script type="text/javascript">
 	$(function(){
