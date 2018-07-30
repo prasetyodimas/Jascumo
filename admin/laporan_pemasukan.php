@@ -16,7 +16,7 @@ if( empty( $_SESSION['id_user'] ) ){
 
         $datenow     	= date('Y-m-d'); 
 
-		$sql 			= "SELECT * FROM vw_transaksi_booking WHERE bookdate='$formatDateDbFrom'";
+		$sql 			= "SELECT * FROM vw_transaksi_booking WHERE bookdate >='$formatDateDbFrom' AND bookdate <='$formatDateDbTo'";
 		$QueryCheck 	= mysqli_query($db_con,$sql);
 
 		if(mysqli_num_rows($QueryCheck) > 0){
