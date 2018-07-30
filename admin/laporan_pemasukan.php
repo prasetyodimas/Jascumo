@@ -8,13 +8,17 @@ if( empty( $_SESSION['id_user'] ) ){
       if(isset($_REQUEST['submit'])){
 	    $submit    		= $_REQUEST['submit'];
         $datefrom  		= $_REQUEST['tgl1'];
-        $tgl2      		= $_REQUEST['tgl2'];
+        $dateto      	= $_REQUEST['tgl2'];
 
+		$formatDateDbFrom = date("Y-m-d", strtotime($datefrom));
+		$formatDateDbTo = date("Y-m-d", strtotime($dateto));
+
+		
         $formatFromDate = str_replace('/', '-', $datefrom);
         $substrChar2 	= str_replace('/', '-', $tgl2);
         $datenow     	= date('Y-m-d'); 
 
-		$sql 			= "SELECT * FROM vw_transaksi_booking WHERE bookdate='$formatFromDate'";
+		$sql 			= "SELECT * FROM vw_transaksi_booking WHERE bookdate='$formatDateDbFrom'";
 		$QueryCheck 	= mysqli_query($db_con,$sql);
 
 		if(mysqli_num_rows($QueryCheck) > 0){
@@ -22,20 +26,18 @@ if( empty( $_SESSION['id_user'] ) ){
 		echo '<h3>Rekap Laporan Penghasilan <small>'.$formatFromDate.' sampai '.$substrChar2.'</small></h3><hr>
 			  <div class="row">
 			  	<div class="col-sm-12 col-md-12">
-			  	<table class="table table-bordered">
-			  	<thead>
-					<tr class="info">
-					  <th>No</th>
-					  <th>No. Nota</th>
-					  <th>Nama Pelanggan</th>
-					  <th>Jenis Layanan / Harga</th>
-					  <th>Tanggal Pesan</th>
-					  <th>Total Bayar</th>
-					</tr>
-			  	</thead>
-			  	<tbody>
-			  	</div>
-		  	  </div>
+				  	<table class="table table-bordered">
+				  	<thead>
+						<tr class="info">
+						  <th>No</th>
+						  <th>No. Nota</th>
+						  <th>Nama Pelanggan</th>
+						  <th>Jenis Layanan / Harga</th>
+						  <th>Tanggal Pesan</th>
+						  <th>Total Bayar</th>
+						</tr>
+				  	</thead>
+				  	<tbody>
 		  ';
 
 		  while($row = mysqli_fetch_array($QueryCheck)){
@@ -54,6 +56,14 @@ if( empty( $_SESSION['id_user'] ) ){
 			  <td>'.$row['bookdate'].'</td>
 			  <td>Rp. '.number_format($row['total']).'</td>';
 		 }
+		 echo '
+		 		<div class="">
+
+		 		</div>
+		 		</div>
+		 	</div>
+
+		 ';
 	 }
 	 echo '
 		 </tbody>
@@ -84,18 +94,19 @@ if( empty( $_SESSION['id_user'] ) ){
 		<div class="well well-sm noprint">
 			<form class="form-inline" role="form" method="post" action="">
 			  <div class="form-group">
-			    <label class="sr-only" for="tgl1">Mulai</label>
-			    <input type="text" class="form-control" id="tgl1" name="tgl1" required autocomplete="off">
+			    <label class="sr-only">Mulai</label>
+			    <input type="text" class="form-control" id="datefrom" name="tgl1" required autocomplete="off">
 			  </div>
 			  <label>S/d</label>
 			  <div class="form-group">
-			    <label class="sr-only" for="tgl2">Hingga</label>
-			    <input type="text" class="form-control" id="tgl2" name="tgl2" required autocomplete="off">
+			    <label class="sr-only">Hingga</label>
+			    <input type="text" class="form-control" id="dateto" name="tgl2" required autocomplete="off">
 			  </div>
 			  <button type="submit" name="submit" class="btn btn-success">Tampilkan</button>
 			</form>
 		</div>
 	</div>
+	
 <?php
 	echo "<div class='row'>";
 	echo "<div class='col-sm-12'><h4>Total Pendapatan Keseluruhan Transaksi</h4></div>";
@@ -127,11 +138,11 @@ if( empty( $_SESSION['id_user'] ) ){
 <script type="text/javascript">
 	$(function(){
 		//declaring date between 
-		$('#tgl1').datepicker({
-			format: 'yyyy/mm/dd', startDate: '-3d' 
+		$( "#datefrom").datepicker({
+			format: 'dd-mm-yyyy'
 		});
-		$('#tgl2').datepicker({
-			format: 'yyyy/mm/dd', startDate: '-3d' 
+		$( "#dateto").datepicker({
+			format: 'dd-mm-yyyy'
 		});
 	});
 </script>
