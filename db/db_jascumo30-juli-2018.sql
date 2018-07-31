@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 31 Jul 2018 pada 03.46
+-- Generation Time: 31 Jul 2018 pada 03.55
 -- Versi Server: 10.1.22-MariaDB
 -- PHP Version: 7.1.8
 
@@ -219,6 +219,38 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `password`, `alamat_user`, `nama_user`, `nohp_user`, `level_akses`, `status_pengguna`, `created_at`, `update_at`) VALUES
 (5, 'kasir', '202cb962ac59075b964b07152d234b70', 'Lorem Ipsum', 'sulastri', 891283213, '0', '1', '2018-06-02 00:26:44', '2018-06-02 00:26:44'),
 (6, 'manajer', '202cb962ac59075b964b07152d234b70', 'testing', 'ibnu', 2147483647, '1', '1', '2018-06-02 00:30:27', '2018-06-02 00:30:27');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_transaksi_booking`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `vw_transaksi_booking` (
+`no_nota` varchar(20)
+,`id_member` varchar(30)
+,`nama_pemesan` varchar(100)
+,`alamat_pemesan` text
+,`notelp_pemesan` varchar(12)
+,`nama_member` varchar(100)
+,`alamat_member` text
+,`notelp_member` varchar(12)
+,`bookdate` varchar(10)
+,`jenis_layanan` varchar(20)
+,`harga_layanan` varchar(10)
+,`total` varchar(20)
+,`bayar` varchar(20)
+,`kembali` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `vw_transaksi_booking`
+--
+DROP TABLE IF EXISTS `vw_transaksi_booking`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_transaksi_booking`  AS  select `tb`.`no_nota` AS `no_nota`,`tb`.`id_member` AS `id_member`,`tb`.`nama_pemesan` AS `nama_pemesan`,`tb`.`alamat_pemesan` AS `alamat_pemesan`,`tb`.`notelp_pemesan` AS `notelp_pemesan`,`m`.`nama_member` AS `nama_member`,`m`.`alamat_member` AS `alamat_member`,`m`.`notelp_member` AS `notelp_member`,date_format(`tb`.`tanggal_pesan`,'%Y-%m-%d') AS `bookdate`,`la`.`jenis_layanan` AS `jenis_layanan`,`la`.`harga_layanan` AS `harga_layanan`,`tb`.`total` AS `total`,`tb`.`bayar` AS `bayar`,`tb`.`kembali` AS `kembali` from ((`transaksi_booking` `tb` join `layanan` `la` on((`tb`.`id_layanan` = `la`.`id_layanan`))) left join `member` `m` on((`m`.`id_member` = `tb`.`id_member`))) ;
 
 --
 -- Indexes for dumped tables
