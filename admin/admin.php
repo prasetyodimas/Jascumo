@@ -24,9 +24,9 @@ if(empty( $_SESSION['id_user'])){
     <link href="<?php echo $site?>admin/css/jquery-ui.min.css" rel="stylesheet">
     <link href="<?php echo $site?>frontend/favicon/favicon.png" rel="shortcut icon" type="image/x-icon">
     <link href="<?php echo $site?>frontend/favicon/favicon.png" type="image/x-icon" rel="icon">
+    <link href="<?php echo $site?>frontend/js/datepicker/css/datepicker.min.css" rel="stylesheet">
     <script src="<?php echo $site;?>admin/js/datatables/css/jquery.dataTables.min.css"></script>
     <script src="<?php echo $site;?>admin/js/datatables/css/dataTables.bootstrap.min.css"></script>
-    <script src="<?php echo $site;?>admin/js/datepicker/css/datepicker.css"></script>
     <!-- Javascript core  -->
     <script src="<?php echo $site;?>admin/js/corejs/jquery.min.js"></script>
     <script src="<?php echo $site;?>admin/js/corejs/bootstrap.min.js"></script>
@@ -35,7 +35,7 @@ if(empty( $_SESSION['id_user'])){
     <!-- Javascript library -->
     <script src="<?php echo $site;?>admin/js/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo $site;?>admin/js/datatables/js/dataTables.bootstrap.min.js"></script>
-    <script src="<?php echo $site;?>admin/js/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="<?php echo $site;?>frontend/js/datepicker/js/datepicker.min.js"></script>
   </head>
   <body>
       <?php include "modules/menus/menu.php"; ?>

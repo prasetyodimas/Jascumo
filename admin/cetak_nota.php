@@ -80,7 +80,7 @@ include '../herpers/currency.php';
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="receipt-left">
-                    <h1><i>Kwitansi</i></h1>
+                    <h1><i></i></h1>
                 </div>
             </div>
         </div>
