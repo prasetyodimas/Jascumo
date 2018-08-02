@@ -1,4 +1,4 @@
-<?php include '../../config/koneksi.php'; 
+<?php error_reporting(0);include '../../config/koneksi.php'; 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
@@ -36,8 +36,21 @@ if ($act=='booking') {
 	$othercars  		= $_POST['other_cars'];
 	$countTrans 		= $total+$biaya_jemput;
 
-	$getIdtipeMobil =  mysqli_fetch_array(mysqli_query($db_con,"SELECT id_tipe_mobil FROM tipe_mobil WHERE id_merek_mobil='$othercarsing'"));
-	$idtipemobil    = $getIdtipeMobil['id_tipe_mobil'];
+	//check otherservices ongkos antar jemput
+	$getDataServiceJemput = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM ongkos_jemput WHERE id_ongkos='$id_ongkos'"));
+	if ($id_ongkos =='' || $id_ongkos==null) {
+		$informationServiceJemput = 'Tidak menggunakan';
+		$serviceJemput ='';
+	}else{
+		$informationServiceJemput = 'Menggunakan';
+		$serviceJemput = $getDataServiceJemput['nama_wilayah'].' ('.number_format($getDataServiceJemput['biaya_jemput']).')';
+	}
+	
+	$informationCars =  mysqli_fetch_array(mysqli_query($db_con,"SELECT mm.id_merek_mobil, tm.nama_mobil, mm.nama_kendaraan, tm.ukuran_mobil, tm.keterangan FROM tipe_mobil tm 
+																 JOIN merek_mobil mm ON tm.id_merek_mobil=mm.id_merek_mobil
+															     WHERE tm.id_merek_mobil='$othercarsing'"));
+
+	$informationService =  mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM layanan WHERE id_layanan='$id_layanan'"));
 	
 	//check detail trasaction and mailer member or not !!
 	if ($_POST['id_member'] !='' || $_POST['id_member']!= null) {
@@ -163,19 +176,27 @@ if ($act=='booking') {
 		    //Content
 		    $mail->isHTML(true);                                     // Set email format to HTML
 		    $mail->Subject = 'Crown Carswash Solution';
+		    $mail->AddEmbeddedImage('../../frontend/logo/crown-cars.png', 'crowncarswash');
 		    // Compose a simple HTML email message
 		    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$nama_pemesan.'</span></h3>'
-		                     .'<p>Terimakasih telah menggunakan layanan dan kepercayaan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
-		                     .'<p>Booking Information :</p>'
-		                     .'<table style="border:1px solid #b9b9b9;padding:10px;">
+		                     .'<p>Terimakasih telah menggunakan jasa dan kepercayaan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
+		                     .'<img src="cid:crowncarswash" style="width:90px;height:auto;">'
+		                     .'<h2>Booking Information :</h2>'
+		                     .'<table style="padding:10px;">
 		                            <thead>
-		                                <tr>Kode Booking       : '.$no_nota.' </tr>
-		                                <tr>Tanggal Pesan      : '.$tgl_pesan.' </tr>
-		                                <tr>Nama Pemesan       : '.$nama_pemesan.' </tr>
-		                                <tr>Alamat             : '.$alamat_pemesan.'</tr>
-		                                <tr>Notelp / Handphone : '.$notelp_pemesan.' </tr>
-		                                <tr>Nama Kendaraan	   : '.$transact['nama_kendaran'].' </tr>
-		                                <tr>Subtotal		   : Rp.'.number_format($countTrans).',-'.' </tr>
+		                                <tr>Kode Booking       : '.$no_nota.' </tr></br>
+		                                <tr>Tanggal Pesan      : '.$tgl_pesan.' </tr></br>
+		                                <tr>Nama Pemesan       : '.$nama_pemesan.' </tr></br>
+		                                <tr>Alamat             : '.$alamat_pemesan.'</tr></br>
+		                                <tr>Notelp / Handphone : '.$notelp_pemesan.' </tr></br>
+		                                <tr>Layanan 		   : '.$informationService['jenis_layanan'].' Rp.'.number_format($informationService['harga_layanan']).' </tr></br>
+		                                <tr>Merek Kendaraan	   : '.$informationCars['nama_kendaraan'].'</tr></br>
+		                                <tr>Nama Kendaraan	   : '.$informationCars['nama_mobil'].' </tr></br>
+		                                <tr>Ukuran             : '.$informationCars['ukuran_mobil'].'</tr></br>
+		                                <tr>Keterangan         : '.$informationCars['keterangan'].'</tr></br>
+		                                <tr>Antar / Jemput     : '.$informationServiceJemput.'</tr></br>
+		                                <tr>				     '.$serviceJemput.'</tr></br>
+		                                <tr>Subtotal 		   : Rp.'.number_format($countTrans).',-'.' </tr></br>
 		                            </thead>
 		                       </table>'
 		                    .'<h3>Nomor Antrian Sementara Anda <span style"font-size:15px;">('.$no_antrian.')</span></h3>'
@@ -296,20 +317,28 @@ if ($act=='booking') {
 		    //Content
 		    $mail->isHTML(true);                                     // Set email format to HTML
 		    $mail->Subject = 'Crown Carswash Solution';
+		    $mail->AddEmbeddedImage('../../frontend/logo/crown-cars.png', 'crowncarswash');
 		    // Compose a simple HTML email message
 		    $mail->Body    = '<h3 style="color:#000;">Dear Yth <span style="color:#eac702;">'.$getMember['nama_member'].'</span></h3>'
-		                     .'<p>Terimakasih telah menggunakan layanan dan kepercayaan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
-		                     .'<p>Booking Information :</p>'
-		                     .'<table style="border:1px solid #b9b9b9;padding:10px;">
+		                     .'<p>Terimakasih telah menggunakan jasa dan layanan kami <span style="font-size:12px;font-style:italic;"> crowncarswash solution </span></p>'
+		                     .'<img src="cid:crowncarswash" style="width:100px;height:auto;">'
+		                     .'<h2>Booking Information :</h2>'
+		                     .'<table style="padding:10px;">
 		                            <thead>
-		                                <tr>Kode Booking       : '.$no_nota.' </tr>
-		                                <tr>Id Member          : '.$id_member.' </tr>
-		                                <tr>Tanggal Pesan      : '.$tgl_pesan.' </tr>
-		                                <tr>Nama Pemesan       : '.$getMember['nama_member'].' </tr>
-		                                <tr>Alamat             : '.$getMember['alamat_member'].'</tr>
-		                                <tr>Notelp / Handphone : '.$getMember['notelp_member'].' </tr>
-		                                <tr>Nama Kendaraan	   : '.$transact['nama_kendaran'].' </tr>
-		                                <tr>Subtotal		   : Rp.'.number_format($countTrans).',-'.' </tr>
+		                                <tr>Kode Booking       : '.$no_nota.' </tr></br>
+		                                <tr>Id Member          : '.$id_member.' </tr></br>
+		                                <tr>Tanggal Pesan      : '.$tgl_pesan.' </tr></br>
+		                                <tr>Nama Pemesan       : '.$getMember['nama_member'].' </tr></br>
+		                                <tr>Alamat             : '.$getMember['alamat_member'].'</tr></br>
+		                                <tr>Notelp / Handphone : '.$getMember['notelp_member'].' </tr></br>
+		                                <tr>Layanan 		   : '.$informationService['jenis_layanan'].' Rp.'.number_format($informationService['harga_layanan']).' </tr></br>
+		                                <tr>Merek Kendaraan	   : '.$informationCars['nama_kendaraan'].'</tr></br>
+		                                <tr>Nama Kendaraan	   : '.$informationCars['nama_mobil'].' </tr></br>
+		                                <tr>Ukuran             : '.$informationCars['ukuran_mobil'].'</tr></br>
+		                                <tr>Keterangan         : '.$informationCars['keterangan'].'</tr></br>
+		                                <tr>Antar / Jemput     : '.$informationServiceJemput.'</tr></br>
+		                                <tr>				     '.$serviceJemput.'</tr></br>
+		                                <tr>Subtotal 		   : Rp.'.number_format($countTrans).',-'.' </tr></br>
 		                            </thead>
 		                       </table>'
 		                    .'<h3>Nomor Antrian Sementara Anda <span style"font-size:15px;">('.$no_antrian.')</span></h3>'

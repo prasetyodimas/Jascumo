@@ -227,7 +227,7 @@
 		let choose_deliveryjpt = $('.select-antarjmput');
 		let getstatus 		   = $('input[name=validation_status]').val();
 		let bookcode  		   = $('input[name=book_kode]').val();
-		let url_aplication 	   = '<?php echo $site;?>';
+		let url_aplication = '<?php echo $site;?>';
 		$('.book-now').on('click',function(){
 			validateBooking();
 		});

@@ -3,7 +3,7 @@
     $getInfoNonMember = mysqli_fetch_array(mysqli_query($db_con,"SELECT * FROM transaksi_booking WHERE id_member='' ORDER BY no_nota DESC "));
 
 ?>
-<div class="container" style="margin-top: 2rem;margin-bottom:6rem;">
+<div class="container" style="margin-top: 2rem;margin-bottom:15rem;">
 <div class="panel-heading text-left" style="margin-bottom:3em;"> <h4>Review Order / Informasi Pemesanan</h4> </div> 
     <!--REVIEW ORDER-->
     <div class="row">
